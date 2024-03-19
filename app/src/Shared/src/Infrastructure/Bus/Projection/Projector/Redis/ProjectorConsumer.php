@@ -45,7 +45,8 @@ class ProjectorConsumer
                 foreach ($projections as $projection) {
                     $projection->project($event);
                 }
-            } catch (\Exception) {
+            } catch (\Exception $exception) {
+                $r = 5;
             }
         }
     }

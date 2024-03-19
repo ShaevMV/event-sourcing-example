@@ -8,7 +8,7 @@ use Auth\Domain\User\Model\UserId;
 use ArrangementFee\Domain\Order\Event\OrderWasCreating;
 use ArrangementFee\Domain\Order\Model\Order;
 use ArrangementFee\Domain\Order\Model\PromoCode;
-use ArrangementFee\Domain\Order\Model\TicketTypeId;
+use ArrangementFee\Domain\Order\Model\ArrangementTypeId;
 use PHPUnit\Framework\TestCase;
 
 class OrderTest extends TestCase
@@ -17,7 +17,7 @@ class OrderTest extends TestCase
     {
         $order = Order::create(
             ['test1','test2'],
-            TicketTypeId::random(),
+            ArrangementTypeId::random(),
             UserId::random(),
             PromoCode::fromString('')
         );

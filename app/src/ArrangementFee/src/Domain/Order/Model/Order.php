@@ -14,7 +14,7 @@ use Shared\Domain\Aggregate\AggregateRoot;
 class Order extends AggregateRoot implements Aggregate, AggregateEventable, AggregateReconstructable
 {
     private readonly array $guestNames;
-    public readonly TicketTypeId $ticketTypeId;
+    public readonly ArrangementTypeId $arrangementTypeId;
 
     private OrderStatus $status;
 
@@ -23,24 +23,25 @@ class Order extends AggregateRoot implements Aggregate, AggregateEventable, Aggr
 
     /**
      * @param string[] $guestNames
-     * @param TicketTypeId $ticketTypeId
+     * @param ArrangementTypeId $arrangementTypeId
      * @param UserId $userId
      * @param PromoCode $promoCode
      * @return self
      */
     public static function create(
-        array $guestNames,
-        TicketTypeId $ticketTypeId,
-        UserId $userId,
-        PromoCode $promoCode,
+        array             $guestNames,
+        ArrangementTypeId $arrangementTypeId,
+        UserId            $userId,
+        PromoCode         $promoCode,
     ): self
     {
         $order = new self(OrderId::random());
+
         $order->recordAndApply(new OrderWasCreating(
             $order->id()->value(),
             $guestNames,
             $userId->value(),
-            $ticketTypeId->value(),
+            $arrangementTypeId->value(),
             $promoCode->value()
         ));
 
@@ -52,7 +53,7 @@ class Order extends AggregateRoot implements Aggregate, AggregateEventable, Aggr
         $this->id = OrderId::fromString($orderWasCreating->getAggregateId());
         $this->status = OrderStatus::fromString(OrderStatus::NEW);
         $this->guestNames = array_map(fn(string $name) => GuestName::fromString($name), $orderWasCreating->guestNames);
-        $this->ticketTypeId = TicketTypeId::fromString($orderWasCreating->ticketTypeId);
+        $this->arrangementTypeId = ArrangementTypeId::fromString($orderWasCreating->arrangementTypeId);
         $this->promoCode = new PromoCode($orderWasCreating->promoCode);
         $this->userId = new UserId($orderWasCreating->userId);
     }

@@ -213,7 +213,7 @@ RUN apk --no-cache add git openssh bash; \
 # - in Linux, `172.17.0.1` is the host IP
 # By default, `host.docker.internal` is set as extra host in docker-compose.yml, so it also works in Linux without any
 # additional setting. This env is reserved for people who want to customize their own compose configuration.
-ENV XDEBUG_CLIENT_HOST="host.docker.internal"
+ENV XDEBUG_CLIENT_HOST="172.17.0.1"
 
 # ---------------------------------------------------- Scripts ---------------------------------------------------------
 

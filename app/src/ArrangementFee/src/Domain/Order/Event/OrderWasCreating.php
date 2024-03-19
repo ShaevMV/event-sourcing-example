@@ -18,7 +18,7 @@ class OrderWasCreating extends Event
         string                 $aggregateId,
         array                  $guestNames,
         public readonly string $userId,
-        public readonly string $ticketTypeId,
+        public readonly string $arrangementTypeId,
         public readonly string $promoCode
     )
     {
@@ -29,6 +29,6 @@ class OrderWasCreating extends Event
 
     public static function eventName(): string
     {
-        return 'ArrangementFee.domain.order.creating';
+        return 'arrangementFee.domain.order.creating';
     }
 }

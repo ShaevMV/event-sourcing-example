@@ -7,7 +7,7 @@ namespace ArrangementFee\Application\Command\OrderCreate;
 use ArrangementFee\Domain\Order\Model\Order;
 use ArrangementFee\Domain\Order\Model\OrderRepositoryPersistence;
 use ArrangementFee\Domain\Order\Model\PromoCode;
-use ArrangementFee\Domain\Order\Model\TicketTypeId;
+use ArrangementFee\Domain\Order\Model\ArrangementTypeId;
 use Auth\Domain\User\Model\UserId;
 use Shared\Domain\Bus\Command\CommandHandler;
 
@@ -23,7 +23,7 @@ class OrderCreateCommandHandler implements CommandHandler
     {
         $order = Order::create(
             $orderCreateCommand->guestNames,
-            TicketTypeId::fromString($orderCreateCommand->ticketTypeId),
+            ArrangementTypeId::fromString($orderCreateCommand->ticketTypeId),
             UserId::fromString($orderCreateCommand->userId),
             PromoCode::fromString($orderCreateCommand->promoCode)
         );

@@ -6,11 +6,10 @@ namespace Tests\ArrangementFee\Application\Command\OrderCreate;
 
 use ArrangementFee\Application\Command\OrderCreate\OrderCreateCommand;
 use ArrangementFee\Application\Command\OrderCreate\OrderCreateCommandHandler;
-use ArrangementFee\Domain\Order\Model\Order;
 use ArrangementFee\Domain\Order\Model\OrderId;
 use ArrangementFee\Domain\Order\Model\OrderRepositoryPersistence;
 use ArrangementFee\Domain\Order\Model\PromoCode;
-use ArrangementFee\Domain\Order\Model\TicketTypeId;
+use ArrangementFee\Domain\Order\Model\ArrangementTypeId;
 use ArrangementFee\Infrastructure\Repository\Domain\Order\EventStore\EsOrderRepositoryPersistence;
 use Auth\Domain\User\Model\UserId;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -36,7 +35,7 @@ class OrderCreateCommandTest extends KernelTestCase
 
         $orderResponse = $handler(new OrderCreateCommand(
             ['test1','test2'],
-            TicketTypeId::random()->value(),
+            ArrangementTypeId::random()->value(),
             UserId::random()->value(),
             PromoCode::fromString('')->value()
         ));
