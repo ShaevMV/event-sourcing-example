@@ -8,7 +8,7 @@ use Shared\Domain\Aggregate\AggregateId;
 
 interface OrderRepositoryPersistence
 {
+    public function ofId(AggregateId $orderId): Order;
 
-    public function ofId (AggregateId $userId):Order;
-    public function persist(Order $order):void;
+    public function persist(Order $order): void;
 }

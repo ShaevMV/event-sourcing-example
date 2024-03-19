@@ -8,5 +8,9 @@ use Shared\Domain\Bus\Command\CommandResponse;
 
 class OrderCreateCommandResponse implements CommandResponse
 {
-
+    public function __construct(
+        public readonly string $orderId
+    )
+    {
+    }
 }

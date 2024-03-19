@@ -29,12 +29,20 @@ services:
     Auth\:
       resource: '../src/Auth/src/'
 
+    ArrangementFee\:
+      resource: '../src/ArrangementFee/src/'
+
     Shared\:
       resource: '../src/Shared/src/'
 
     Shared\Infrastructure\Tests\Doctrine\DatabaseArranger:
       public: true
-
+    ArrangementFee\Application\Command\OrderCreate\OrderCreateCommandHandler:
+      public: true
+    Auth\Application\Command\UserRegister\UserRegisterCommandHandler:
+      public: true
+    ArrangementFee\Infrastructure\Repository\Domain\Order\EventStore\EsOrderRepositoryPersistence:
+      public: true
     Shared\Infrastructure\Tests\Doctrine\DatabaseArrangerInterface: '@Shared\Infrastructure\Tests\Doctrine\DatabaseArranger'
 
     Auth\Domain\User\Model\UserRepositoryPersistence: '@Auth\Infrastructure\Repository\Domain\User\EventStore\EsUserRepositoryPersistence'

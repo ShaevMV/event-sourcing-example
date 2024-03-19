@@ -6,7 +6,7 @@ namespace ArrangementFee\Domain\Order\Model;
 
 class Ticket
 {
-    public readonly array $guestName;
+    public array $guestName;
 
     public function __construct(
         array $guestName,

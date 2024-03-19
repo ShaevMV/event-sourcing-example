@@ -72,3 +72,7 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - ./data/redis:/bitnami/redis/data
+    ports:
+      - "${INFRA_REDIS_PORT:-6379}:6379"
+    networks:
+      - default
