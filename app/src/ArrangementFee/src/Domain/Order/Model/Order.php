@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Order\Domain\Order\Model;
+namespace ArrangementFee\Domain\Order\Model;
 
 use Auth\Domain\User\Model\UserId;
-use Order\Domain\Order\Event\OrderWasCreating;
+use ArrangementFee\Domain\Order\Event\OrderWasCreating;
 use Shared\Domain\Aggregate\Aggregate;
 use Shared\Domain\Aggregate\AggregateEventable;
 use Shared\Domain\Aggregate\AggregateReconstructable;

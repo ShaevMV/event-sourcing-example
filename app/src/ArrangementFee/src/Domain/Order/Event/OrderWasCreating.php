@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Order\Domain\Order\Event;
+namespace ArrangementFee\Domain\Order\Event;
 
 use Shared\Domain\Bus\Event\Event;
 

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tests\Order\Domain\Order\Model;
+namespace Tests\ArrangementFee\Domain\Order\Model;
 
 use Auth\Domain\User\Model\UserId;
-use Order\Domain\Order\Event\OrderWasCreating;
-use Order\Domain\Order\Model\Order;
-use Order\Domain\Order\Model\PromoCode;
-use Order\Domain\Order\Model\TicketTypeId;
+use ArrangementFee\Domain\Order\Event\OrderWasCreating;
+use ArrangementFee\Domain\Order\Model\Order;
+use ArrangementFee\Domain\Order\Model\PromoCode;
+use ArrangementFee\Domain\Order\Model\TicketTypeId;
 use PHPUnit\Framework\TestCase;
 
 class OrderTest extends TestCase

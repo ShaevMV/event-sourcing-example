@@ -38,14 +38,14 @@
         "psr-4": {
             "App\\": "app/",
             "Auth\\": "src/Auth/src/",
-            "Order\\": "src/Order/src/",
+            "ArrangementFee\\": "src/ArrangementFee/src/",
             "Shared\\": "src/Shared/src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "Tests\\Auth\\": "src/Auth/tests/",
-            "Tests\\Order\\": "src/Order/tests/",
+            "Tests\\ArrangementFee\\": "src/ArrangementFee/tests/",
             "Tests\\Shared\\": "src/Shared/tests/"
         }
     },

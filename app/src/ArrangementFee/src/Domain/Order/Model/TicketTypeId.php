@@ -1,6 +1,6 @@
 <?php
 
-namespace Order\Domain\Order\Model;
+namespace ArrangementFee\Domain\Order\Model;
 
 use Shared\Domain\ValueObject\Uuid;
 
