@@ -37,12 +37,17 @@ services:
 
     Shared\Infrastructure\Tests\Doctrine\DatabaseArranger:
       public: true
+
     ArrangementFee\Application\Command\OrderCreate\OrderCreateCommandHandler:
       public: true
     Auth\Application\Command\UserRegister\UserRegisterCommandHandler:
       public: true
     ArrangementFee\Infrastructure\Repository\Domain\Order\EventStore\EsOrderRepositoryPersistence:
       public: true
+
+    ArrangementFee\Application\Query\GetOrderList\GetOrderListQueryHandler:
+      public: true
+
     Shared\Infrastructure\Tests\Doctrine\DatabaseArrangerInterface: '@Shared\Infrastructure\Tests\Doctrine\DatabaseArranger'
 
     Auth\Domain\User\Model\UserRepositoryPersistence: '@Auth\Infrastructure\Repository\Domain\User\EventStore\EsUserRepositoryPersistence'
