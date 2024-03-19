@@ -1,2 +1,4 @@
 .env
 data
+.phpunit.result.cache
+app/.phpunit.result.cache
