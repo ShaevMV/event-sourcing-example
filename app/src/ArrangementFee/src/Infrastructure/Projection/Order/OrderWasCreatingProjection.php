@@ -38,7 +38,7 @@ class OrderWasCreatingProjection implements Projection
         $this->connection->insert('arrangement_fee',
             [
                 'id' => $event->getAggregateId(),
-                'guest' => "['" . implode(",'", $event->guestNames) . "']",
+                'guest' => json_encode($event->guestNames),
                 'user_id' => $event->userId,
                 'type_arrangement_id' => $event->arrangementTypeId,
                 'status' => OrderStatus::NEW,

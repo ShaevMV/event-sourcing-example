@@ -24,7 +24,7 @@ final class Version20240319121922 extends AbstractMigration
         (
             id uuid NOT NULL,
             user_id character varying NOT NULL,
-            guest varchar[] NOT NULL,
+            guest jsonb NOT NULL default '[]',
             type_arrangement_id character varying NOT NULL,
             status varchar(255) default 'new',
             created_at timestamp without time zone default NOW(),

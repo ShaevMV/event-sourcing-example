@@ -32,7 +32,7 @@ class ArrangementFeeRepository implements ArrangementFeeRepositoryInterface
 
         return array_map(fn(array $data) => new Order(
             $data['id'],
-            json_decode($data['guest'], true) ?? [],
+            json_decode($data['guest'], true),
             $data['type_arrangement_id'],
             $data['user_id'],
             $data['status'],

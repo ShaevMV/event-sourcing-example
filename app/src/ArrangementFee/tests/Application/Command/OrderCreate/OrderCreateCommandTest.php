@@ -12,6 +12,7 @@ use ArrangementFee\Domain\Order\Model\PromoCode;
 use ArrangementFee\Domain\Order\Model\ArrangementTypeId;
 use ArrangementFee\Infrastructure\Repository\Domain\Order\EventStore\EsOrderRepositoryPersistence;
 use Auth\Domain\User\Model\UserId;
+use Shared\Infrastructure\Bus\Projection\Projector\Redis\ProjectorConsumer;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class OrderCreateCommandTest extends KernelTestCase
@@ -43,5 +44,10 @@ class OrderCreateCommandTest extends KernelTestCase
         $orderId = OrderId::fromString($orderResponse->orderId);
         $order = $this->orderRepositoryPersistence->ofId(OrderId::fromString($orderResponse->orderId));
         self::assertTrue($orderId->equals(OrderId::fromString($order->id()->value())));
+        /** @var ProjectorConsumer $workerProjectionRedis */
+        $workerProjectionRedis = $kernel->getContainer()->get(ProjectorConsumer::class);
+        $workerProjectionRedis->consume();
+
+
     }
 }
