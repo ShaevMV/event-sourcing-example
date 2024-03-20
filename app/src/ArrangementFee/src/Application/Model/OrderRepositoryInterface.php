@@ -2,7 +2,7 @@
 
 namespace ArrangementFee\Application\Model;
 
-interface ArrangementFeeRepositoryInterface
+interface OrderRepositoryInterface
 {
     /**
      * @return Order[]

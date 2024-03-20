@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace ArrangementFee\Infrastructure\Repository\Application\Doctrine;
 
-use ArrangementFee\Application\Model\ArrangementFeeRepositoryInterface;
+use ArrangementFee\Application\Model\OrderRepositoryInterface;
 use ArrangementFee\Application\Model\Order;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\ORM\EntityManagerInterface;
 use JsonException;
 
-class ArrangementFeeRepository implements ArrangementFeeRepositoryInterface
+class OrderRepository implements OrderRepositoryInterface
 {
     public function __construct(
         private EntityManagerInterface $em,
