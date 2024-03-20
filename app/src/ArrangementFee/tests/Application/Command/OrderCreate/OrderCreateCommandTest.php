@@ -6,10 +6,10 @@ namespace Tests\ArrangementFee\Application\Command\OrderCreate;
 
 use ArrangementFee\Application\Command\OrderCreate\OrderCreateCommand;
 use ArrangementFee\Application\Command\OrderCreate\OrderCreateCommandHandler;
+use ArrangementFee\Domain\ArrangementFee\Model\ArrangementTypeId;
 use ArrangementFee\Domain\Order\Model\OrderId;
 use ArrangementFee\Domain\Order\Model\OrderRepositoryPersistence;
 use ArrangementFee\Domain\Order\Model\PromoCode;
-use ArrangementFee\Domain\Order\Model\ArrangementTypeId;
 use ArrangementFee\Infrastructure\Repository\Domain\Order\EventStore\EsOrderRepositoryPersistence;
 use Auth\Domain\User\Model\UserId;
 use Shared\Infrastructure\Bus\Projection\Projector\Redis\ProjectorConsumer;

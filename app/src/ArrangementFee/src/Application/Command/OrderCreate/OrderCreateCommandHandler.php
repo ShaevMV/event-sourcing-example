@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace ArrangementFee\Application\Command\OrderCreate;
 
+use ArrangementFee\Domain\ArrangementFee\Model\ArrangementTypeId;
 use ArrangementFee\Domain\Order\Model\Order;
 use ArrangementFee\Domain\Order\Model\OrderRepositoryPersistence;
 use ArrangementFee\Domain\Order\Model\PromoCode;
-use ArrangementFee\Domain\Order\Model\ArrangementTypeId;
 use Auth\Domain\User\Model\UserId;
 use Shared\Domain\Bus\Command\CommandHandler;
 

@@ -12,7 +12,8 @@ use Shared\Domain\Bus\Projection\Projection;
 class OrderWasCreatingProjection implements Projection
 {
     public function __construct(
-        private readonly Connection $connection
+        private readonly Connection $connection,
+
     )
     {
     }
@@ -35,7 +36,7 @@ class OrderWasCreatingProjection implements Projection
             return;
         }
 
-        $this->connection->insert('arrangement_fee',
+        $this->connection->insert('order',
             [
                 'id' => $event->getAggregateId(),
                 'guest' => json_encode($event->guestNames),

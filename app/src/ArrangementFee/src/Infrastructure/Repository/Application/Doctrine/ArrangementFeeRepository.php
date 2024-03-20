@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace ArrangementFee\Infrastructure\Repository\Application\ArrangementFee\Doctrine\Repository;
+namespace ArrangementFee\Infrastructure\Repository\Application\Doctrine;
 
-use ArrangementFee\Application\Model\Order;
 use ArrangementFee\Application\Model\ArrangementFeeRepositoryInterface;
+use ArrangementFee\Application\Model\Order;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,7 +26,7 @@ class ArrangementFeeRepository implements ArrangementFeeRepositoryInterface
     public function getOrderList(): array
     {
         $qb = new QueryBuilder($this->em->getConnection());
-        $orderList = $qb->from('arrangement_fee', 'af')
+        $orderList = $qb->from('order', 'af')
             ->select(['af.*'])
             ->fetchAllAssociative();
 
@@ -36,6 +36,9 @@ class ArrangementFeeRepository implements ArrangementFeeRepositoryInterface
             $data['type_arrangement_id'],
             $data['user_id'],
             $data['status'],
+            $data['price'],
+            $data['promo_code'],
+            $data['discount'],
         ), $orderList);
     }
 }

@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace ArrangementFee\Domain\Order\Model;
 
-use Auth\Domain\User\Model\UserId;
+use ArrangementFee\Domain\ArrangementFee\Model\ArrangementTypeId;
 use ArrangementFee\Domain\Order\Event\OrderWasCreating;
+use Auth\Domain\User\Model\UserId;
 use Shared\Domain\Aggregate\Aggregate;
 use Shared\Domain\Aggregate\AggregateEventable;
 use Shared\Domain\Aggregate\AggregateReconstructable;

@@ -8,7 +8,7 @@ use ArrangementFee\Application\Command\OrderCreate\OrderCreateCommand;
 use ArrangementFee\Application\Command\OrderCreate\OrderCreateCommandHandler;
 use ArrangementFee\Application\Query\GetOrderList\GetOrderListQuery;
 use ArrangementFee\Application\Query\GetOrderList\GetOrderListQueryHandler;
-use ArrangementFee\Domain\Order\Model\ArrangementTypeId;
+use ArrangementFee\Domain\ArrangementFee\Model\ArrangementTypeId;
 use ArrangementFee\Domain\Order\Model\PromoCode;
 use Auth\Domain\User\Model\UserId;
 use Shared\Infrastructure\Bus\Projection\Projector\Redis\ProjectorConsumer;
