@@ -8,7 +8,7 @@ use OrganizationalFees\Application\Command\OrderCreate\OrderCreateCommand;
 use OrganizationalFees\Application\Command\OrderCreate\OrderCreateCommandHandler;
 use OrganizationalFees\Application\Query\GetOrderList\GetOrderListQuery;
 use OrganizationalFees\Application\Query\GetOrderList\GetOrderListQueryHandler;
-use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementTypeId;
+use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
 use OrganizationalFees\Domain\Order\Model\PromoCode;
 use Auth\Domain\User\Model\UserId;
 use Shared\Infrastructure\Bus\Projection\Projector\Redis\ProjectorConsumer;
@@ -24,7 +24,7 @@ class GetOrderListQueryTest extends KernelTestCase
 
         $handler(new OrderCreateCommand(
             ['test1','test2'],
-            ArrangementTypeId::random()->value(),
+            ArrangementId::random()->value(),
             UserId::random()->value(),
             PromoCode::fromString('')->value()
         ));

@@ -6,7 +6,7 @@ namespace Tests\OrganizationalFees\Application\Command\OrderCreate;
 
 use OrganizationalFees\Application\Command\OrderCreate\OrderCreateCommand;
 use OrganizationalFees\Application\Command\OrderCreate\OrderCreateCommandHandler;
-use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementTypeId;
+use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
 use OrganizationalFees\Domain\Order\Model\OrderId;
 use OrganizationalFees\Domain\Order\Model\OrderRepositoryPersistence;
 use OrganizationalFees\Domain\Order\Model\PromoCode;
@@ -36,7 +36,7 @@ class OrderCreateCommandTest extends KernelTestCase
 
         $orderResponse = $handler(new OrderCreateCommand(
             ['test1','test2'],
-            ArrangementTypeId::random()->value(),
+            ArrangementId::random()->value(),
             UserId::random()->value(),
             PromoCode::fromString('')->value()
         ));
@@ -44,10 +44,5 @@ class OrderCreateCommandTest extends KernelTestCase
         $orderId = OrderId::fromString($orderResponse->orderId);
         $order = $this->orderRepositoryPersistence->ofId(OrderId::fromString($orderResponse->orderId));
         self::assertTrue($orderId->equals(OrderId::fromString($order->id()->value())));
-        /** @var ProjectorConsumer $workerProjectionRedis */
-        $workerProjectionRedis = $kernel->getContainer()->get(ProjectorConsumer::class);
-        $workerProjectionRedis->consume();
-
-
     }
 }

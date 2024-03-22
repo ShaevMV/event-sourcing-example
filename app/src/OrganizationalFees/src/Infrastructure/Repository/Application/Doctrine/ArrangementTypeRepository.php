@@ -4,11 +4,11 @@ namespace OrganizationalFees\Infrastructure\Repository\Application\Doctrine;
 
 use OrganizationalFees\Application\Model\ArrangementType;
 use OrganizationalFees\Application\Model\ArrangementTypeRepositoryInterface;
-use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementTypeId;
+use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
 
 class ArrangementTypeRepository implements ArrangementTypeRepositoryInterface
 {
-    public function getArrangementType(ArrangementTypeId $arrangementTypeId): ArrangementType
+    public function getArrangementType(ArrangementId $arrangementTypeId): ArrangementType
     {
         // TODO: Implement getArrangementType() method.
     }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace OrganizationalFees\Domain\Order\Model;
 
-use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementTypeId;
+use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
 use OrganizationalFees\Domain\Order\Event\OrderWasCreating;
 use Auth\Domain\User\Model\UserId;
 use Shared\Domain\Aggregate\Aggregate;
@@ -15,7 +15,7 @@ use Shared\Domain\Aggregate\AggregateRoot;
 class Order extends AggregateRoot implements Aggregate, AggregateEventable, AggregateReconstructable
 {
     private readonly array $guestNames;
-    public readonly ArrangementTypeId $arrangementTypeId;
+    public readonly ArrangementId $arrangementTypeId;
 
     private OrderStatus $status;
 
@@ -24,16 +24,16 @@ class Order extends AggregateRoot implements Aggregate, AggregateEventable, Aggr
 
     /**
      * @param string[] $guestNames
-     * @param ArrangementTypeId $arrangementTypeId
+     * @param ArrangementId $arrangementTypeId
      * @param UserId $userId
      * @param PromoCode $promoCode
      * @return self
      */
     public static function create(
-        array             $guestNames,
-        ArrangementTypeId $arrangementTypeId,
-        UserId            $userId,
-        PromoCode         $promoCode,
+        array         $guestNames,
+        ArrangementId $arrangementTypeId,
+        UserId        $userId,
+        PromoCode     $promoCode,
     ): self
     {
         $order = new self(OrderId::random());
@@ -54,7 +54,7 @@ class Order extends AggregateRoot implements Aggregate, AggregateEventable, Aggr
         $this->id = OrderId::fromString($orderWasCreating->getAggregateId());
         $this->status = OrderStatus::fromString(OrderStatus::NEW);
         $this->guestNames = array_map(fn(string $name) => GuestName::fromString($name), $orderWasCreating->guestNames);
-        $this->arrangementTypeId = ArrangementTypeId::fromString($orderWasCreating->arrangementTypeId);
+        $this->arrangementTypeId = ArrangementId::fromString($orderWasCreating->arrangementTypeId);
         $this->promoCode = new PromoCode($orderWasCreating->promoCode);
         $this->userId = new UserId($orderWasCreating->userId);
     }

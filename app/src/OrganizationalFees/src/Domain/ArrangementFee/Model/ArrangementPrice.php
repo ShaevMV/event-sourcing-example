@@ -8,6 +8,11 @@ use Shared\Domain\ValueObject\Price;
 
 class ArrangementPrice extends Price
 {
+    /**
+     * @var array<string,integer>
+     */
+    private array $priceList;
+
     public function __construct(
         public readonly int $price,
         public readonly int $timestamp
@@ -20,13 +25,6 @@ class ArrangementPrice extends Price
     {
         return end($this->priceList);
     }
-
-
-    /**
-     * @var array<string,integer>
-     */
-    protected array $priceList;
-
 
     public function serialize(): ?string
     {

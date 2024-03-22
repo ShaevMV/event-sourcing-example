@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\OrganizationalFees\Domain\Order\Model;
 
-use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementTypeId;
+use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
 use OrganizationalFees\Domain\Order\Event\OrderWasCreating;
 use OrganizationalFees\Domain\Order\Model\Order;
 use OrganizationalFees\Domain\Order\Model\PromoCode;
@@ -17,7 +17,7 @@ class OrderTest extends TestCase
     {
         $order = Order::create(
             ['test1','test2'],
-            ArrangementTypeId::random(),
+            ArrangementId::random(),
             UserId::random(),
             PromoCode::fromString('')
         );

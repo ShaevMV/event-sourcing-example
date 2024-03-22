@@ -19,12 +19,12 @@ class ArrangementFee extends AggregateRoot implements Aggregate, AggregateEventa
     private readonly FestivalId $festivalId;
 
     public static function create(
-        string            $name,
-        int               $price,
-        FestivalId        $festivalId,
+        string     $name,
+        int        $price,
+        FestivalId $festivalId,
     ): self
     {
-        $arrangementFee = new self(ArrangementTypeId::random());
+        $arrangementFee = new self(ArrangementId::random());
 
         $arrangementFee->recordAndApply(new ArrangementFeeWasCreating(
             $arrangementFee->id()->value(),
@@ -38,7 +38,7 @@ class ArrangementFee extends AggregateRoot implements Aggregate, AggregateEventa
 
     public function onArrangementFeeWasCreating(ArrangementFeeWasCreating $arrangementFeeWasCreating): void
     {
-        $this->id = ArrangementTypeId::fromString($arrangementFeeWasCreating->getAggregateId());
+        $this->id = ArrangementId::fromString($arrangementFeeWasCreating->getAggregateId());
         $this->name = ArrangementName::fromString($arrangementFeeWasCreating->name);
         $this->price = new ArrangementPrice(
             $arrangementFeeWasCreating->price,
