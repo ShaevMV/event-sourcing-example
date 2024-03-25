@@ -7,7 +7,6 @@ namespace OrganizationalFees\Infrastructure\Repository\Domain\ArrangementFee;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFee;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFeeRepositoryPersistence;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
-use Shared\Domain\Aggregate\AggregateId;
 
 class ArrangementFeeRepositoryDecoration
 {

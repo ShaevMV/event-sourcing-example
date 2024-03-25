@@ -45,4 +45,9 @@ class ArrangementPrice extends Price
     {
         $this->priceList = $data;
     }
+
+    public function getPriceList(): array
+    {
+        return $this->priceList;
+    }
 }

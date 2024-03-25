@@ -18,7 +18,7 @@ class OrderWasCreating extends Event
         string                 $aggregateId,
         array                  $guestNames,
         public readonly string $userId,
-        public readonly string $arrangementTypeId,
+        public readonly string $arrangementFeeId,
         public readonly string $promoCode
     )
     {

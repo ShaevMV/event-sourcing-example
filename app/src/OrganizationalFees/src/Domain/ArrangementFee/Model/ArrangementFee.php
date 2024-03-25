@@ -46,4 +46,15 @@ class ArrangementFee extends AggregateRoot implements Aggregate, AggregateEventa
         );
         $this->festivalId = FestivalId::fromString($arrangementFeeWasCreating->festivalId);
     }
+
+    public function getPrice(int $timestampNow): ?int
+    {
+        foreach ($this->price->getPriceList() as $timestamp => $price) {
+            if ($timestamp <= $timestampNow) {
+                return $price;
+            }
+        }
+
+        return null;
+    }
 }
