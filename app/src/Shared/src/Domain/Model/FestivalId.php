@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OrganizationalFees\Domain\ArrangementFee\Model;
+namespace Shared\Domain\Model;
 
 use Shared\Domain\ValueObject\Uuid;
 

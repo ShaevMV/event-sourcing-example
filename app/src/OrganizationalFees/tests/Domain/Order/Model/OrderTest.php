@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace Tests\OrganizationalFees\Domain\Order\Model;
 
+use Auth\Domain\User\Model\UserId;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFee;
-use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
-use OrganizationalFees\Domain\ArrangementFee\Model\FestivalId;
 use OrganizationalFees\Domain\Order\Event\OrderWasCreating;
 use OrganizationalFees\Domain\Order\Model\Order;
 use OrganizationalFees\Domain\Order\Model\PromoCode;
-use Auth\Domain\User\Model\UserId;
 use PHPUnit\Framework\TestCase;
+use Shared\Domain\Model\FestivalId;
 
 class OrderTest extends TestCase
 {

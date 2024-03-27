@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Shared\Domain\ValueObject;
 
-abstract class Price extends Json
+class Price extends Number
 {
+
 }

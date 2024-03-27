@@ -6,8 +6,8 @@ namespace OrganizationalFees\Application\Command\AddArrangementFee;
 
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFee;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFeeRepositoryPersistence;
-use OrganizationalFees\Domain\ArrangementFee\Model\FestivalId;
 use Shared\Domain\Bus\Command\CommandHandler;
+use Shared\Domain\Model\FestivalId;
 
 class AddArrangementFeeCommandHandler implements CommandHandler
 {

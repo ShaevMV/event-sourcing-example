@@ -10,14 +10,14 @@ use Shared\Domain\Aggregate\Aggregate;
 use Shared\Domain\Aggregate\AggregateEventable;
 use Shared\Domain\Aggregate\AggregateReconstructable;
 use Shared\Domain\Aggregate\AggregateRoot;
+use Shared\Domain\Model\FestivalId;
 
 class ArrangementFee extends AggregateRoot implements Aggregate, AggregateEventable, AggregateReconstructable
 {
-    private readonly ArrangementPrice $price;
+    protected readonly ArrangementPriceList $price;
 
-    private readonly ArrangementName $name;
-
-    private readonly FestivalId $festivalId;
+    protected readonly ArrangementName $name;
+    protected readonly FestivalId $festivalId;
 
     public static function create(
         string     $name,
@@ -42,7 +42,7 @@ class ArrangementFee extends AggregateRoot implements Aggregate, AggregateEventa
     {
         $this->id = ArrangementId::fromString($arrangementFeeWasCreating->getAggregateId());
         $this->name = ArrangementName::fromString($arrangementFeeWasCreating->name);
-        $this->price = new ArrangementPrice(
+        $this->price = new ArrangementPriceList(
             $arrangementFeeWasCreating->price,
             $arrangementFeeWasCreating->getOccurredOn()->getTimestamp()
         );

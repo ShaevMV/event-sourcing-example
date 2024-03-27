@@ -2,16 +2,14 @@
 
 declare(strict_types=1);
 
-namespace OrganizationalFees\Domain\ArrangementFee\Model;
+namespace Shared\Domain\ValueObject;
 
-use Shared\Domain\ValueObject\Price;
-
-class ArrangementPrice extends Price
+class PriceList extends Json
 {
     /**
      * @var array<string,integer>
      */
-    private array $priceList;
+    protected array $priceList;
 
     public function __construct(
         int $price,

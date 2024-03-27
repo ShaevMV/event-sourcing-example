@@ -16,7 +16,7 @@ use Shared\Domain\Aggregate\AggregateRoot;
 class Order extends AggregateRoot implements Aggregate, AggregateEventable, AggregateReconstructable
 {
     private readonly array $guestNames;
-    public readonly ArrangementId $arrangementTypeId;
+    public readonly ArrangementId $arrangementFeeId;
 
     private OrderStatus $status;
 
@@ -50,7 +50,7 @@ class Order extends AggregateRoot implements Aggregate, AggregateEventable, Aggr
         $this->id = OrderId::fromString($orderWasCreating->getAggregateId());
         $this->status = OrderStatus::fromString(OrderStatus::NEW);
         $this->guestNames = array_map(fn(string $name) => GuestName::fromString($name), $orderWasCreating->guestNames);
-        $this->arrangementTypeId = ArrangementId::fromString($orderWasCreating->arrangementFeeId);
+        $this->arrangementFeeId = ArrangementId::fromString($orderWasCreating->arrangementFeeId);
         $this->promoCode = new PromoCode($orderWasCreating->promoCode);
         $this->userId = new UserId($orderWasCreating->userId);
     }

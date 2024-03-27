@@ -7,7 +7,6 @@ namespace OrganizationalFees\Infrastructure\Repository\Domain\ArrangementFee\Eve
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFee;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFeeRepositoryPersistence;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
-use Shared\Domain\Aggregate\AggregateId;
 use Shared\Domain\Bus\Projection\Projector;
 use Shared\Domain\EventSourcing\EventStore\EventStore;
 

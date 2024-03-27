@@ -6,7 +6,7 @@ namespace Shared\Domain\ValueObject;
 
 abstract class Number implements \Stringable, ValueObject
 {
-    final public function __construct(protected int $value)
+    public function __construct(protected int $value)
     {
     }
 
