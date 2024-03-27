@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace OrganizationalFees\Domain\PromoCode\Model;
 
+use OrganizationalFees\Domain\PromoCode\Event\PromoCodeWasApply;
 use OrganizationalFees\Domain\PromoCode\Event\PromoCodeWasCreating;
 use OrganizationalFees\Domain\PromoCode\Exception\PromoCodeSingDontCorrectException;
 use Shared\Domain\Aggregate\Aggregate;
 use Shared\Domain\Aggregate\AggregateEventable;
 use Shared\Domain\Aggregate\AggregateReconstructable;
 use Shared\Domain\Aggregate\AggregateRoot;
+use Shared\Domain\Exception\DomainException;
 use Shared\Domain\Model\FestivalId;
 use Shared\Domain\ValueObject\ValidateException;
 
@@ -19,7 +21,7 @@ class PromoCode extends AggregateRoot implements Aggregate, AggregateEventable, 
 
     protected ?Limit $limit = null;
 
-    protected int $count = 0;
+    protected Counter $count;
 
     protected Discount $discount;
 
@@ -28,11 +30,11 @@ class PromoCode extends AggregateRoot implements Aggregate, AggregateEventable, 
     protected FestivalId $festivalId;
 
     public static function create(
-        Title     $title,
-        Discount   $discord,
-        FestivalId $festivalId,
+        Title         $title,
+        Discount      $discord,
+        FestivalId    $festivalId,
         PromoCodeSing $promoCodeSing,
-        ?Limit     $limit = null,
+        ?Limit        $limit = null,
     ): self
     {
         $promoCode = new self(PromoCodeId::random());
@@ -59,5 +61,22 @@ class PromoCode extends AggregateRoot implements Aggregate, AggregateEventable, 
         $this->title = new Title($promoCodeWasCreating->title);
         $this->limit = null === $promoCodeWasCreating->limit ? null : new Limit($promoCodeWasCreating->limit);
         $this->promoCodeSing = PromoCodeSing::fromString($promoCodeWasCreating->promoCodeSing);
+        $this->count = new Counter(0);
+    }
+
+    /**
+     * @throws DomainException
+     */
+    public function applyPromoCode(): void
+    {
+        if (!$this->limit->includes($this->count->value())) {
+            throw new DomainException('Вышли за приделы лимита ');
+        }
+        $this->recordAndApply(new PromoCodeWasApply($this->id->value()));
+    }
+
+    public function onPromoCodeWasApply(PromoCodeWasApply $promoCodeWasApply): void
+    {
+        $this->count->nextCount();
     }
 }

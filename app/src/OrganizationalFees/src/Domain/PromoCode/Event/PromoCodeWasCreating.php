@@ -22,6 +22,6 @@ class PromoCodeWasCreating extends Event
 
     public static function eventName(): string
     {
-        return 'arrangementFee.domain.order.creating';
+        return 'arrangementFee.domain.promoCode.creating';
     }
 }
