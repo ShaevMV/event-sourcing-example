@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OrganizationalFees\Domain\ArrangementFee\Model;
 
 use OrganizationalFees\Domain\ArrangementFee\Event\ArrangementFeeWasCreating;
+use OrganizationalFees\Domain\ArrangementFee\Event\ArrangementFeeWasUpdatePrice;
 use Shared\Domain\Aggregate\Aggregate;
 use Shared\Domain\Aggregate\AggregateEventable;
 use Shared\Domain\Aggregate\AggregateReconstructable;
@@ -36,6 +37,7 @@ class ArrangementFee extends AggregateRoot implements Aggregate, AggregateEventa
         return $arrangementFee;
     }
 
+
     public function onArrangementFeeWasCreating(ArrangementFeeWasCreating $arrangementFeeWasCreating): void
     {
         $this->id = ArrangementId::fromString($arrangementFeeWasCreating->getAggregateId());
@@ -45,6 +47,25 @@ class ArrangementFee extends AggregateRoot implements Aggregate, AggregateEventa
             $arrangementFeeWasCreating->getOccurredOn()->getTimestamp()
         );
         $this->festivalId = FestivalId::fromString($arrangementFeeWasCreating->festivalId);
+    }
+
+    public function updatePrice(int $price, int $timestamp): self
+    {
+        $this->recordAndApply(new ArrangementFeeWasUpdatePrice(
+            $this->id->value(),
+            $price,
+            $timestamp
+        ));
+
+        return $this;
+    }
+
+    public function onArrangementFeeWasUpdatePrice(ArrangementFeeWasUpdatePrice $arrangementFeeWasUpdatePrice): void
+    {
+        $this->price->addPrice(
+            $arrangementFeeWasUpdatePrice->price,
+            $arrangementFeeWasUpdatePrice->timestamp
+        );
     }
 
     public function getPrice(?int $timestampNow = null): ?int

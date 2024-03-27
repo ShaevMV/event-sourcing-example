@@ -14,39 +14,25 @@ class ArrangementPrice extends Price
     private array $priceList;
 
     public function __construct(
-        public readonly int $price,
-        public readonly int $timestamp
+        int $price,
+        int $timestamp
     )
     {
         $this->priceList[$timestamp] = $price;
     }
 
-    public function getLastPrice(): int
-    {
-        return end($this->priceList);
-    }
 
-    public function serialize(): ?string
-    {
-        return serialize($this->priceList);
-    }
-
-    public function unserialize(string $data)
-    {
-        $this->priceList = unserialize($data);
-    }
-
-    public function __serialize(): array
+    public function getPriceList(): array
     {
         return $this->priceList;
     }
 
-    public function __unserialize(array $data): void
+    public function addPrice(int $price, int $timestamp): void
     {
-        $this->priceList = $data;
+        $this->priceList[$timestamp] = $price;
     }
 
-    public function getPriceList(): array
+    public function jsonSerialize(): array
     {
         return $this->priceList;
     }

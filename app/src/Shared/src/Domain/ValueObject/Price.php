@@ -6,5 +6,4 @@ namespace Shared\Domain\ValueObject;
 
 abstract class Price extends Json
 {
-
 }
