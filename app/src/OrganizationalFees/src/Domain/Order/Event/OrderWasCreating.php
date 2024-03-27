@@ -19,7 +19,8 @@ class OrderWasCreating extends Event
         array                  $guestNames,
         public readonly string $userId,
         public readonly string $arrangementFeeId,
-        public readonly string $promoCode
+        public readonly string $promoCode,
+        public readonly int    $price,
     )
     {
         parent::__construct($aggregateId);

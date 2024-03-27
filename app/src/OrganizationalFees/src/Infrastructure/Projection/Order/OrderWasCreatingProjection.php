@@ -16,7 +16,7 @@ class OrderWasCreatingProjection implements Projection
 {
     public function __construct(
         private readonly Connection $connection,
-        private readonly ArrangementFeeRepositoryDecoration $feeRepositoryDecoration
+
     )
     {
     }
@@ -39,8 +39,6 @@ class OrderWasCreatingProjection implements Projection
             return;
         }
 
-        $arrangementFee = $this->feeRepositoryDecoration->ofId(ArrangementId::fromString($event->arrangementFeeId));
-
         $this->connection->insert('order',
             [
                 'id' => $event->getAggregateId(),
@@ -48,9 +46,8 @@ class OrderWasCreatingProjection implements Projection
                 'user_id' => $event->userId,
                 'arrangement_fee_id' => $event->arrangementFeeId,
                 'status' => OrderStatus::NEW,
-                'price' => $arrangementFee->getPrice(time()),
+                'price' => $event->price,
                 'promo_code' => $event->promoCode,
-
             ],
         );
     }

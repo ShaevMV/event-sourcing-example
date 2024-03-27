@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OrganizationalFees\Domain\Order\Model;
 
+use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFee;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
 use OrganizationalFees\Domain\Order\Event\OrderWasCreating;
 use Auth\Domain\User\Model\UserId;
@@ -22,16 +23,10 @@ class Order extends AggregateRoot implements Aggregate, AggregateEventable, Aggr
     private readonly UserId $userId;
     private readonly PromoCode $promoCode;
 
-    /**
-     * @param string[] $guestNames
-     * @param ArrangementId $arrangementTypeId
-     * @param UserId $userId
-     * @param PromoCode $promoCode
-     * @return self
-     */
+
     public static function create(
         array         $guestNames,
-        ArrangementId $arrangementTypeId,
+        ArrangementFee $arrangementFee,
         UserId        $userId,
         PromoCode     $promoCode,
     ): self
@@ -42,8 +37,9 @@ class Order extends AggregateRoot implements Aggregate, AggregateEventable, Aggr
             $order->id()->value(),
             $guestNames,
             $userId->value(),
-            $arrangementTypeId->value(),
-            $promoCode->value()
+            $arrangementFee->id()->value(),
+            $promoCode->value(),
+            $arrangementFee->getPrice(time())
         ));
 
         return $order;

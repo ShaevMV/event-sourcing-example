@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OrganizationalFees\Application\Command\OrderCreate;
 
+use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFeeRepositoryPersistence;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
 use OrganizationalFees\Domain\Order\Model\Order;
 use OrganizationalFees\Domain\Order\Model\OrderRepositoryPersistence;
@@ -14,16 +15,19 @@ use Shared\Domain\Bus\Command\CommandHandler;
 class OrderCreateCommandHandler implements CommandHandler
 {
     public function __construct(
-        private readonly OrderRepositoryPersistence $orderRepositoryPersistence
+        private readonly OrderRepositoryPersistence $orderRepositoryPersistence,
+        private readonly ArrangementFeeRepositoryPersistence $feeRepositoryDecoration
     )
     {
     }
 
     public function __invoke(OrderCreateCommand $orderCreateCommand): OrderCreateCommandResponse
     {
+        $arrangementFee = $this->feeRepositoryDecoration->ofId(ArrangementId::fromString($orderCreateCommand->ticketTypeId));
+
         $order = Order::create(
             $orderCreateCommand->guestNames,
-            ArrangementId::fromString($orderCreateCommand->ticketTypeId),
+            $arrangementFee,
             UserId::fromString($orderCreateCommand->userId),
             PromoCode::fromString($orderCreateCommand->promoCode)
         );
