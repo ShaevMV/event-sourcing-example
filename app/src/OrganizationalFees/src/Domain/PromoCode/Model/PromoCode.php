@@ -25,16 +25,16 @@ class PromoCode extends AggregateRoot implements Aggregate, AggregateEventable, 
 
     protected Discount $discount;
 
-    protected PromoCodeSing $promoCodeSing;
+    protected Sing $promoCodeSing;
 
     protected FestivalId $festivalId;
 
     public static function create(
-        Title         $title,
-        Discount      $discord,
-        FestivalId    $festivalId,
-        PromoCodeSing $promoCodeSing,
-        ?Limit        $limit = null,
+        Title      $title,
+        Discount   $discord,
+        FestivalId $festivalId,
+        Sing       $promoCodeSing,
+        ?Limit     $limit = null,
     ): self
     {
         $promoCode = new self(PromoCodeId::random());
@@ -60,7 +60,7 @@ class PromoCode extends AggregateRoot implements Aggregate, AggregateEventable, 
         $this->discount = new Discount($promoCodeWasCreating->discount);
         $this->title = new Title($promoCodeWasCreating->title);
         $this->limit = null === $promoCodeWasCreating->limit ? null : new Limit($promoCodeWasCreating->limit);
-        $this->promoCodeSing = PromoCodeSing::fromString($promoCodeWasCreating->promoCodeSing);
+        $this->promoCodeSing = Sing::fromString($promoCodeWasCreating->sing);
         $this->count = new Counter(0);
     }
 
@@ -70,7 +70,7 @@ class PromoCode extends AggregateRoot implements Aggregate, AggregateEventable, 
     public function applyPromoCode(): void
     {
         if (!$this->limit->includes($this->count->value())) {
-            throw new DomainException('Вышли за приделы лимита ');
+            throw new DomainException('Вышли за приделы лимита');
         }
         $this->recordAndApply(new PromoCodeWasApply($this->id->value()));
     }
@@ -78,5 +78,10 @@ class PromoCode extends AggregateRoot implements Aggregate, AggregateEventable, 
     public function onPromoCodeWasApply(PromoCodeWasApply $promoCodeWasApply): void
     {
         $this->count->nextCount();
+    }
+
+    public function isCountAchievedLimit(): bool
+    {
+        return  $this->limit->equals($this->count);
     }
 }

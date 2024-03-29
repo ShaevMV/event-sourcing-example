@@ -51,6 +51,11 @@ services:
   OrganizationalFees\Infrastructure\Repository\Domain\ArrangementFee\EventStory\EsArrangementFeeRepositoryPersistence:
     public: true
 
+  OrganizationalFees\Infrastructure\Repository\Domain\PromoCode\EventStory\EsPromoCodeRepositoryPersistence:
+    public: true
+  OrganizationalFees\Application\Command\AddPromoCode\AddPromoCodeCommandHandler:
+    public: true
+
   OrganizationalFees\Application\Command\AddArrangementFee\AddArrangementFeeCommandHandler:
     public: true
 
@@ -59,6 +64,7 @@ services:
   Auth\Domain\User\Model\UserRepositoryPersistence: '@Auth\Infrastructure\Repository\Domain\User\EventStore\EsUserRepositoryPersistence'
 
   OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFeeRepositoryPersistence: '@OrganizationalFees\Infrastructure\Repository\Domain\ArrangementFee\EventStory\EsArrangementFeeRepositoryPersistence'
+  OrganizationalFees\Domain\PromoCode\Model\PromoCodeRepositoryPersistence: '@OrganizationalFees\Infrastructure\Repository\Domain\PromoCode\EventStory\EsPromoCodeRepositoryPersistence'
 
   #    Shared\Infrastructure\Bus\Projection\Projector\InMemory\ProjectorInMemory:
   #      arguments: [ !tagged shared.domain.bus.projector.projection ]

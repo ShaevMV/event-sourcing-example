@@ -9,7 +9,7 @@ namespace OrganizationalFees\Domain\PromoCode\Model;
 use OrganizationalFees\Domain\PromoCode\Exception\PromoCodeSingDontCorrectException;
 use Shared\Domain\ValueObject\Keyword;
 
-class PromoCodeSing extends Keyword
+class Sing extends Keyword
 {
     public const PERCENT = '%',
         FIX = '-';

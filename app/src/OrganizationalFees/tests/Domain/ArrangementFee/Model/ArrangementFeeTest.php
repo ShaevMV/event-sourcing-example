@@ -24,6 +24,7 @@ class ArrangementFeeTest extends TestCase
         $eventCurrent = $events->current();
         $this->assertInstanceOf(ArrangementFeeWasCreating::class, $eventCurrent);
         $this->assertEquals(100, $arrangementFee->getPrice());
+
         return $arrangementFee;
     }
 
@@ -34,7 +35,7 @@ class ArrangementFeeTest extends TestCase
         $arrangementFee->updatePrice(150, time());
         $this->assertEquals(150, $arrangementFee->getPrice());
 
-        $arrangementFee->updatePrice(250, time()+10000);
+        $arrangementFee->updatePrice(250, time() + 10000);
         $this->assertEquals(150, $arrangementFee->getPrice());
     }
 }

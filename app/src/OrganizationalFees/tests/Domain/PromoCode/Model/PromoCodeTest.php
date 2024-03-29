@@ -9,7 +9,7 @@ use OrganizationalFees\Domain\PromoCode\Exception\PromoCodeSingDontCorrectExcept
 use OrganizationalFees\Domain\PromoCode\Model\Discount;
 use OrganizationalFees\Domain\PromoCode\Model\Limit;
 use OrganizationalFees\Domain\PromoCode\Model\PromoCode;
-use OrganizationalFees\Domain\PromoCode\Model\PromoCodeSing;
+use OrganizationalFees\Domain\PromoCode\Model\Sing;
 use OrganizationalFees\Domain\PromoCode\Model\Title;
 use PHPUnit\Framework\TestCase;
 use Shared\Domain\Exception\DomainException;
@@ -28,7 +28,7 @@ class PromoCodeTest extends TestCase
             Title::fromString('test'),
             new Discount(100),
             FestivalId::random(),
-            PromoCodeSing::fromString(PromoCodeSing::FIX),
+            Sing::fromString(Sing::FIX),
             new Limit(2),
         );
 
@@ -38,6 +38,7 @@ class PromoCodeTest extends TestCase
         $this->assertInstanceOf(PromoCodeWasCreating::class, $eventCurrent);
         $promoCode->applyPromoCode();
         $promoCode->applyPromoCode();
+        $this->assertTrue($promoCode->isCountAchievedLimit());
         $this->expectException(DomainException::class);
         $promoCode->applyPromoCode();
 

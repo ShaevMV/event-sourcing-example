@@ -13,8 +13,8 @@ class PromoCodeWasCreating extends Event
         public readonly string $title,
         public readonly int    $discount,
         public readonly string $festivalId,
-        public readonly string $promoCodeSing,
-        public readonly ?int   $limit,
+        public readonly string $sing,
+        public readonly ?int   $limit = null,
     )
     {
         parent::__construct($aggregateId);
