@@ -15,12 +15,14 @@ class OrderWasCreating extends Event
     public array $guestNames = [];
 
     public function __construct(
-        string                 $aggregateId,
-        array                  $guestNames,
-        public readonly string $userId,
-        public readonly string $arrangementFeeId,
-        public readonly string $promoCode,
-        public readonly int    $price,
+        string                  $aggregateId,
+        array                   $guestNames,
+        public readonly string  $userId,
+        public readonly string  $arrangementFeeId,
+        public readonly int     $price,
+        public readonly int     $total,
+        public readonly int     $discount = 0,
+        public readonly ?string $promoCode = null,
     )
     {
         parent::__construct($aggregateId);

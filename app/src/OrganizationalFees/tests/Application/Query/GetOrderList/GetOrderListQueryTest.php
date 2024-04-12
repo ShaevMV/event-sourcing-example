@@ -8,14 +8,31 @@ use OrganizationalFees\Application\Command\OrderCreate\OrderCreateCommand;
 use OrganizationalFees\Application\Command\OrderCreate\OrderCreateCommandHandler;
 use OrganizationalFees\Application\Query\GetOrderList\GetOrderListQuery;
 use OrganizationalFees\Application\Query\GetOrderList\GetOrderListQueryHandler;
+use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFee;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
-use OrganizationalFees\Domain\Order\Model\PromoCode;
 use Auth\Domain\User\Model\UserId;
+use OrganizationalFees\Domain\PromoCode\Model\Title;
 use Shared\Infrastructure\Bus\Projection\Projector\Redis\ProjectorConsumer;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Tests\OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFeeTest;
 
 class GetOrderListQueryTest extends KernelTestCase
 {
+
+    private ArrangementFee $arrangementFee;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+
+        $kernel = self::bootKernel();
+
+        /** @var ArrangementFeeTest $arrangementFee */
+        $arrangementFee = $kernel->getContainer()->get(ArrangementFeeTest::class);
+        $this->arrangementFee = $arrangementFee->testCreate();
+    }
+
     public function testGetListOrder():void
     {
         $kernel = self::bootKernel();
@@ -26,7 +43,7 @@ class GetOrderListQueryTest extends KernelTestCase
             ['test1','test2'],
             ArrangementId::random()->value(),
             UserId::random()->value(),
-            PromoCode::fromString('')->value()
+            Title::fromString('test')->value()
         ));
 
         /** @var ProjectorConsumer $workerProjectionRedis */
@@ -37,7 +54,6 @@ class GetOrderListQueryTest extends KernelTestCase
         $handler = $kernel->getContainer()->get(GetOrderListQueryHandler::class);
 
         $result = $handler(new GetOrderListQuery());
-
         $this->assertNotEmpty($result->orderList);
     }
 }

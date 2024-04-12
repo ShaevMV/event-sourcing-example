@@ -11,8 +11,9 @@ class OrderCreateCommand implements Command
     public function __construct(
         public readonly array $guestNames,
         public readonly string $userId,
-        public readonly string $ticketTypeId,
-        public readonly string $promoCode
+        public readonly string $arrangementFeeId,
+        public readonly string $festivalId,
+        public readonly ?string $promoCode = null
     )
     {
     }

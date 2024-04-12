@@ -35,6 +35,9 @@ services:
   Shared\:
     resource: '../src/Shared/src/'
 
+  Tests\OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFeeTest:
+    public: true
+
   Shared\Infrastructure\Tests\Doctrine\DatabaseArranger:
     public: true
 

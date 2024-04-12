@@ -8,25 +8,46 @@ use Auth\Domain\User\Model\UserId;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFee;
 use OrganizationalFees\Domain\Order\Event\OrderWasCreating;
 use OrganizationalFees\Domain\Order\Model\Order;
-use OrganizationalFees\Domain\Order\Model\PromoCode;
-use PHPUnit\Framework\TestCase;
-use Shared\Domain\Model\FestivalId;
+use OrganizationalFees\Domain\PromoCode\Exception\PromoCodeSingDontCorrectException;
+use OrganizationalFees\Domain\PromoCode\Model\PromoCode;
+use Shared\Domain\Exception\DomainException;
+use Shared\Domain\ValueObject\ValidateException;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Tests\OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFeeTest;
+use Tests\OrganizationalFees\Domain\PromoCode\Model\PromoCodeTest;
 
-class OrderTest extends TestCase
+class OrderTest extends KernelTestCase
 {
-    public function testCreate(): void
-    {
-        $arrangementFee = ArrangementFee::create(
-            'test',
-            100,
-            FestivalId::random(),
-        );
 
+    private ArrangementFee $arrangementFee;
+    private PromoCode $promoCode;
+
+    /**
+     * @throws ValidateException
+     * @throws PromoCodeSingDontCorrectException
+     * @throws DomainException
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $kernel = self::bootKernel();
+
+        /** @var ArrangementFeeTest $arrangementFee */
+        $arrangementFee = $kernel->getContainer()->get(ArrangementFeeTest::class);
+        $this->arrangementFee = $arrangementFee->testCreate();
+        /** @var PromoCodeTest $promoCode */
+        $promoCode = $kernel->getContainer()->get(PromoCodeTest::class);
+        $this->promoCode = $promoCode->testCreateFix();
+    }
+
+
+    public function testCreate(): Order
+    {
         $order = Order::create(
             ['test1', 'test2'],
-            $arrangementFee,
+            $this->arrangementFee,
             UserId::random(),
-            PromoCode::fromString('')
+            null,
         );
 
         $events = $order->pullEvents();
@@ -38,6 +59,23 @@ class OrderTest extends TestCase
         $this->assertSame($order->id()->value(), $orderWasCreating->getAggregateId());
         $this->assertSame(['test1', 'test2'], $orderWasCreating->guestNames);
         $this->assertSame(100, $orderWasCreating->price);
-        $this->assertSame($arrangementFee->id()->value(), $orderWasCreating->arrangementFeeId);
+        $this->assertSame($this->arrangementFee->id()->value(), $orderWasCreating->arrangementFeeId);
+
+        return $order;
+    }
+
+    public function testCreateOnPromoCode(): Order
+    {
+        $order = Order::create(
+            ['test1', 'test2'],
+            $this->arrangementFee,
+            UserId::random(),
+            $this->promoCode,
+        );
+        $this->assertEquals(100, $order->price);
+        $this->assertEquals(100, $order->discount);
+        $this->assertEquals(0, $order->total);
+
+        return $order;
     }
 }
