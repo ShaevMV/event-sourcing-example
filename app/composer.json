@@ -38,6 +38,7 @@
         "psr-4": {
             "App\\": "app/",
             "Auth\\": "src/Auth/src/",
+            "ExportService\\": "src/ExportService/src/",
             "Shared\\": "src/Shared/src/"
         }
     },
