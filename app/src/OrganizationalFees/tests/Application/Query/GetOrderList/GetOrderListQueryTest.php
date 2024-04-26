@@ -28,20 +28,23 @@ class GetOrderListQueryTest extends KernelTestCase
 
         $kernel = self::bootKernel();
 
-        /** @var ArrangementFeeTest $arrangementFee */
-        $arrangementFee = $kernel->getContainer()->get(ArrangementFeeTest::class);
+        /** @var OrderCreateCommandTest $OrderCreateCommandTest */
+        $arrangementFee = $kernel->getContainer()->get(OrderCreateCommandTest::class);
         $this->arrangementFee = $arrangementFee->testCreate();
     }
 
     public function testGetListOrder():void
     {
         $kernel = self::bootKernel();
+
+
+
         /** @var OrderCreateCommandHandler $handler */
         $handler = $kernel->getContainer()->get(OrderCreateCommandHandler::class);
 
         $handler(new OrderCreateCommand(
             ['test1','test2'],
-            ArrangementId::random()->value(),
+            $this->arrangementFee->id()->value(),
             UserId::random()->value(),
             Title::fromString('test')->value()
         ));

@@ -23,6 +23,7 @@ use OrganizationalFees\Infrastructure\Repository\Domain\PromoCode\EventStory\EsP
 use Shared\Domain\Model\FestivalId;
 use Shared\Infrastructure\Bus\Projection\Projector\Redis\ProjectorConsumer;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Tests\OrganizationalFees\Constant\TestConstant;
 
 class OrderCreateCommandTest extends KernelTestCase
 {
@@ -36,8 +37,6 @@ class OrderCreateCommandTest extends KernelTestCase
     {
         parent::setUp();
         $kernel = self::bootKernel();
-
-        $this->festivalId = FestivalId::random();
 
         /** @var OrderRepositoryPersistence $orderRepositoryPersistence */
         $orderRepositoryPersistence = $kernel->getContainer()->get(EsOrderRepositoryPersistence::class);
@@ -60,7 +59,7 @@ class OrderCreateCommandTest extends KernelTestCase
         $handler = $kernel->getContainer()->get(AddArrangementFeeCommandHandler::class);
         $handlerResponse = $handler(new AddArrangementFeeCommand(
             'test',
-            $this->festivalId->value(),
+            TestConstant::FESTIVAL_ID,
             1000
         ));
         $resultPersistence = $this->arrangementFeeRepositoryPersistence->ofId(ArrangementId::fromString($handlerResponse->id));
@@ -78,7 +77,7 @@ class OrderCreateCommandTest extends KernelTestCase
         $handlerResponse = $handler(new AddPromoCodeCommand(
             'test',
             100,
-            $this->festivalId->value(),
+            TestConstant::FESTIVAL_ID,
             '%',
             100,
         ));
@@ -109,7 +108,7 @@ class OrderCreateCommandTest extends KernelTestCase
             ['test1','test2'],
             UserId::random()->value(),
             $arrangementFee->id()->value(),
-            $this->festivalId->value(),
+            TestConstant::FESTIVAL_ID,
             $promoCode->getTitle()->value(),
         ));
 
