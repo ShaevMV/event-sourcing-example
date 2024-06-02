@@ -20,6 +20,6 @@ class ArrangementFeeWasUpdatePrice extends Event
 
     public static function eventName(): string
     {
-        return 'arrangementFee.domain.arrangementFee.updatePrice';
+        return 'organizationalFees.domain.arrangementFee.updatePrice';
     }
 }

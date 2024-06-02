@@ -19,6 +19,6 @@ class ArrangementFeeWasCreating extends Event
 
     public static function eventName(): string
     {
-       return 'arrangementFee.domain.arrangementFee.creating';
+       return 'organizationalFees.domain.arrangementFee.creating';
     }
 }
