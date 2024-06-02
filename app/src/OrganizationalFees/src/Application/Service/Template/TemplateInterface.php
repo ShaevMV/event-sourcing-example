@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace OrganizationalFees\Application\Service\Template;
 
-interface MailTemplateInterface
+interface TemplateInterface
 {
-    public function validate(string $content): bool;
+    public function getPath(): string;
 }

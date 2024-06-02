@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace OrganizationalFees\Application\Service\Template;
 
-use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 interface TemplateServiceInterface
 {
-    public function save(File $file): string;
+    public function save(UploadedFile $file, TemplateInterface $template): string;
 }

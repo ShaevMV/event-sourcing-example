@@ -64,6 +64,10 @@ services:
 
   Tests\OrganizationalFees\Application\Command\OrderCreate\OrderCreateCommandTest:
     public: true
+
+  OrganizationalFees\Infrastructure\Service\Template\TemplateService:
+    public: true
+
   Shared\Infrastructure\Tests\Doctrine\DatabaseArrangerInterface: '@Shared\Infrastructure\Tests\Doctrine\DatabaseArranger'
 
   Auth\Domain\User\Model\UserRepositoryPersistence: '@Auth\Infrastructure\Repository\Domain\User\EventStore\EsUserRepositoryPersistence'
