@@ -7,6 +7,8 @@ namespace OrganizationalFees\Application\Command\Festival\FestivalCreate;
 use OrganizationalFees\Application\Service\Template\TemplateServiceInterface;
 use OrganizationalFees\Domain\Festival\Model\Festival;
 use OrganizationalFees\Domain\Festival\Model\FestivalRepositoryPersistence;
+use OrganizationalFees\Infrastructure\Service\Template\TemplateMail;
+use OrganizationalFees\Infrastructure\Service\Template\TemplatePdf;
 use Shared\Domain\Bus\Command\CommandHandler;
 
 class FestivalCreateCommandHandler implements CommandHandler
@@ -24,8 +26,8 @@ class FestivalCreateCommandHandler implements CommandHandler
             $command->name,
             $command->dateStart,
             $command->dateEnd,
-            $this->templateService->save($command->pdfTemplate),
-            $this->templateService->save($command->mailTemplate),
+            $this->templateService->save($command->pdfTemplate, new TemplatePdf()),
+            $this->templateService->save($command->mailTemplate, new TemplateMail()),
         );
 
         $this->festivalRepositoryPersistence->persist($festival);

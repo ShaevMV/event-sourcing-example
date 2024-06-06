@@ -6,7 +6,7 @@ namespace OrganizationalFees\Application\Command\Festival\FestivalCreate;
 
 use DateTime;
 use Shared\Domain\Bus\Command\Command;
-use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FestivalCreateCommand implements Command
 {
@@ -14,8 +14,8 @@ class FestivalCreateCommand implements Command
         public readonly string $name,
         public readonly DateTime $dateStart,
         public readonly DateTime $dateEnd,
-        public readonly File $mailTemplate,
-        public readonly File $pdfTemplate,
+        public readonly UploadedFile $mailTemplate,
+        public readonly UploadedFile $pdfTemplate,
     )
     {
     }

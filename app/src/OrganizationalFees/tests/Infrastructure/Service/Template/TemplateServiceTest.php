@@ -7,10 +7,9 @@ namespace Tests\OrganizationalFees\Infrastructure\Service\Template;
 use OrganizationalFees\Infrastructure\Service\Template\TemplateMail;
 use OrganizationalFees\Infrastructure\Service\Template\TemplatePdf;
 use OrganizationalFees\Infrastructure\Service\Template\TemplateService;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class TemplateServiceTest extends KernelTestCase
+class TemplateServiceTest extends BaseTemplateTestCase
 {
 
     private TemplateService $templateService;
@@ -28,23 +27,17 @@ class TemplateServiceTest extends KernelTestCase
 
     public function testTemplateMail(): void
     {
-        $file = new UploadedFile(__DIR__.'/File/mail.html.twig', 'mail.html.twig', test: true);
+        $file = new UploadedFile(__DIR__.'/File/'.self::TEMPLATE_MAIL, self::TEMPLATE_MAIL, test: true);
         $path = $this->templateService->save($file, new TemplateMail());
 
-        self::assertEquals(TemplateMail::PATH.'mail.html.twig', $path);
-
-        $file = new UploadedFile($path, 'mail.html.twig', test: true);
-        $file->move(__DIR__.'/File/');
+        self::assertEquals(TemplateMail::PATH.self::TEMPLATE_MAIL, $path);
     }
 
     public function testTemplatePdf(): void
     {
-        $file = new UploadedFile(__DIR__.'/File/pdf.html.twig', 'pdf.html.twig', test: true);
+        $file = new UploadedFile(__DIR__.'/File/'.self::TEMPLATE_PDF, self::TEMPLATE_PDF, test: true);
         $path = $this->templateService->save($file, new TemplatePdf());
 
-        self::assertEquals(TemplatePdf::PATH.'pdf.html.twig', $path);
-
-        $file = new UploadedFile($path, 'pdf.html.twig', test: true);
-        $file->move(__DIR__.'/File/');
+        self::assertEquals(TemplatePdf::PATH.self::TEMPLATE_PDF, $path);
     }
 }

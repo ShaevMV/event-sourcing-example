@@ -67,6 +67,10 @@ services:
 
   OrganizationalFees\Infrastructure\Service\Template\TemplateService:
     public: true
+  OrganizationalFees\Infrastructure\Repository\Domain\Festival\EventStory\EsFestivalRepositoryPersistence:
+    public: true
+  OrganizationalFees\Application\Command\Festival\FestivalCreate\FestivalCreateCommandHandler:
+    public: true
 
   Shared\Infrastructure\Tests\Doctrine\DatabaseArrangerInterface: '@Shared\Infrastructure\Tests\Doctrine\DatabaseArranger'
 
@@ -74,6 +78,7 @@ services:
 
   OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFeeRepositoryPersistence: '@OrganizationalFees\Infrastructure\Repository\Domain\ArrangementFee\EventStory\EsArrangementFeeRepositoryPersistence'
   OrganizationalFees\Domain\PromoCode\Model\PromoCodeRepositoryPersistence: '@OrganizationalFees\Infrastructure\Repository\Domain\PromoCode\EventStory\EsPromoCodeRepositoryPersistence'
+  OrganizationalFees\Domain\Festival\Model\PromoCodeRepositoryPersistenceFestivalRepositoryPersistence: '@OrganizationalFees\Infrastructure\Repository\Domain\Festival\EventStory\EsFestivalRepositoryPersistence'
 
   #    Shared\Infrastructure\Bus\Projection\Projector\InMemory\ProjectorInMemory:
   #      arguments: [ !tagged shared.domain.bus.projector.projection ]
