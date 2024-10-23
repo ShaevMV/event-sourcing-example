@@ -11,14 +11,12 @@ class ArrangementFeeWasCreating extends Event
         public readonly string $name,
         public readonly int $price,
         public readonly string $festivalId,
-    )
-    {
+    ) {
         parent::__construct($aggregateId);
     }
 
-
     public static function eventName(): string
     {
-       return 'organizationalFees.domain.arrangementFee.creating';
+        return 'organizationalFees.domain.arrangementFee.creating';
     }
 }

@@ -8,5 +8,4 @@ use Shared\Domain\ValueObject\PriceList;
 
 class ArrangementPriceList extends PriceList
 {
-
 }

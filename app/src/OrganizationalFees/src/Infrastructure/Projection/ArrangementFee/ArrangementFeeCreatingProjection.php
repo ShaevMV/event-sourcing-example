@@ -13,14 +13,13 @@ class ArrangementFeeCreatingProjection implements Projection
 {
     public function __construct(
         private readonly Connection $connection,
-    )
-    {
+    ) {
     }
 
     public function listenTo(): array
     {
         return [
-            ArrangementFeeWasCreating::class
+            ArrangementFeeWasCreating::class,
         ];
     }
 

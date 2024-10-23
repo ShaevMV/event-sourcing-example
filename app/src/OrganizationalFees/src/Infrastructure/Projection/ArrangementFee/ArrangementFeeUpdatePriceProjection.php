@@ -14,14 +14,13 @@ class ArrangementFeeUpdatePriceProjection implements Projection
 {
     public function __construct(
         private readonly Connection $connection,
-    )
-    {
+    ) {
     }
 
     public function listenTo(): array
     {
         return [
-            ArrangementFeeWasUpdatePrice::class
+            ArrangementFeeWasUpdatePrice::class,
         ];
     }
 

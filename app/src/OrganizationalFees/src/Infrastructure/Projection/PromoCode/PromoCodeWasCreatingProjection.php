@@ -13,15 +13,13 @@ class PromoCodeWasCreatingProjection implements Projection
 {
     public function __construct(
         private readonly Connection $connection,
-    )
-    {
+    ) {
     }
-
 
     public function listenTo(): array
     {
         return [
-            PromoCodeWasCreating::class
+            PromoCodeWasCreating::class,
         ];
     }
 

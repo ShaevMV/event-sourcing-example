@@ -10,7 +10,6 @@ class TemplateMail implements TemplateInterface
 {
     public const PATH = '/app/src/OrganizationalFees/src/Infrastructure/Resources/Template/Mail/';
 
-
     public function getPath(): string
     {
         return self::PATH;

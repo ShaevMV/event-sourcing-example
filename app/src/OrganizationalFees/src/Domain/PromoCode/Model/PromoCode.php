@@ -30,13 +30,12 @@ class PromoCode extends AggregateRoot implements Aggregate, AggregateEventable, 
     protected FestivalId $festivalId;
 
     public static function create(
-        Title      $title,
-        Discount   $discord,
+        Title $title,
+        Discount $discord,
         FestivalId $festivalId,
-        Sing       $promoCodeSing,
-        ?Limit     $limit = null,
-    ): self
-    {
+        Sing $promoCodeSing,
+        ?Limit $limit = null,
+    ): self {
         $promoCode = new self(PromoCodeId::random());
         $promoCode->recordAndApply(new PromoCodeWasCreating(
             $promoCode->id->value(),

@@ -13,8 +13,7 @@ class FindPromoCodeQueryHandler implements QueryHandler
 {
     public function __construct(
         private readonly PromoCodeRepositoryInterface $repository
-    )
-    {
+    ) {
     }
 
     public function __invoke(FindPromoCodeQuery $query): ?FindPromoCodeQueryResponse

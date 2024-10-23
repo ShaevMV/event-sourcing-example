@@ -8,5 +8,4 @@ use Shared\Domain\ValueObject\Keyword;
 
 class ArrangementName extends Keyword
 {
-
 }

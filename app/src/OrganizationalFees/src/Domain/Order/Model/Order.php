@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace OrganizationalFees\Domain\Order\Model;
 
+use Auth\Domain\User\Model\UserId;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFee;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
 use OrganizationalFees\Domain\Order\Event\OrderWasCreating;
-use Auth\Domain\User\Model\UserId;
 use OrganizationalFees\Domain\PromoCode\Model\PromoCode;
 use OrganizationalFees\Domain\PromoCode\Model\Title;
 use Shared\Domain\Aggregate\Aggregate;
@@ -30,12 +30,11 @@ class Order extends AggregateRoot implements Aggregate, AggregateEventable, Aggr
     public readonly int $total;
 
     public static function create(
-        array          $guestNames,
+        array $guestNames,
         ArrangementFee $arrangementFee,
-        UserId         $userId,
-        ?PromoCode     $promoCode = null,
-    ): self
-    {
+        UserId $userId,
+        ?PromoCode $promoCode = null,
+    ): self {
         $order = new self(OrderId::random());
 
         $promoCode?->validateCountAchievedLimit();
@@ -63,13 +62,11 @@ class Order extends AggregateRoot implements Aggregate, AggregateEventable, Aggr
         return ($price * $count) - ($count * $discount);
     }
 
-
-
     public function onOrderWasCreating(OrderWasCreating $orderWasCreating): void
     {
         $this->id = OrderId::fromString($orderWasCreating->getAggregateId());
         $this->status = OrderStatus::fromString(OrderStatus::NEW);
-        $this->guestNames = array_map(fn(string $name) => GuestName::fromString($name), $orderWasCreating->guestNames);
+        $this->guestNames = array_map(fn (string $name) => GuestName::fromString($name), $orderWasCreating->guestNames);
         $this->userId = new UserId($orderWasCreating->userId);
 
         $this->arrangementFeeId = ArrangementId::fromString($orderWasCreating->arrangementFeeId);
@@ -79,10 +76,8 @@ class Order extends AggregateRoot implements Aggregate, AggregateEventable, Aggr
         $this->total = $orderWasCreating->total;
     }
 
-
     public function getStatus(): OrderStatus
     {
         return $this->status;
     }
-
 }

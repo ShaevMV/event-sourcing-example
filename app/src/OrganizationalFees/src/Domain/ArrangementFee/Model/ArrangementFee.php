@@ -20,11 +20,10 @@ class ArrangementFee extends AggregateRoot implements Aggregate, AggregateEventa
     protected readonly FestivalId $festivalId;
 
     public static function create(
-        string     $name,
-        int        $price,
+        string $name,
+        int $price,
         FestivalId $festivalId,
-    ): self
-    {
+    ): self {
         $arrangementFee = new self(ArrangementId::random());
 
         $arrangementFee->recordAndApply(new ArrangementFeeWasCreating(
@@ -36,7 +35,6 @@ class ArrangementFee extends AggregateRoot implements Aggregate, AggregateEventa
 
         return $arrangementFee;
     }
-
 
     public function onArrangementFeeWasCreating(ArrangementFeeWasCreating $arrangementFeeWasCreating): void
     {
@@ -71,7 +69,7 @@ class ArrangementFee extends AggregateRoot implements Aggregate, AggregateEventa
     public function getPrice(?int $timestampNow = null): ?int
     {
         $timestampNow = null === $timestampNow ? time() : $timestampNow;
-        $priceList = $this?->price->getPriceList() ?? [];
+        $priceList = $this->price->getPriceList() ?? [];
         krsort($priceList);
         foreach ($priceList as $timestamp => $price) {
             if ($timestamp <= $timestampNow) {

@@ -10,7 +10,6 @@ class FestivalCreateCommandResponse implements CommandResponse
 {
     public function __construct(
         public readonly string $id,
-    )
-    {
+    ) {
     }
 }

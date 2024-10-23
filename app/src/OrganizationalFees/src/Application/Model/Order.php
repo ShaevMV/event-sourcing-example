@@ -17,8 +17,7 @@ class Order
         public readonly int $price,
         public readonly string $promoCode = '',
         public readonly int $discount = 0,
-    )
-    {
+    ) {
         $this->guest = $guest;
     }
 }

@@ -9,7 +9,6 @@ use Shared\Domain\Bus\Command\Command;
 class OrderApprovedCommand implements Command
 {
     public function __construct(
-    )
-    {
+    ) {
     }
 }

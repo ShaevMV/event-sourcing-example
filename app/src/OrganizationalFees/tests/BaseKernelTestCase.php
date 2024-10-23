@@ -8,6 +8,5 @@ class BaseKernelTestCase extends KernelTestCase
 {
     public function __destruct()
     {
-        // TODO: Implement __destruct() method.
     }
 }

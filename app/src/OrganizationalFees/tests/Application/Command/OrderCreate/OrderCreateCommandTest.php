@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\OrganizationalFees\Application\Command\OrderCreate;
 
+use Auth\Domain\User\Model\UserId;
 use OrganizationalFees\Application\Command\AddArrangementFee\AddArrangementFeeCommand;
 use OrganizationalFees\Application\Command\AddArrangementFee\AddArrangementFeeCommandHandler;
 use OrganizationalFees\Application\Command\AddPromoCode\AddPromoCodeCommand;
@@ -19,7 +20,6 @@ use OrganizationalFees\Domain\PromoCode\Model\PromoCode;
 use OrganizationalFees\Domain\PromoCode\Model\PromoCodeId;
 use OrganizationalFees\Infrastructure\Repository\Domain\ArrangementFee\EventStory\EsArrangementFeeRepositoryPersistence;
 use OrganizationalFees\Infrastructure\Repository\Domain\Order\EventStore\EsOrderRepositoryPersistence;
-use Auth\Domain\User\Model\UserId;
 use OrganizationalFees\Infrastructure\Repository\Domain\PromoCode\EventStory\EsPromoCodeRepositoryPersistence;
 use Shared\Domain\Model\FestivalId;
 use Shared\Domain\ValueObject\ValidateException;
@@ -51,7 +51,6 @@ class OrderCreateCommandTest extends BaseKernelTestCase
         /** @var EsPromoCodeRepositoryPersistence $promoCodeRepositoryPersistence */
         $promoCodeRepositoryPersistence = $kernel->getContainer()->get(EsPromoCodeRepositoryPersistence::class);
         $this->promoCodeRepositoryPersistence = $promoCodeRepositoryPersistence;
-
     }
 
     public function testCreateArrangementFee(): ArrangementFee
@@ -99,7 +98,6 @@ class OrderCreateCommandTest extends BaseKernelTestCase
         return $resultPersistence;
     }
 
-
     /**
      * @throws ValidateException
      * @throws PromoCodeSingDontCorrectException
@@ -107,15 +105,14 @@ class OrderCreateCommandTest extends BaseKernelTestCase
     public function testCreate(): void
     {
         $kernel = self::bootKernel();
-        /** @var  OrderCreateCommandHandler $handler */
+        /** @var OrderCreateCommandHandler $handler */
         $handler = $kernel->getContainer()->get(OrderCreateCommandHandler::class);
 
-        $arrangementFee =  $this->testCreateArrangementFee();
+        $arrangementFee = $this->testCreateArrangementFee();
         $promoCode = $this->testCreatePromoCode();
 
-
         $orderResponse = $handler(new OrderCreateCommand(
-            ['test1','test2'],
+            ['test1', 'test2'],
             UserId::random()->value(),
             $arrangementFee->id()->value(),
             TestConstant::FESTIVAL_ID,

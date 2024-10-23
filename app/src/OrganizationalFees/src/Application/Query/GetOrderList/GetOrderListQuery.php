@@ -8,5 +8,4 @@ use Shared\Domain\Bus\Query\Query;
 
 class GetOrderListQuery implements Query
 {
-
 }

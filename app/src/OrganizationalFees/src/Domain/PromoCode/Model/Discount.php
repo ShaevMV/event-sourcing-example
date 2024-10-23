@@ -8,5 +8,4 @@ use Shared\Domain\ValueObject\PositiveNumber;
 
 class Discount extends PositiveNumber
 {
-
 }

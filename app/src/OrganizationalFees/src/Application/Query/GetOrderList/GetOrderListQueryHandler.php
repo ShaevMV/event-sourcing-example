@@ -11,8 +11,7 @@ class GetOrderListQueryHandler implements QueryHandler
 {
     public function __construct(
         private readonly OrderRepositoryInterface $arrangementFeeRepository
-    )
-    {
+    ) {
     }
 
     public function __invoke(GetOrderListQuery $query): GetOrderListQueryResponse

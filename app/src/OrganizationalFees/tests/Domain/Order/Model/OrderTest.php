@@ -18,7 +18,6 @@ use Tests\OrganizationalFees\Domain\PromoCode\Model\PromoCodeTest;
 
 class OrderTest extends BaseKernelTestCase
 {
-
     private ArrangementFee $arrangementFee;
     private PromoCode $promoCode;
 
@@ -39,7 +38,6 @@ class OrderTest extends BaseKernelTestCase
         $promoCode = $kernel->getContainer()->get(PromoCodeTest::class);
         $this->promoCode = $promoCode->testCreateFixNotLimit();
     }
-
 
     public function testCreate(): Order
     {

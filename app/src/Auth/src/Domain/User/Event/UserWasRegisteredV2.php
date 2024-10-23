@@ -14,13 +14,6 @@ class UserWasRegisteredV2 extends Event
      */
     public readonly array $roles;
 
-    /**
-     * @param string $aggregateId
-     * @param string $username
-     * @param string $email
-     * @param string $passwordHash
-     * @param array $roles
-     */
     public function __construct(
         string $aggregateId,
         public readonly string $username,

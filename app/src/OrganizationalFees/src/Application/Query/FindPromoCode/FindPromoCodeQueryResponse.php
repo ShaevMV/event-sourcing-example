@@ -11,8 +11,6 @@ class FindPromoCodeQueryResponse implements QueryResponse
     public function __construct(
         public readonly string $id,
         public readonly int $discount,
-
-    )
-    {
+    ) {
     }
 }

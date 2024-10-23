@@ -12,8 +12,7 @@ class UpdatePriceCommandHandler implements CommandHandler
 {
     public function __construct(
         private readonly ArrangementFeeRepositoryPersistence $feeRepositoryDecoration,
-    )
-    {
+    ) {
     }
 
     public function __invoke(UpdatePriceCommand $updatePriceCommand): void

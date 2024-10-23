@@ -9,5 +9,4 @@ use Shared\Domain\ValueObject\Uuid;
 
 class PromoCodeId extends Uuid implements AggregateId
 {
-
 }

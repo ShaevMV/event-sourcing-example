@@ -12,8 +12,7 @@ class OrderRepositoryDecoration
 {
     public function __construct(
         private readonly OrderRepositoryPersistence $orderRepositoryPersistence
-    )
-    {
+    ) {
     }
 
     public function ofId(AggregateId $orderId): Order

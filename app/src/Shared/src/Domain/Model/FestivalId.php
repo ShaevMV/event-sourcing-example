@@ -8,5 +8,4 @@ use Shared\Domain\ValueObject\Uuid;
 
 class FestivalId extends Uuid
 {
-
 }

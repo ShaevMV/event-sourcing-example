@@ -6,5 +6,4 @@ namespace OrganizationalFees\Application\Exception;
 
 class TemplatePdfException extends \DomainException
 {
-
 }

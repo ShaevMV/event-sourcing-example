@@ -12,30 +12,30 @@ class Email implements \Stringable, ValueObject
         $this->ensureIsValidUuid($email);
     }
 
-     public static function fromString(string $email): static
-     {
-         return new static($email);
-     }
+    public static function fromString(string $email): static
+    {
+        return new static($email);
+    }
 
-     public function value(): string
-     {
-         return $this->email;
-     }
+    public function value(): string
+    {
+        return $this->email;
+    }
 
-     public function equals(Email $other): bool
-     {
-         return $this->value() === $other->value();
-     }
+    public function equals(Email $other): bool
+    {
+        return $this->value() === $other->value();
+    }
 
-     public function __toString(): string
-     {
-         return $this->value();
-     }
+    public function __toString(): string
+    {
+        return $this->value();
+    }
 
-     private function ensureIsValidUuid(string $email): void
-     {
-         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-             throw new ValidateException(sprintf('Некорректный email %s', $email));
-         }
-     }
+    private function ensureIsValidUuid(string $email): void
+    {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new ValidateException(sprintf('Некорректный email %s', $email));
+        }
+    }
 }

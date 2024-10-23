@@ -9,14 +9,13 @@ use Shared\Domain\Bus\Event\Event;
 class PromoCodeWasCreating extends Event
 {
     public function __construct(
-        string                 $aggregateId,
+        string $aggregateId,
         public readonly string $title,
-        public readonly int    $discount,
+        public readonly int $discount,
         public readonly string $festivalId,
         public readonly string $sing,
-        public readonly ?int   $limit = null,
-    )
-    {
+        public readonly ?int $limit = null,
+    ) {
         parent::__construct($aggregateId);
     }
 

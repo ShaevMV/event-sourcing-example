@@ -16,8 +16,7 @@ class FestivalCreateCommandHandler implements CommandHandler
     public function __construct(
         private readonly FestivalRepositoryPersistence $festivalRepositoryPersistence,
         private readonly TemplateServiceInterface $templateService,
-    )
-    {
+    ) {
     }
 
     public function __invoke(FestivalCreateCommand $command): FestivalCreateCommandResponse

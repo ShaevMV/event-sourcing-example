@@ -7,18 +7,16 @@ namespace Shared\Domain\ValueObject;
 class PriceList extends Json
 {
     /**
-     * @var array<string,integer>
+     * @var array<string,int>
      */
     protected array $priceList;
 
     public function __construct(
         int $price,
         int $timestamp
-    )
-    {
+    ) {
         $this->priceList[$timestamp] = $price;
     }
-
 
     public function getPriceList(): array
     {

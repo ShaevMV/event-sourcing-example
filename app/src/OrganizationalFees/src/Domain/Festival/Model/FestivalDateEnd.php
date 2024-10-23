@@ -8,5 +8,4 @@ use Shared\Domain\ValueObject\DateTime;
 
 class FestivalDateEnd extends DateTime
 {
-
 }

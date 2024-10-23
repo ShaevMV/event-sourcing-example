@@ -14,10 +14,10 @@ class Uuid implements \Stringable, ValueObject
         $this->ensureIsValidUuid($this->value);
     }
 
-     public static function random(): static
-     {
-         return new static(RamseyUuid::uuid4()->toString());
-     }
+    public static function random(): static
+    {
+        return new static(RamseyUuid::uuid4()->toString());
+    }
 
     public static function fromString(string $value): static
     {
@@ -29,15 +29,15 @@ class Uuid implements \Stringable, ValueObject
         return $this->value;
     }
 
-     public function equals(Uuid $other): bool
-     {
-         return $this->value() === $other->value();
-     }
+    public function equals(Uuid $other): bool
+    {
+        return $this->value() === $other->value();
+    }
 
-     public function __toString(): string
-     {
-         return $this->value();
-     }
+    public function __toString(): string
+    {
+        return $this->value();
+    }
 
     /**
      * @throws ValidateException

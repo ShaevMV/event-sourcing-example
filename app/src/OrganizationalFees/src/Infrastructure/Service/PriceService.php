@@ -4,5 +4,4 @@ namespace OrganizationalFees\Infrastructure\Service;
 
 class PriceService
 {
-
 }

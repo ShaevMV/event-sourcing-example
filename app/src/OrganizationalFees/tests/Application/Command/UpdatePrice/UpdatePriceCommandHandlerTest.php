@@ -7,8 +7,8 @@ use OrganizationalFees\Application\Command\UpdatePrice\UpdatePriceCommandHandler
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFee;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
 use OrganizationalFees\Infrastructure\Repository\Domain\ArrangementFee\EventStory\EsArrangementFeeRepositoryPersistence;
-use Tests\OrganizationalFees\BaseKernelTestCase;
 use Tests\OrganizationalFees\Application\Command\AddArrangementFee\AddArrangementFeeCommandHandlerTest;
+use Tests\OrganizationalFees\BaseKernelTestCase;
 
 class UpdatePriceCommandHandlerTest extends BaseKernelTestCase
 {

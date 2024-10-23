@@ -9,5 +9,4 @@ use Shared\Domain\Model\FestivalId as BaseFestivalId;
 
 class FestivalId extends BaseFestivalId implements AggregateId
 {
-
 }

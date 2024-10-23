@@ -14,7 +14,6 @@ class OrderCreateCommand implements Command
         public readonly string $arrangementFeeId,
         public readonly string $festivalId,
         public readonly ?string $promoCode = null
-    )
-    {
+    ) {
     }
 }

@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class TemplateServiceTest extends BaseTemplateTestCase
 {
-
     private TemplateService $templateService;
 
     protected function setUp(): void
@@ -22,7 +21,6 @@ class TemplateServiceTest extends BaseTemplateTestCase
         /** @var TemplateService $templateService */
         $templateService = $kernel->getContainer()->get(TemplateService::class);
         $this->templateService = $templateService;
-
     }
 
     public function testTemplateMail(): void

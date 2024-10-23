@@ -12,11 +12,9 @@ class ArrangementFeeWasUpdatePrice extends Event
         string $aggregateId,
         public readonly int $price,
         public readonly int $timestamp,
-    )
-    {
+    ) {
         parent::__construct($aggregateId);
     }
-
 
     public static function eventName(): string
     {

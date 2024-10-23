@@ -12,7 +12,6 @@ class AddArrangementFeeCommand implements Command
         public readonly string $name,
         public readonly string $festivalId,
         public readonly int $price,
-    )
-    {
+    ) {
     }
 }

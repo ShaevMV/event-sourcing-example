@@ -12,8 +12,7 @@ class ArrangementFeeRepositoryDecoration
 {
     public function __construct(
         public readonly ArrangementFeeRepositoryPersistence $arrangementFeeRepositoryPersistence
-    )
-    {
+    ) {
     }
 
     public function ofId(ArrangementId $aggregateId): ArrangementFee

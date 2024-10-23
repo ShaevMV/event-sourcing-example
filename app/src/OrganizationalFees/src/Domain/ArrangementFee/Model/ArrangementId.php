@@ -9,5 +9,4 @@ use Shared\Domain\ValueObject\Uuid;
 
 class ArrangementId extends Uuid implements AggregateId
 {
-
 }

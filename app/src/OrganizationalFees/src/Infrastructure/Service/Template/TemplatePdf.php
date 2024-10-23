@@ -10,7 +10,6 @@ class TemplatePdf implements TemplateInterface
 {
     public const PATH = '/app/src/OrganizationalFees/src/Infrastructure/Resources/Template/Pdf/';
 
-
     public function getPath(): string
     {
         return self::PATH;

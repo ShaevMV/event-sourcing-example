@@ -12,7 +12,6 @@ use Shared\Domain\EventSourcing\EventStore\EventStore;
 
 class EsArrangementFeeRepositoryPersistence implements ArrangementFeeRepositoryPersistence
 {
-
     public function __construct(
         private readonly EventStore $eventStore,
         private readonly Projector $projector,

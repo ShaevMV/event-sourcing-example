@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace OrganizationalFees\Application\Command\OrderCreate;
 
+use Auth\Domain\User\Model\UserId;
 use OrganizationalFees\Application\Model\PromoCodeRepositoryInterface;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFeeRepositoryPersistence;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
 use OrganizationalFees\Domain\Order\Model\Order;
 use OrganizationalFees\Domain\Order\Model\OrderRepositoryPersistence;
-
-use Auth\Domain\User\Model\UserId;
 use OrganizationalFees\Domain\PromoCode\Model\PromoCode;
 use OrganizationalFees\Domain\PromoCode\Model\PromoCodeId;
 use OrganizationalFees\Domain\PromoCode\Model\PromoCodeRepositoryPersistence;
@@ -21,12 +20,11 @@ use Shared\Domain\Model\FestivalId;
 class OrderCreateCommandHandler implements CommandHandler
 {
     public function __construct(
-        private readonly OrderRepositoryPersistence          $orderRepositoryPersistence,
+        private readonly OrderRepositoryPersistence $orderRepositoryPersistence,
         private readonly ArrangementFeeRepositoryPersistence $feeRepositoryDecoration,
-        private readonly PromoCodeRepositoryInterface        $promoCodeRepository,
-        private readonly PromoCodeRepositoryPersistence      $promoCodeRepositoryPersistence,
-    )
-    {
+        private readonly PromoCodeRepositoryInterface $promoCodeRepository,
+        private readonly PromoCodeRepositoryPersistence $promoCodeRepositoryPersistence,
+    ) {
     }
 
     public function __invoke(OrderCreateCommand $orderCreateCommand): OrderCreateCommandResponse
@@ -46,10 +44,9 @@ class OrderCreateCommandHandler implements CommandHandler
         return new OrderCreateCommandResponse($order->id()->value());
     }
 
-
     private function getAndPersistPromoCode(?string $promoCodeTitle, string $festivalId): ?PromoCode
     {
-        if(null === $promoCodeTitle) {
+        if (null === $promoCodeTitle) {
             return null;
         }
 
@@ -58,10 +55,9 @@ class OrderCreateCommandHandler implements CommandHandler
             FestivalId::fromString($festivalId)
         )?->id;
 
-        if(null === $promoCodeId) {
+        if (null === $promoCodeId) {
             return null;
         }
-
 
         $promoCode = $this->promoCodeRepositoryPersistence->ofId(PromoCodeId::fromString($promoCodeId))
             ->applyPromoCode();

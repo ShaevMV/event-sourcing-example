@@ -6,7 +6,6 @@ namespace OrganizationalFees\Infrastructure\Repository\Domain\Order\EventStore;
 
 use OrganizationalFees\Domain\Order\Model\Order;
 use OrganizationalFees\Domain\Order\Model\OrderRepositoryPersistence;
-use Auth\Domain\User\Model\User;
 use Shared\Domain\Aggregate\AggregateId;
 use Shared\Domain\Bus\Projection\Projector;
 use Shared\Domain\EventSourcing\EventStore\EventStore;

@@ -13,8 +13,7 @@ class AddArrangementFeeCommandHandler implements CommandHandler
 {
     public function __construct(
         private readonly ArrangementFeeRepositoryPersistence $arrangementFeeRepositoryPersistence
-    )
-    {
+    ) {
     }
 
     public function __invoke(AddArrangementFeeCommand $addArrangementFeeCommand): AddArrangementFeeCommandResponse

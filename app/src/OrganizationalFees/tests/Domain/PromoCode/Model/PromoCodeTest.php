@@ -19,7 +19,6 @@ use Shared\Domain\ValueObject\ValidateException;
 
 class PromoCodeTest extends TestCase
 {
-
     /**
      * @throws ValidateException
      * @throws PromoCodeSingDontCorrectException|DomainException
@@ -41,7 +40,6 @@ class PromoCodeTest extends TestCase
 
         return $promoCode;
     }
-
 
     /**
      * @throws ValidateException

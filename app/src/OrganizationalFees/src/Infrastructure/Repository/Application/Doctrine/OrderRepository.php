@@ -4,24 +4,21 @@ declare(strict_types=1);
 
 namespace OrganizationalFees\Infrastructure\Repository\Application\Doctrine;
 
-use OrganizationalFees\Application\Model\OrderRepositoryInterface;
-use OrganizationalFees\Application\Model\Order;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\ORM\EntityManagerInterface;
-use JsonException;
+use OrganizationalFees\Application\Model\Order;
+use OrganizationalFees\Application\Model\OrderRepositoryInterface;
 
 class OrderRepository implements OrderRepositoryInterface
 {
     public function __construct(
         private EntityManagerInterface $em,
-    )
-    {
+    ) {
     }
 
     /**
-     * @inheritDoc
-     * @throws JsonException|Exception
+     * @throws \JsonException|Exception
      */
     public function getOrderList(): array
     {
@@ -30,7 +27,7 @@ class OrderRepository implements OrderRepositoryInterface
             ->select(['af.*'])
             ->fetchAllAssociative();
 
-        return array_map(fn(array $data) => new Order(
+        return array_map(fn (array $data) => new Order(
             $data['id'],
             json_decode($data['guest'], true),
             $data['type_arrangement_id'],

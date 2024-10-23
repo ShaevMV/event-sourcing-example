@@ -8,5 +8,4 @@ use Shared\Domain\Exception\DomainException;
 
 class PromoCodeSingDontCorrectException extends DomainException
 {
-
 }

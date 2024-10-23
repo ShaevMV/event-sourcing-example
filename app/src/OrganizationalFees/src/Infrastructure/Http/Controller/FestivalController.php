@@ -10,13 +10,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 #[Route('/festival', name: 'festival')]
-class FestivalController  extends AbstractController
+class FestivalController extends AbstractController
 {
     #[Route('/festival/create', name: 'festival', methods: 'POST')]
     public function create(Request $request, FestivalCreateCommandHandler $handler): Response
     {
-
     }
 }

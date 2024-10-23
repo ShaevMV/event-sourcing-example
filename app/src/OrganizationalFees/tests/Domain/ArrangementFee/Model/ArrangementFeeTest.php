@@ -28,7 +28,6 @@ class ArrangementFeeTest extends TestCase
         return $arrangementFee;
     }
 
-
     public function testUpdatePrice(): void
     {
         $arrangementFee = $this->testCreate();

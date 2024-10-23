@@ -2,7 +2,6 @@
 
 namespace Tests\OrganizationalFees\Application\Command\Festival;
 
-use DateMalformedStringException;
 use OrganizationalFees\Application\Command\FestivalCreate\FestivalCreateCommand;
 use OrganizationalFees\Application\Command\FestivalCreate\FestivalCreateCommandHandler;
 use OrganizationalFees\Domain\Festival\Model\FestivalId;
@@ -17,14 +16,14 @@ class FestivalCreateCommandTest extends BaseTemplateTestCase
     }
 
     /**
-     * @throws DateMalformedStringException
+     * @throws \DateMalformedStringException
      */
     public function testCreate(): void
     {
         $kernel = self::bootKernel();
 
         /** @var EsFestivalRepositoryPersistence $persistence */
-        $persistence =self::$kernel->getContainer()->get(EsFestivalRepositoryPersistence::class);
+        $persistence = self::$kernel->getContainer()->get(EsFestivalRepositoryPersistence::class);
         /** @var FestivalCreateCommandHandler $handler */
         $handler = $kernel->getContainer()->get(FestivalCreateCommandHandler::class);
         $handlerResponse = $handler(new FestivalCreateCommand(

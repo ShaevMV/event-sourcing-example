@@ -2,13 +2,10 @@
 
 namespace OrganizationalFees\Infrastructure\Projection\Order;
 
-use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
-use OrganizationalFees\Domain\Order\Event\OrderWasCreating;
-use OrganizationalFees\Domain\Order\Model\OrderStatus;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
-use OrganizationalFees\Infrastructure\Repository\Domain\ArrangementFee\ArrangementFeeRepositoryDecoration;
-use OrganizationalFees\Infrastructure\Service\PriceService;
+use OrganizationalFees\Domain\Order\Event\OrderWasCreating;
+use OrganizationalFees\Domain\Order\Model\OrderStatus;
 use Shared\Domain\Bus\Event\Event;
 use Shared\Domain\Bus\Projection\Projection;
 
@@ -16,15 +13,13 @@ class OrderWasCreatingProjection implements Projection
 {
     public function __construct(
         private readonly Connection $connection,
-
-    )
-    {
+    ) {
     }
 
     public function listenTo(): array
     {
         return [
-            OrderWasCreating::class
+            OrderWasCreating::class,
         ];
     }
 

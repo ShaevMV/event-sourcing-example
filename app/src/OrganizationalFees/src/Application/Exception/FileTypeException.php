@@ -6,5 +6,4 @@ namespace OrganizationalFees\Application\Exception;
 
 class FileTypeException extends \DomainException
 {
-
 }

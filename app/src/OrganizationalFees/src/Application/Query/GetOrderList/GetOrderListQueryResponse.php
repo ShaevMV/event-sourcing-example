@@ -14,7 +14,6 @@ class GetOrderListQueryResponse implements QueryResponse
      */
     public function __construct(
         public readonly array $orderList
-    )
-    {
+    ) {
     }
 }

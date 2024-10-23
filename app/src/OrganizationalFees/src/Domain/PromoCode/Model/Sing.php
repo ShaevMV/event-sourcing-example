@@ -1,8 +1,6 @@
 <?php
 
-
 declare(strict_types=1);
-
 
 namespace OrganizationalFees\Domain\PromoCode\Model;
 
@@ -11,12 +9,12 @@ use Shared\Domain\ValueObject\Keyword;
 
 class Sing extends Keyword
 {
-    public const PERCENT = '%',
-        FIX = '-';
+    public const PERCENT = '%';
+    public const FIX = '-';
 
     public function isPercent(): bool
     {
-        return $this->value === self::PERCENT;
+        return self::PERCENT === $this->value;
     }
 
     /**
@@ -24,7 +22,7 @@ class Sing extends Keyword
      */
     public static function fromString(string $value): static
     {
-        if(!in_array($value, [self::FIX, self::PERCENT])) {
+        if (!in_array($value, [self::FIX, self::PERCENT])) {
             throw new PromoCodeSingDontCorrectException(sprintf('Не известный тип знака для промокода %s', $value));
         }
 

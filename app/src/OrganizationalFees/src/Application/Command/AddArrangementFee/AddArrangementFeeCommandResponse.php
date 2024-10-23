@@ -10,7 +10,6 @@ class AddArrangementFeeCommandResponse implements CommandResponse
 {
     public function __construct(
         public readonly string $id,
-    )
-    {
+    ) {
     }
 }

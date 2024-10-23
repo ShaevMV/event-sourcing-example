@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OrganizationalFees\Domain\Festival\Model;
 
-use DateTime;
 use OrganizationalFees\Domain\Festival\Event\FestivalWasCreating;
 use Shared\Domain\Aggregate\Aggregate;
 use Shared\Domain\Aggregate\AggregateEventable;
@@ -20,13 +19,12 @@ class Festival extends AggregateRoot implements Aggregate, AggregateEventable, A
     private FestivalPdfTemplate $pdfTemplate;
 
     public static function create(
-        string   $name,
-        DateTime $dateStart,
-        DateTime $dateEnd,
-        string   $pdfTemplate,
-        string   $mailTemplate,
-    ): self
-    {
+        string $name,
+        \DateTime $dateStart,
+        \DateTime $dateEnd,
+        string $pdfTemplate,
+        string $mailTemplate,
+    ): self {
         $arrangementFee = new self(FestivalId::random());
 
         $arrangementFee->recordAndApply(new FestivalWasCreating(

@@ -8,5 +8,4 @@ use Shared\Domain\ValueObject\FileTemplate;
 
 class FestivalMailTemplate extends FileTemplate
 {
-
 }

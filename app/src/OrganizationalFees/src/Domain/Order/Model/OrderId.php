@@ -7,5 +7,4 @@ use Shared\Domain\ValueObject\Uuid;
 
 class OrderId extends Uuid implements AggregateId
 {
-
 }

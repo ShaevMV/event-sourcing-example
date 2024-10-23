@@ -12,7 +12,6 @@ class UpdatePriceCommand implements Command
         public readonly string $arrangementFeeId,
         public readonly int $price,
         public readonly int $timestamp,
-    )
-    {
+    ) {
     }
 }
