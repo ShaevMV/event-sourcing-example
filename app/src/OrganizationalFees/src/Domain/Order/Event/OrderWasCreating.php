@@ -9,9 +9,7 @@ use JMS\Serializer\Annotation\Type as Type;
 
 class OrderWasCreating extends Event
 {
-    /**
-     * @Type("array<int,string>")
-     */
+    #[Type(name:'array')]
     public array $guestNames = [];
 
     public function __construct(

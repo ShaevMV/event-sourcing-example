@@ -51,8 +51,8 @@ class Order extends AggregateRoot implements Aggregate, AggregateEventable, Aggr
                 count($guestNames),
                 $promoCode?->getDiscount()->value() ?? 0
             ),
-            $promoCode?->getDiscount()->value(),
-            $promoCode?->getTitle()->value(),
+            $promoCode?->getDiscount()->value() ?? 0,
+            $promoCode?->getTitle()->value() ?? null,
         ));
 
         return $order;
@@ -74,7 +74,7 @@ class Order extends AggregateRoot implements Aggregate, AggregateEventable, Aggr
 
         $this->arrangementFeeId = ArrangementId::fromString($orderWasCreating->arrangementFeeId);
         $this->price = $orderWasCreating->price;
-        $this->promoCode = $orderWasCreating->promoCode ? new Title($orderWasCreating->promoCode) : null;
+        $this->promoCode = ($orderWasCreating->promoCode ?? false) ? new Title($orderWasCreating->promoCode) : null;
         $this->discount = $orderWasCreating->discount;
         $this->total = $orderWasCreating->total;
     }

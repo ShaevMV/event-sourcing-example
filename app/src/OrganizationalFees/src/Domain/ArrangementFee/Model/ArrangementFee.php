@@ -71,8 +71,8 @@ class ArrangementFee extends AggregateRoot implements Aggregate, AggregateEventa
     public function getPrice(?int $timestampNow = null): ?int
     {
         $timestampNow = null === $timestampNow ? time() : $timestampNow;
-
-        foreach ($this->price->getPriceList() as $timestamp => $price) {
+        $priceList = $this?->price->getPriceList() ?? [];
+        foreach ($priceList as $timestamp => $price) {
             if ($timestamp <= $timestampNow) {
                 return $price;
             }

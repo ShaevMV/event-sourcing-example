@@ -14,16 +14,17 @@ class FestivalCreateCommandTest extends BaseTemplateTestCase
 
     protected function setUp(): void
     {
-        parent::setUp();
-        $kernel = self::bootKernel();
-        /** @var EsFestivalRepositoryPersistence $persistence */
-        $persistence = $kernel->getContainer()->get(EsFestivalRepositoryPersistence::class);
-        $this->persistence = $persistence;
+        self::bootKernel();
+
     }
 
     public function testCreate(): void
     {
         $kernel = self::bootKernel();
+
+        /** @var EsFestivalRepositoryPersistence $persistence */
+        $persistence =self::$kernel->getContainer()->get(EsFestivalRepositoryPersistence::class);
+        $this->persistence = $persistence;
         /** @var FestivalCreateCommandHandler $handler */
         $handler = $kernel->getContainer()->get(FestivalCreateCommandHandler::class);
         $handlerResponse = $handler(new FestivalCreateCommand(
@@ -33,7 +34,7 @@ class FestivalCreateCommandTest extends BaseTemplateTestCase
             $this->getFile(self::TEMPLATE_MAIL),
             $this->getFile(self::TEMPLATE_PDF),
         ));
-        $resultPersistence = $this->persistence->ofId(FestivalId::fromString($handlerResponse->id));
+        $resultPersistence = $persistence->ofId(FestivalId::fromString($handlerResponse->id));
         $id = FestivalId::fromString($handlerResponse->id);
 
         self::assertTrue($id->equals(FestivalId::fromString($resultPersistence->id()->value())));

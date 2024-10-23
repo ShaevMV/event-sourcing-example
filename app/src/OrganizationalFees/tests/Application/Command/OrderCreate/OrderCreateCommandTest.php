@@ -14,6 +14,7 @@ use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFee;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
 use OrganizationalFees\Domain\Order\Model\OrderId;
 use OrganizationalFees\Domain\Order\Model\OrderRepositoryPersistence;
+use OrganizationalFees\Domain\PromoCode\Exception\PromoCodeSingDontCorrectException;
 use OrganizationalFees\Domain\PromoCode\Model\PromoCode;
 use OrganizationalFees\Domain\PromoCode\Model\PromoCodeId;
 use OrganizationalFees\Infrastructure\Repository\Domain\ArrangementFee\EventStory\EsArrangementFeeRepositoryPersistence;
@@ -21,6 +22,7 @@ use OrganizationalFees\Infrastructure\Repository\Domain\Order\EventStore\EsOrder
 use Auth\Domain\User\Model\UserId;
 use OrganizationalFees\Infrastructure\Repository\Domain\PromoCode\EventStory\EsPromoCodeRepositoryPersistence;
 use Shared\Domain\Model\FestivalId;
+use Shared\Domain\ValueObject\ValidateException;
 use Shared\Infrastructure\Bus\Projection\Projector\Redis\ProjectorConsumer;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Tests\OrganizationalFees\Constant\TestConstant;
@@ -69,6 +71,10 @@ class OrderCreateCommandTest extends KernelTestCase
         return $resultPersistence;
     }
 
+    /**
+     * @throws ValidateException
+     * @throws PromoCodeSingDontCorrectException
+     */
     public function testCreatePromoCode(): PromoCode
     {
         $kernel = self::bootKernel();
@@ -94,6 +100,10 @@ class OrderCreateCommandTest extends KernelTestCase
     }
 
 
+    /**
+     * @throws ValidateException
+     * @throws PromoCodeSingDontCorrectException
+     */
     public function testCreate(): void
     {
         $kernel = self::bootKernel();

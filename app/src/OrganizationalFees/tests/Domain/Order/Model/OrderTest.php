@@ -37,7 +37,7 @@ class OrderTest extends KernelTestCase
         $this->arrangementFee = $arrangementFee->testCreate();
         /** @var PromoCodeTest $promoCode */
         $promoCode = $kernel->getContainer()->get(PromoCodeTest::class);
-        $this->promoCode = $promoCode->testCreateFix();
+        $this->promoCode = $promoCode->testCreateFixNotLimit();
     }
 
 

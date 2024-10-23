@@ -1,0 +1,36 @@
+services:
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+
+  OrganizationalFees\Application\Command\OrderCreate\OrderCreateCommandHandler:
+    public: true
+
+  OrganizationalFees\Application\Query\GetOrderList\GetOrderListQueryHandler:
+    public: true
+
+  OrganizationalFees\Infrastructure\Repository\Domain\ArrangementFee\EventStory\EsArrangementFeeRepositoryPersistence:
+    public: true
+
+  OrganizationalFees\Infrastructure\Repository\Domain\Order\EventStore\EsOrderRepositoryPersistence:
+    public: true
+
+  OrganizationalFees\Application\Command\FestivalCreate\FestivalCreateCommandHandler:
+    public: true
+
+  OrganizationalFees\Infrastructure\Repository\Domain\Festival\EventStory\EsFestivalRepositoryPersistence:
+    public: true
+
+  OrganizationalFees\Infrastructure\Repository\Domain\PromoCode\EventStory\EsPromoCodeRepositoryPersistence:
+    public: true
+  OrganizationalFees\Application\Command\AddPromoCode\AddPromoCodeCommandHandler:
+    public: true
+
+  OrganizationalFees\Application\Command\AddArrangementFee\AddArrangementFeeCommandHandler:
+    public: true
+
+  OrganizationalFees\Infrastructure\Service\Template\TemplateService:
+    public: true
+

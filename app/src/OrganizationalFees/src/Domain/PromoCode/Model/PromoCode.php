@@ -81,7 +81,7 @@ class PromoCode extends AggregateRoot implements Aggregate, AggregateEventable, 
 
     public function validateCountAchievedLimit(): void
     {
-        if ($this->limit->equals($this->count)) {
+        if (null !== $this->limit && $this->limit->equals($this->count)) {
             throw new PromoCodeExceedingTheLimitException($this->title->value());
         }
     }

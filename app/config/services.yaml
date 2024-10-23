@@ -3,6 +3,9 @@
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+imports:
+  - { resource: 'services/*.yaml' }
+  - { resource: 'testServices/*.yaml' }
 parameters:
 
 services:
@@ -26,59 +29,8 @@ services:
       - '../src/Entity/'
       - '../src/Kernel.php'
 
-  Auth\:
-    resource: '../src/Auth/src/'
-
-  OrganizationalFees\:
-    resource: '../src/OrganizationalFees/src/'
-
   Shared\:
     resource: '../src/Shared/src/'
-
-  Tests\OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFeeTest:
-    public: true
-
-  Shared\Infrastructure\Tests\Doctrine\DatabaseArranger:
-    public: true
-
-  OrganizationalFees\Application\Command\OrderCreate\OrderCreateCommandHandler:
-    public: true
-  Auth\Application\Command\UserRegister\UserRegisterCommandHandler:
-    public: true
-  OrganizationalFees\Infrastructure\Repository\Domain\Order\EventStore\EsOrderRepositoryPersistence:
-    public: true
-
-  OrganizationalFees\Application\Query\GetOrderList\GetOrderListQueryHandler:
-    public: true
-
-  OrganizationalFees\Infrastructure\Repository\Domain\ArrangementFee\EventStory\EsArrangementFeeRepositoryPersistence:
-    public: true
-
-  OrganizationalFees\Infrastructure\Repository\Domain\PromoCode\EventStory\EsPromoCodeRepositoryPersistence:
-    public: true
-  OrganizationalFees\Application\Command\AddPromoCode\AddPromoCodeCommandHandler:
-    public: true
-
-  OrganizationalFees\Application\Command\AddArrangementFee\AddArrangementFeeCommandHandler:
-    public: true
-
-  Tests\OrganizationalFees\Application\Command\OrderCreate\OrderCreateCommandTest:
-    public: true
-
-  OrganizationalFees\Infrastructure\Service\Template\TemplateService:
-    public: true
-  OrganizationalFees\Infrastructure\Repository\Domain\Festival\EventStory\EsFestivalRepositoryPersistence:
-    public: true
-  OrganizationalFees\Application\Command\Festival\FestivalCreate\FestivalCreateCommandHandler:
-    public: true
-
-  Shared\Infrastructure\Tests\Doctrine\DatabaseArrangerInterface: '@Shared\Infrastructure\Tests\Doctrine\DatabaseArranger'
-
-  Auth\Domain\User\Model\UserRepositoryPersistence: '@Auth\Infrastructure\Repository\Domain\User\EventStore\EsUserRepositoryPersistence'
-
-  OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFeeRepositoryPersistence: '@OrganizationalFees\Infrastructure\Repository\Domain\ArrangementFee\EventStory\EsArrangementFeeRepositoryPersistence'
-  OrganizationalFees\Domain\PromoCode\Model\PromoCodeRepositoryPersistence: '@OrganizationalFees\Infrastructure\Repository\Domain\PromoCode\EventStory\EsPromoCodeRepositoryPersistence'
-  OrganizationalFees\Domain\Festival\Model\PromoCodeRepositoryPersistenceFestivalRepositoryPersistence: '@OrganizationalFees\Infrastructure\Repository\Domain\Festival\EventStory\EsFestivalRepositoryPersistence'
 
   #    Shared\Infrastructure\Bus\Projection\Projector\InMemory\ProjectorInMemory:
   #      arguments: [ !tagged shared.domain.bus.projector.projection ]
@@ -94,3 +46,10 @@ services:
   Shared\Infrastructure\Bus\Event\Serializer\UpcastSerializer:
     decorates: Shared\Domain\Bus\Event\Deserializer
     arguments: [ '@.inner', !tagged shared.domain.eventsourcing.upcasting.upcaster ]
+
+
+  Tests\OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFeeTest:
+    public: true
+
+  Tests\OrganizationalFees\Domain\PromoCode\Model\PromoCodeTest:
+    public: true

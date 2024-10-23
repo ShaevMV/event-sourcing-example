@@ -1,32 +1,29 @@
+imports:
+  - { resource: 'testServices/*.yaml' }
+
+
 services:
   _defaults:
     public: true
+
+  Tests\OrganizationalFees\:
+    resource: '../src/OrganizationalFees/tests/*'
+    public: true
+
   Tests\OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFeeTest:
     public: true
 
-  Shared\Infrastructure\Tests\Doctrine\DatabaseArranger:
+
+
+
+  DatabaseArranger:
+    class: Shared\Infrastructure\Tests\Doctrine\DatabaseArranger
     public: true
 
-  OrganizationalFees\Application\Command\OrderCreate\OrderCreateCommandHandler:
-    public: true
-  Auth\Application\Command\UserRegister\UserRegisterCommandHandler:
-    public: true
-  OrganizationalFees\Infrastructure\Repository\Domain\Order\EventStore\EsOrderRepositoryPersistence:
+
+  Tests\OrganizationalFees\Application\Command\OrderCreate\OrderCreateCommandTest:
     public: true
 
-  OrganizationalFees\Application\Query\GetOrderList\GetOrderListQueryHandler:
-    public: true
 
-  OrganizationalFees\Infrastructure\Repository\Domain\ArrangementFee\EventStory\EsArrangementFeeRepositoryPersistence:
-    public: true
+  Shared\Infrastructure\Tests\Doctrine\DatabaseArrangerInterface: '@DatabaseArranger'
 
-  OrganizationalFees\Infrastructure\Repository\Domain\PromoCode\EventStory\EsPromoCodeRepositoryPersistence:
-    public: true
-  OrganizationalFees\Application\Command\AddPromoCode\AddPromoCodeCommandHandler:
-    public: true
-
-  OrganizationalFees\Application\Command\AddArrangementFee\AddArrangementFeeCommandHandler:
-    public: true
-
-  OrganizationalFees\Application\Command\Festival\FestivalCreate\FestivalCreateCommandHandler:
-    public: true
