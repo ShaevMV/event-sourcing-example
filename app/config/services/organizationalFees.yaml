@@ -27,3 +27,10 @@ services:
   OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFeeRepositoryPersistence: '@EsArrangementFeeRepositoryPersistence'
   OrganizationalFees\Domain\Festival\Model\PromoCodeRepositoryPersistenceFestivalRepositoryPersistence: '@EsFestivalRepositoryPersistence'
 
+  ### Projection #####
+  OrganizationalFees\Infrastructure\Projection\PromoCode\PromoCodeWasCreatingProjection:
+    tags: [ 'shared.domain.bus.projector.projection' ]
+  OrganizationalFees\Infrastructure\Projection\Order\OrderWasCreatingProjection:
+    tags: [ 'shared.domain.bus.projector.projection' ]
+
+

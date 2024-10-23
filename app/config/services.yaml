@@ -39,6 +39,8 @@ services:
     arguments: [ !tagged shared.domain.bus.projector.projection ]
     public: true
 
+
+
   Shared\Domain\Bus\Projection\Projector: '@Shared\Infrastructure\Bus\Projection\Projector\Redis\ProjectorProducer'
 
   Shared\Domain\Bus\Event\Deserializer: '@Shared\Infrastructure\Bus\Event\Serializer\JMS\JMSSerializer'

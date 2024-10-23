@@ -13,7 +13,6 @@ class PromoCodeWasCreatingProjection implements Projection
 {
     public function __construct(
         private readonly Connection $connection,
-
     )
     {
     }

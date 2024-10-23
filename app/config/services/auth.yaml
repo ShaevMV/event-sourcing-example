@@ -7,3 +7,9 @@ services:
 
   Auth\:
     resource: '../../src/Auth/src/'
+
+  Auth\Infrastructure\Projection\SecurityUser\Dbal\UserWasRegisteredProjection:
+    tags: [ 'shared.domain.bus.projector.projection' ]
+
+  Auth\Infrastructure\Projection\SecurityUser\Dbal\UserWasPasswordHashChangedProjection:
+    tags: [ 'shared.domain.bus.projector.projection' ]

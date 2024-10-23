@@ -39,12 +39,12 @@ class OrderWasCreatingProjection implements Projection
             return;
         }
 
-        $this->connection->insert('order',
+        $this->connection->insert('"order"',
             [
                 'id' => $event->getAggregateId(),
                 'guest' => json_encode($event->guestNames),
                 'user_id' => $event->userId,
-                'arrangement_fee_id' => $event->arrangementFeeId,
+                'type_arrangement_id' => $event->arrangementFeeId,
                 'status' => OrderStatus::NEW,
                 'price' => $event->price,
                 'promo_code' => $event->promoCode,

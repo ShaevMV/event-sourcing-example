@@ -46,7 +46,7 @@ class ProjectorConsumer
                     $projection->project($event);
                 }
             } catch (\Exception $exception) {
-                $r = 5;
+                throw $exception;
             }
         }
     }
