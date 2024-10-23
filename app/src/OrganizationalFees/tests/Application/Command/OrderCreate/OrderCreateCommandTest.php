@@ -24,10 +24,11 @@ use OrganizationalFees\Infrastructure\Repository\Domain\PromoCode\EventStory\EsP
 use Shared\Domain\Model\FestivalId;
 use Shared\Domain\ValueObject\ValidateException;
 use Shared\Infrastructure\Bus\Projection\Projector\Redis\ProjectorConsumer;
+use Shared\Infrastructure\Tests\PhpUnit\InfrastructureTestCase;
 use Tests\OrganizationalFees\BaseKernelTestCase;
 use Tests\OrganizationalFees\Constant\TestConstant;
 
-class OrderCreateCommandTest extends BaseKernelTestCase
+class OrderCreateCommandTest extends InfrastructureTestCase
 {
     private OrderRepositoryPersistence $orderRepositoryPersistence;
     private EsArrangementFeeRepositoryPersistence $arrangementFeeRepositoryPersistence;

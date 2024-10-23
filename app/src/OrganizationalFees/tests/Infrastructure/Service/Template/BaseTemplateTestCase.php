@@ -6,17 +6,19 @@ namespace Tests\OrganizationalFees\Infrastructure\Service\Template;
 
 use OrganizationalFees\Infrastructure\Service\Template\TemplateMail;
 use OrganizationalFees\Infrastructure\Service\Template\TemplatePdf;
+use Shared\Infrastructure\Tests\PhpUnit\InfrastructureTestCase;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Tests\OrganizationalFees\BaseKernelTestCase;
 
-class BaseTemplateTestCase extends BaseKernelTestCase
+class BaseTemplateTestCase extends InfrastructureTestCase
 {
     protected const TEMPLATE_MAIL = 'mail.html.twig';
     protected const TEMPLATE_PDF = 'pdf.html.twig';
 
     protected function tearDown(): void
     {
+        parent::tearDown();
         try {
             $file = new UploadedFile(TemplateMail::PATH.self::TEMPLATE_MAIL, self::TEMPLATE_MAIL, test: true);
             $file->move(__DIR__.'/File/');

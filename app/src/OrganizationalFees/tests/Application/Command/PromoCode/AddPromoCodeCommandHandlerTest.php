@@ -12,9 +12,10 @@ use OrganizationalFees\Infrastructure\Repository\Domain\PromoCode\EventStory\EsP
 use Shared\Domain\Model\FestivalId;
 use Shared\Domain\ValueObject\ValidateException;
 use Shared\Infrastructure\Bus\Projection\Projector\Redis\ProjectorConsumer;
+use Shared\Infrastructure\Tests\PhpUnit\InfrastructureTestCase;
 use Tests\OrganizationalFees\BaseKernelTestCase;
 
-class AddPromoCodeCommandHandlerTest extends BaseKernelTestCase
+class AddPromoCodeCommandHandlerTest extends InfrastructureTestCase
 {
     private EsPromoCodeRepositoryPersistence $persistence;
 

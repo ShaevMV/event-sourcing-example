@@ -24,7 +24,7 @@ abstract class InfrastructureTestCase extends KernelTestCase
     protected function tearDown(): void
     {
         parent::tearDown();
-        self::databaseArranger()->beforeTest();
+        self::databaseArranger()->afterTest();
     }
 
     public static function tearDownAfterClass(): void

@@ -7,10 +7,11 @@ use OrganizationalFees\Application\Command\UpdatePrice\UpdatePriceCommandHandler
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFee;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
 use OrganizationalFees\Infrastructure\Repository\Domain\ArrangementFee\EventStory\EsArrangementFeeRepositoryPersistence;
+use Shared\Infrastructure\Tests\PhpUnit\InfrastructureTestCase;
 use Tests\OrganizationalFees\Application\Command\AddArrangementFee\AddArrangementFeeCommandHandlerTest;
 use Tests\OrganizationalFees\BaseKernelTestCase;
 
-class UpdatePriceCommandHandlerTest extends BaseKernelTestCase
+class UpdatePriceCommandHandlerTest extends InfrastructureTestCase
 {
     private EsArrangementFeeRepositoryPersistence $persistence;
     private ArrangementFee $arrangementFee;
