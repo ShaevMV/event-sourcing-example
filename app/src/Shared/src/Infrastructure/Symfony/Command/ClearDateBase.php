@@ -15,11 +15,11 @@ class ClearDateBase extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         // delete database if exists, then create
-        passthru('php bin/console doctrine:database:drop --env=test --force --if-exists');
-        passthru('php bin/console doctrine:database:create --env=test');
+        passthru('php bin/console doctrine:database:drop --force --if-exists');
+        passthru('php bin/console doctrine:database:create');
 
         // run migrations
-        passthru('php bin/console doctrine:migrations:migrate --env=test -n');
+        passthru('php bin/console doctrine:migrations:migrate -n');
 
         return Command::SUCCESS;
     }

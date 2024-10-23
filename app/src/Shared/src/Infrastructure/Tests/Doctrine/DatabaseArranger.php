@@ -6,6 +6,7 @@ namespace Shared\Infrastructure\Tests\Doctrine;
 
 use App\Kernel;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
@@ -26,31 +27,18 @@ class DatabaseArranger implements DatabaseArrangerInterface
         $this->entityManager = $entityManager;
     }
 
+    /**
+     * @throws Exception
+     */
     public function beforeClass(): void
     {
-        $application = new Application($this->kernel);
-        $application->setAutoExit(false);
 
-        $application->run(new ArrayInput([
-            'command' => 'doctrine:database:create',
-        ]), new NullOutput());
 
-        $d = $application->run(new ArrayInput([
-            'command' => 'doctrine:migrations:migrate',
-            '--no-interaction' => true,
-        ]), new NullOutput());
     }
 
     public function afterClass(): void
     {
-        $application = new Application($this->kernel);
-        $application->setAutoExit(false);
 
-        $application->run(new ArrayInput([
-            'command' => 'doctrine:database:drop',
-            '--force' => true,
-            '--no-interaction' => true,
-        ]), new NullOutput());
     }
 
     public function beforeTest(): void
@@ -60,5 +48,6 @@ class DatabaseArranger implements DatabaseArrangerInterface
 
     public function afterTest(): void
     {
+        $this->cleaner->clear($this->entityManager);
     }
 }

@@ -10,7 +10,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.13",
         "jms/serializer-bundle": "^5.0",
-        "lexik/jwt-authentication-bundle": "^2.16",
+        "lexik/jwt-authentication-bundle": "^2.21",
         "ramsey/uuid": "^4.7",
         "symfony-bundles/redis-bundle": "^3.1",
         "symfony/cache": "6.1.*",
@@ -72,10 +72,11 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "6.1.*"
+            "require": "6.2.*"
         }
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.6",
         "friendsofphp/php-cs-fixer": "^3.13",
         "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "6.1.*",

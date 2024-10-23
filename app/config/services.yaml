@@ -32,6 +32,9 @@ services:
   Shared\:
     resource: '../src/Shared/src/'
 
+  App\DataFixtures\:
+    resource: '../app/DataFixtures/'
+
   #    Shared\Infrastructure\Bus\Projection\Projector\InMemory\ProjectorInMemory:
   #      arguments: [ !tagged shared.domain.bus.projector.projection ]
   
@@ -41,8 +44,6 @@ services:
 
   Shared\Infrastructure\Tests\Doctrine\DatabaseCleaner: '@Shared\Infrastructure\Tests\Doctrine\PgsqlDatabaseCleaner'
 
-
-
   Shared\Domain\Bus\Projection\Projector: '@Shared\Infrastructure\Bus\Projection\Projector\Redis\ProjectorProducer'
 
   Shared\Domain\Bus\Event\Deserializer: '@Shared\Infrastructure\Bus\Event\Serializer\JMS\JMSSerializer'
@@ -50,10 +51,6 @@ services:
   Shared\Infrastructure\Bus\Event\Serializer\UpcastSerializer:
     decorates: Shared\Domain\Bus\Event\Deserializer
     arguments: [ '@.inner', !tagged shared.domain.eventsourcing.upcasting.upcaster ]
-
-
-
-
 
   DatabaseArranger:
     class: Shared\Infrastructure\Tests\Doctrine\DatabaseArranger
