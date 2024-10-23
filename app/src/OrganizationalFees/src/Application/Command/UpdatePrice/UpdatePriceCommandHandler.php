@@ -18,7 +18,9 @@ class UpdatePriceCommandHandler implements CommandHandler
 
     public function __invoke(UpdatePriceCommand $updatePriceCommand): void
     {
-        $arrangement = $this->feeRepositoryDecoration->ofId(ArrangementId::fromString($updatePriceCommand->arrangementFeeId));
+        $arrangement = $this->feeRepositoryDecoration->ofId(
+            ArrangementId::fromString($updatePriceCommand->arrangementFeeId)
+        );
 
         $this->feeRepositoryDecoration->persist(
             $arrangement->updatePrice($updatePriceCommand->price, $updatePriceCommand->timestamp)

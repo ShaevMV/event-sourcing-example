@@ -34,3 +34,8 @@ services:
   OrganizationalFees\Infrastructure\Service\Template\TemplateService:
     public: true
 
+  OrganizationalFees\Application\Command\UpdatePrice\UpdatePriceCommandHandler:
+    public: true
+
+  Tests\OrganizationalFees\Application\Command\AddArrangementFee\AddArrangementFeeCommandHandlerTest:
+    public: true

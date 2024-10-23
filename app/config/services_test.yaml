@@ -25,5 +25,6 @@ services:
     public: true
 
 
+
   Shared\Infrastructure\Tests\Doctrine\DatabaseArrangerInterface: '@DatabaseArranger'
 

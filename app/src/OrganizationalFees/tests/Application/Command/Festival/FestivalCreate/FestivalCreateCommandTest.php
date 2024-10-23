@@ -10,12 +10,9 @@ use Tests\OrganizationalFees\Infrastructure\Service\Template\BaseTemplateTestCas
 
 class FestivalCreateCommandTest extends BaseTemplateTestCase
 {
-    private EsFestivalRepositoryPersistence $persistence;
-
     protected function setUp(): void
     {
         self::bootKernel();
-
     }
 
     public function testCreate(): void
@@ -24,7 +21,6 @@ class FestivalCreateCommandTest extends BaseTemplateTestCase
 
         /** @var EsFestivalRepositoryPersistence $persistence */
         $persistence =self::$kernel->getContainer()->get(EsFestivalRepositoryPersistence::class);
-        $this->persistence = $persistence;
         /** @var FestivalCreateCommandHandler $handler */
         $handler = $kernel->getContainer()->get(FestivalCreateCommandHandler::class);
         $handlerResponse = $handler(new FestivalCreateCommand(
