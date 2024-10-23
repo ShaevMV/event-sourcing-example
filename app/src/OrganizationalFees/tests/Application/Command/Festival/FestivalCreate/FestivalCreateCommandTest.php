@@ -2,12 +2,10 @@
 
 namespace Tests\OrganizationalFees\Application\Command\Festival\FestivalCreate;
 
-use OrganizationalFees\Application\Command\Festival\FestivalCreate\FestivalCreateCommand;
-use OrganizationalFees\Application\Command\Festival\FestivalCreate\FestivalCreateCommandHandler;
+use OrganizationalFees\Application\Command\FestivalCreate\FestivalCreateCommand;
+use OrganizationalFees\Application\Command\FestivalCreate\FestivalCreateCommandHandler;
 use OrganizationalFees\Domain\Festival\Model\FestivalId;
-use OrganizationalFees\Infrastructure\Repository\Domain\ArrangementFee\EventStory\EsArrangementFeeRepositoryPersistence;
 use OrganizationalFees\Infrastructure\Repository\Domain\Festival\EventStory\EsFestivalRepositoryPersistence;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Tests\OrganizationalFees\Infrastructure\Service\Template\BaseTemplateTestCase;
 
 class FestivalCreateCommandTest extends BaseTemplateTestCase
@@ -37,6 +35,7 @@ class FestivalCreateCommandTest extends BaseTemplateTestCase
         ));
         $resultPersistence = $this->persistence->ofId(FestivalId::fromString($handlerResponse->id));
         $id = FestivalId::fromString($handlerResponse->id);
+
         self::assertTrue($id->equals(FestivalId::fromString($resultPersistence->id()->value())));
     }
 }

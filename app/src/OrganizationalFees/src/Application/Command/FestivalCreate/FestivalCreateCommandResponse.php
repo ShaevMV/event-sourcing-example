@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OrganizationalFees\Application\Command\Festival\FestivalCreate;
+namespace OrganizationalFees\Application\Command\FestivalCreate;
 
 use Shared\Domain\Bus\Command\CommandResponse;
 

@@ -27,3 +27,6 @@ services:
 
   OrganizationalFees\Application\Command\AddArrangementFee\AddArrangementFeeCommandHandler:
     public: true
+
+  OrganizationalFees\Application\Command\Festival\FestivalCreate\FestivalCreateCommandHandler:
+    public: true

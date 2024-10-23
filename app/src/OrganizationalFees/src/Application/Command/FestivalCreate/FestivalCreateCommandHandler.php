@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OrganizationalFees\Application\Command\Festival\FestivalCreate;
+namespace OrganizationalFees\Application\Command\FestivalCreate;
 
 use OrganizationalFees\Application\Service\Template\TemplateServiceInterface;
 use OrganizationalFees\Domain\Festival\Model\Festival;
