@@ -6,11 +6,11 @@ namespace Tests\OrganizationalFees\Infrastructure\Service\Template;
 
 use OrganizationalFees\Infrastructure\Service\Template\TemplateMail;
 use OrganizationalFees\Infrastructure\Service\Template\TemplatePdf;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Tests\OrganizationalFees\BaseKernelTestCase;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class BaseTemplateTestCase extends KernelTestCase
+class BaseTemplateTestCase extends BaseKernelTestCase
 {
 
     protected const TEMPLATE_MAIL = 'mail.html.twig';

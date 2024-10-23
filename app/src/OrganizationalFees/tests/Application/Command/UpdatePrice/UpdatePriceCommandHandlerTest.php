@@ -4,16 +4,16 @@ namespace Tests\OrganizationalFees\Application\Command\UpdatePrice;
 
 use OrganizationalFees\Application\Command\UpdatePrice\UpdatePriceCommand;
 use OrganizationalFees\Application\Command\UpdatePrice\UpdatePriceCommandHandler;
+use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFee;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
 use OrganizationalFees\Infrastructure\Repository\Domain\ArrangementFee\EventStory\EsArrangementFeeRepositoryPersistence;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Tests\OrganizationalFees\BaseKernelTestCase;
 use Tests\OrganizationalFees\Application\Command\AddArrangementFee\AddArrangementFeeCommandHandlerTest;
-use Tests\OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFeeTest;
 
-class UpdatePriceCommandHandlerTest extends KernelTestCase
+class UpdatePriceCommandHandlerTest extends BaseKernelTestCase
 {
     private EsArrangementFeeRepositoryPersistence $persistence;
-    private \OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFee $arrangementFee;
+    private ArrangementFee $arrangementFee;
 
     protected function setUp(): void
     {

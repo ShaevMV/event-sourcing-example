@@ -1,7 +1,8 @@
 <?php
 
-namespace Tests\OrganizationalFees\Application\Command\Festival\FestivalCreate;
+namespace Tests\OrganizationalFees\Application\Command\Festival;
 
+use DateMalformedStringException;
 use OrganizationalFees\Application\Command\FestivalCreate\FestivalCreateCommand;
 use OrganizationalFees\Application\Command\FestivalCreate\FestivalCreateCommandHandler;
 use OrganizationalFees\Domain\Festival\Model\FestivalId;
@@ -15,6 +16,9 @@ class FestivalCreateCommandTest extends BaseTemplateTestCase
         self::bootKernel();
     }
 
+    /**
+     * @throws DateMalformedStringException
+     */
     public function testCreate(): void
     {
         $kernel = self::bootKernel();

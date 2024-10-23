@@ -9,9 +9,9 @@ use OrganizationalFees\Application\Command\AddArrangementFee\AddArrangementFeeCo
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFee;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
 use OrganizationalFees\Infrastructure\Repository\Domain\ArrangementFee\EventStory\EsArrangementFeeRepositoryPersistence;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Tests\OrganizationalFees\BaseKernelTestCase;
 
-class AddArrangementFeeCommandHandlerTest extends KernelTestCase
+class AddArrangementFeeCommandHandlerTest extends BaseKernelTestCase
 {
     public function testCreate(): ArrangementFee
     {

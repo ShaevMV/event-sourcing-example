@@ -24,10 +24,10 @@ use OrganizationalFees\Infrastructure\Repository\Domain\PromoCode\EventStory\EsP
 use Shared\Domain\Model\FestivalId;
 use Shared\Domain\ValueObject\ValidateException;
 use Shared\Infrastructure\Bus\Projection\Projector\Redis\ProjectorConsumer;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Tests\OrganizationalFees\BaseKernelTestCase;
 use Tests\OrganizationalFees\Constant\TestConstant;
 
-class OrderCreateCommandTest extends KernelTestCase
+class OrderCreateCommandTest extends BaseKernelTestCase
 {
     private OrderRepositoryPersistence $orderRepositoryPersistence;
     private EsArrangementFeeRepositoryPersistence $arrangementFeeRepositoryPersistence;
