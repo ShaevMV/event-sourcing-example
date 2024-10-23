@@ -29,7 +29,7 @@ class JMSSerializer implements Serializer, Deserializer
         $classEvent = $payload['class'];
 
         if (false === class_exists($classEvent)) {
-            throw new EventException(sprintf('Failed deserialize event: class %s not exist', $classEvent ?? ''));
+            throw new EventException(sprintf('Failed deserialize event: class %s not exist', $classEvent));
         }
 
         if (!isset($payload['data'])) {

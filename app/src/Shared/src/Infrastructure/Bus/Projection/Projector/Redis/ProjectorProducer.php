@@ -22,7 +22,7 @@ class ProjectorProducer implements Projector
     {
         foreach ($eventStream as $event) {
             $data = $this->serializer->serialize($event);
-            $result = $this->redis->lpush($this->queueName, [$data]);
+            $this->redis->lpush($this->queueName, [$data]);
         }
     }
 }

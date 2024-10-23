@@ -7,9 +7,9 @@ namespace Shared\Domain\ValueObject;
 class PriceList extends Json
 {
     /**
-     * @var array<string,int>
+     * @var array<int,int>
      */
-    protected array $priceList;
+    private array $priceList = [];
 
     public function __construct(
         int $price,
