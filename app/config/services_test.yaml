@@ -13,14 +13,6 @@ services:
   Tests\OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFeeTest:
     public: true
 
-
-
-
-  DatabaseArranger:
-    class: Shared\Infrastructure\Tests\Doctrine\DatabaseArranger
-    public: true
-
-
   Tests\OrganizationalFees\Application\Command\OrderCreate\OrderCreateCommandTest:
     public: true
 

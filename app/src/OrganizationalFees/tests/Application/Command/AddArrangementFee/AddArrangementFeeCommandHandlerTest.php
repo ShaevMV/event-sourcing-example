@@ -9,9 +9,11 @@ use OrganizationalFees\Application\Command\AddArrangementFee\AddArrangementFeeCo
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFee;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
 use OrganizationalFees\Infrastructure\Repository\Domain\ArrangementFee\EventStory\EsArrangementFeeRepositoryPersistence;
+use Shared\Infrastructure\Bus\Projection\Projector\Redis\ProjectorConsumer;
+use Shared\Infrastructure\Tests\PhpUnit\InfrastructureTestCase;
 use Tests\OrganizationalFees\BaseKernelTestCase;
 
-class AddArrangementFeeCommandHandlerTest extends BaseKernelTestCase
+class AddArrangementFeeCommandHandlerTest extends InfrastructureTestCase
 {
     public function testCreate(): ArrangementFee
     {
@@ -29,6 +31,9 @@ class AddArrangementFeeCommandHandlerTest extends BaseKernelTestCase
         $resultPersistence = $persistence->ofId(ArrangementId::fromString($handlerResponse->id));
         $id = ArrangementId::fromString($handlerResponse->id);
         self::assertTrue($id->equals(ArrangementId::fromString($resultPersistence->id()->value())));
+
+        $consumer = $kernel->getContainer()->get(ProjectorConsumer::class);
+        $consumer->consume();
 
         return $resultPersistence;
     }

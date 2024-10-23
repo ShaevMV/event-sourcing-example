@@ -39,6 +39,8 @@ services:
     arguments: [ !tagged shared.domain.bus.projector.projection ]
     public: true
 
+  Shared\Infrastructure\Tests\Doctrine\DatabaseCleaner: '@Shared\Infrastructure\Tests\Doctrine\PgsqlDatabaseCleaner'
+
 
 
   Shared\Domain\Bus\Projection\Projector: '@Shared\Infrastructure\Bus\Projection\Projector\Redis\ProjectorProducer'
@@ -49,6 +51,13 @@ services:
     decorates: Shared\Domain\Bus\Event\Deserializer
     arguments: [ '@.inner', !tagged shared.domain.eventsourcing.upcasting.upcaster ]
 
+
+
+
+
+  DatabaseArranger:
+    class: Shared\Infrastructure\Tests\Doctrine\DatabaseArranger
+    public: true
 
   Tests\OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFeeTest:
     public: true
