@@ -1,0 +1,29 @@
+services:
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+  OrganizationalFees\:
+    resource: '../../src/OrganizationalFees/src/'
+
+  EsArrangementFeeRepositoryPersistence:
+    class: OrganizationalFees\Infrastructure\Repository\Domain\ArrangementFee\EventStory\EsArrangementFeeRepositoryPersistence
+    public: true
+
+  EsOrderRepositoryPersistence:
+    class: OrganizationalFees\Infrastructure\Repository\Domain\Order\EventStore\EsOrderRepositoryPersistence
+    public: true
+
+  EsFestivalRepositoryPersistence:
+    class: OrganizationalFees\Infrastructure\Repository\Domain\Festival\EventStory\EsFestivalRepositoryPersistence
+    public: true
+
+  EsPromoCodeRepositoryPersistence:
+    class: OrganizationalFees\Infrastructure\Repository\Domain\PromoCode\EventStory\EsPromoCodeRepositoryPersistence
+    public: true
+
+  OrganizationalFees\Domain\PromoCode\Model\PromoCodeRepositoryPersistence: '@EsPromoCodeRepositoryPersistence'
+  OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFeeRepositoryPersistence: '@EsArrangementFeeRepositoryPersistence'
+  OrganizationalFees\Domain\Festival\Model\PromoCodeRepositoryPersistenceFestivalRepositoryPersistence: '@EsFestivalRepositoryPersistence'
+
