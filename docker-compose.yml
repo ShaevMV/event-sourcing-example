@@ -20,7 +20,6 @@ services:
       - "host.docker.internal:host-gateway"
     volumes:
       - ${APP_BASE_DIR-.}:/app
-      - ./docker/php/resolv.conf:/etc/resolv.conf
 
   web:
     build:
@@ -76,7 +75,3 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
       - ./data/redis:/bitnami/redis/data
-    ports:
-      - "${INFRA_REDIS_PORT:-6379}:6379"
-    networks:
-      - default
