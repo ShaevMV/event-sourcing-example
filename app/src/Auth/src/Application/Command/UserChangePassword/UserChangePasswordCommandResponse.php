@@ -9,7 +9,7 @@ use Shared\Domain\Bus\Command\CommandResponse;
 class UserChangePasswordCommandResponse implements CommandResponse
 {
     public function __construct(
-        public readonly string $userId
+        public readonly string $userId,
     ) {
     }
 }

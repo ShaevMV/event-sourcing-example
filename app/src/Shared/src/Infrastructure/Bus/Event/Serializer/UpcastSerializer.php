@@ -17,7 +17,7 @@ class UpcastSerializer extends DeserializerDecorator
 
     public function __construct(
         Deserializer $deserializer,
-        iterable $upcasters
+        iterable $upcasters,
     ) {
         parent::__construct($deserializer);
         /**

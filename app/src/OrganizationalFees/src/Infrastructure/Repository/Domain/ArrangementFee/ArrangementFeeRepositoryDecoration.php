@@ -11,7 +11,7 @@ use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
 class ArrangementFeeRepositoryDecoration
 {
     public function __construct(
-        public readonly ArrangementFeeRepositoryPersistence $arrangementFeeRepositoryPersistence
+        public readonly ArrangementFeeRepositoryPersistence $arrangementFeeRepositoryPersistence,
     ) {
     }
 

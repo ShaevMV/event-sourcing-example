@@ -17,7 +17,7 @@ final class EventStream implements \Iterator, \Countable
     private array $events = [];
 
     public function __construct(
-        public readonly AggregateId $aggregateId
+        public readonly AggregateId $aggregateId,
     ) {
     }
 

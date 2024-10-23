@@ -7,7 +7,7 @@ namespace Shared\Domain\ValueObject;
 class Email implements \Stringable, ValueObject
 {
     final public function __construct(
-        protected string $email
+        protected string $email,
     ) {
         $this->ensureIsValidUuid($email);
     }

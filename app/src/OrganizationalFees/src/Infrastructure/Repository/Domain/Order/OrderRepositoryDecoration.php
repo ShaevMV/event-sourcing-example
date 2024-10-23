@@ -11,7 +11,7 @@ use Shared\Domain\Aggregate\AggregateId;
 class OrderRepositoryDecoration
 {
     public function __construct(
-        private readonly OrderRepositoryPersistence $orderRepositoryPersistence
+        private readonly OrderRepositoryPersistence $orderRepositoryPersistence,
     ) {
     }
 

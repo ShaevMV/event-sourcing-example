@@ -13,7 +13,7 @@ class PriceList extends Json
 
     public function __construct(
         int $price,
-        int $timestamp
+        int $timestamp,
     ) {
         $this->priceList[$timestamp] = $price;
     }

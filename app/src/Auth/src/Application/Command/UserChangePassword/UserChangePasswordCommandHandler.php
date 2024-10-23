@@ -14,7 +14,7 @@ class UserChangePasswordCommandHandler implements CommandHandler
 {
     public function __construct(
         private readonly UserRepositoryPersistence $repositoryPersistence,
-        private readonly PasswordEncryptor $passwordEncryptor
+        private readonly PasswordEncryptor $passwordEncryptor,
     ) {
     }
 

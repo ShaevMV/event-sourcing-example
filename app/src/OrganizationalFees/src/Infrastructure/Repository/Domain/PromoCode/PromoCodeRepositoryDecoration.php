@@ -11,7 +11,7 @@ use OrganizationalFees\Domain\PromoCode\Model\PromoCodeRepositoryPersistence;
 class PromoCodeRepositoryDecoration
 {
     public function __construct(
-        public readonly PromoCodeRepositoryPersistence $promoCodeRepositoryPersistence
+        public readonly PromoCodeRepositoryPersistence $promoCodeRepositoryPersistence,
     ) {
     }
 

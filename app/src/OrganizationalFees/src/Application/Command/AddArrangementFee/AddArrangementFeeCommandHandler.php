@@ -12,7 +12,7 @@ use Shared\Domain\Model\FestivalId;
 class AddArrangementFeeCommandHandler implements CommandHandler
 {
     public function __construct(
-        private readonly ArrangementFeeRepositoryPersistence $arrangementFeeRepositoryPersistence
+        private readonly ArrangementFeeRepositoryPersistence $arrangementFeeRepositoryPersistence,
     ) {
     }
 

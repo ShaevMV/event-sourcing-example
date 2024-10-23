@@ -10,7 +10,7 @@ use Shared\Domain\Bus\Query\QueryHandler;
 class GetOrderListQueryHandler implements QueryHandler
 {
     public function __construct(
-        private readonly OrderRepositoryInterface $arrangementFeeRepository
+        private readonly OrderRepositoryInterface $arrangementFeeRepository,
     ) {
     }
 

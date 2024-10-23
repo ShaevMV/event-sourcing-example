@@ -11,7 +11,6 @@ use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
 use OrganizationalFees\Infrastructure\Repository\Domain\ArrangementFee\EventStory\EsArrangementFeeRepositoryPersistence;
 use Shared\Infrastructure\Bus\Projection\Projector\Redis\ProjectorConsumer;
 use Shared\Infrastructure\Tests\PhpUnit\InfrastructureTestCase;
-use Tests\OrganizationalFees\BaseKernelTestCase;
 
 class AddArrangementFeeCommandHandlerTest extends InfrastructureTestCase
 {

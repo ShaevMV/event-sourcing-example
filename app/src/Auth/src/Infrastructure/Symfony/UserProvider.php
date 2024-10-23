@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 class UserProvider implements UserProviderInterface
 {
     public function __construct(
-        protected readonly UserSecurityRepository $repository
+        protected readonly UserSecurityRepository $repository,
     ) {
     }
 

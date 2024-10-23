@@ -11,6 +11,6 @@ interface PromoCodeRepositoryInterface
 {
     public function findPromoCode(
         Title $title,
-        FestivalId $festivalId
+        FestivalId $festivalId,
     ): ?PromoCode;
 }

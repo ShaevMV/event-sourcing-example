@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface
 {
     public function __construct(
-        protected readonly UserSecurity $securityUser
+        protected readonly UserSecurity $securityUser,
     ) {
     }
 

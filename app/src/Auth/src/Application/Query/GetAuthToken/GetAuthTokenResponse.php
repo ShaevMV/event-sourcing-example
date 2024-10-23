@@ -9,7 +9,7 @@ use Shared\Domain\Bus\Query\QueryResponse;
 class GetAuthTokenResponse implements QueryResponse
 {
     public function __construct(
-        public readonly string $token
+        public readonly string $token,
     ) {
     }
 }

@@ -12,7 +12,7 @@ use Shared\Domain\Bus\Command\CommandHandler;
 class UserChangeEmailCommandHandler implements CommandHandler
 {
     public function __construct(
-        private readonly UserRepositoryPersistence $repositoryPersistence
+        private readonly UserRepositoryPersistence $repositoryPersistence,
     ) {
     }
 

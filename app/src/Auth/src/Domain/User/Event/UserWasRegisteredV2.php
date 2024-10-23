@@ -19,7 +19,7 @@ class UserWasRegisteredV2 extends Event
         public readonly string $username,
         public readonly string $email,
         public readonly string $passwordHash,
-        array $roles
+        array $roles,
     ) {
         $this->roles = $roles;
         parent::__construct($aggregateId);

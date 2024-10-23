@@ -13,7 +13,7 @@ abstract class AggregateRoot implements Aggregate, AggregateEventable, Aggregate
     private int $version = 0;
 
     final protected function __construct(
-        protected AggregateId $id
+        protected AggregateId $id,
     ) {
     }
 

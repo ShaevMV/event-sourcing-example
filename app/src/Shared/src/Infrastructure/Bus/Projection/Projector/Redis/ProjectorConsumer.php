@@ -33,9 +33,12 @@ class ProjectorConsumer
 
     public function consume(): void
     {
+        /*
+         * @psalm-suppress MixedAssignment
+         */
         while ($data = $this->client->lpop($this->queueName)) {
             try {
-                $event = $this->deserializer->deserialize($data);
+                $event = $this->deserializer->deserialize((string) $data);
                 if (false === isset($this->projections[get_class($event)])) {
                     continue;
                 }
@@ -46,7 +49,6 @@ class ProjectorConsumer
                     $projection->project($event);
                 }
             } catch (\Exception $exception) {
-                throw $exception;
             }
         }
     }

@@ -18,7 +18,7 @@ use Shared\Domain\ValueObject\ValidateException;
 class AddPromoCodeCommandHandler implements CommandHandler
 {
     public function __construct(
-        private readonly PromoCodeRepositoryPersistence $promoCodeRepositoryPersistence
+        private readonly PromoCodeRepositoryPersistence $promoCodeRepositoryPersistence,
     ) {
     }
 

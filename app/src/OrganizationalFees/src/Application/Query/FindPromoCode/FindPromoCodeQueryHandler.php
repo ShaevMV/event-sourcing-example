@@ -12,7 +12,7 @@ use Shared\Domain\Model\FestivalId;
 class FindPromoCodeQueryHandler implements QueryHandler
 {
     public function __construct(
-        private readonly PromoCodeRepositoryInterface $repository
+        private readonly PromoCodeRepositoryInterface $repository,
     ) {
     }
 

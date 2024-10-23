@@ -13,7 +13,7 @@ class GetOrderListQueryResponse implements QueryResponse
      * @param Order[] $orderList
      */
     public function __construct(
-        public readonly array $orderList
+        public readonly array $orderList,
     ) {
     }
 }

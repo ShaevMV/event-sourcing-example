@@ -14,7 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class WorkerProjectionRedis extends Command
 {
     public function __construct(
-        protected readonly ProjectorConsumer $workerProjectionRedis
+        protected readonly ProjectorConsumer $workerProjectionRedis,
     ) {
         parent::__construct();
     }

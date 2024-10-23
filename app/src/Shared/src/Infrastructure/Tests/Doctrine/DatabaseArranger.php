@@ -6,10 +6,6 @@ namespace Shared\Infrastructure\Tests\Doctrine;
 
 use App\Kernel;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
-use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Output\NullOutput;
 
 class DatabaseArranger implements DatabaseArrangerInterface
 {
@@ -20,7 +16,7 @@ class DatabaseArranger implements DatabaseArrangerInterface
     public function __construct(
         Kernel $kernel,
         DatabaseCleaner $cleaner,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
     ) {
         $this->cleaner = $cleaner;
         $this->kernel = $kernel;
@@ -28,17 +24,14 @@ class DatabaseArranger implements DatabaseArrangerInterface
     }
 
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function beforeClass(): void
     {
-
-
     }
 
     public function afterClass(): void
     {
-
     }
 
     public function beforeTest(): void

@@ -14,7 +14,7 @@ use Doctrine\Persistence\ObjectRepository;
 abstract class DoctrineRepository
 {
     public function __construct(
-        private readonly EntityManagerInterface $em
+        private readonly EntityManagerInterface $em,
     ) {
     }
 

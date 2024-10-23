@@ -9,7 +9,7 @@ use Ramsey\Uuid\Uuid as RamseyUuid;
 class Uuid implements \Stringable, ValueObject
 {
     final public function __construct(
-        protected string $value
+        protected string $value,
     ) {
         $this->ensureIsValidUuid($this->value);
     }
