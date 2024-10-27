@@ -22,6 +22,7 @@ class FindPromoCodeQueryHandler implements QueryHandler
             Title::fromString($query->title),
             FestivalId::fromString($query->festivalId),
         );
+
         if (null === $promoCode) {
             return null;
         }

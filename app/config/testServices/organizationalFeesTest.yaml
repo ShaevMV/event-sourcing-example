@@ -42,3 +42,6 @@ services:
 
   OrganizationalFees\Application\Command\OrderApproved\OrderApprovedCommandHandler:
     public: true
+
+  OrganizationalFees\Application\Query\FindPromoCode\FindPromoCodeQueryHandler:
+    public: true

@@ -19,6 +19,7 @@ use Tests\OrganizationalFees\Constant\TestConstant;
 class AddPromoCodeCommandHandlerTest extends InfrastructureTestCase
 {
     use ReadModelTrait;
+    public const DISCOUNT = 100;
 
     private EsPromoCodeRepositoryPersistence $persistence;
 
@@ -33,7 +34,7 @@ class AddPromoCodeCommandHandlerTest extends InfrastructureTestCase
         $handler = $this->get(AddPromoCodeCommandHandler::class);
         $handlerResponse = $handler(new AddPromoCodeCommand(
             'test',
-            100,
+            self::DISCOUNT,
             TestConstant::FESTIVAL_ID,
             '%',
             100,
