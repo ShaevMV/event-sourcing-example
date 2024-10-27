@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\OrganizationalFees\Application\Command\PromoCode;
 
+use Doctrine\DBAL\Exception;
 use OrganizationalFees\Application\Command\AddPromoCode\AddPromoCodeCommand;
 use OrganizationalFees\Application\Command\AddPromoCode\AddPromoCodeCommandHandler;
 use OrganizationalFees\Domain\PromoCode\Exception\PromoCodeSingDontCorrectException;
@@ -11,45 +12,43 @@ use OrganizationalFees\Domain\PromoCode\Model\PromoCodeId;
 use OrganizationalFees\Infrastructure\Repository\Domain\PromoCode\EventStory\EsPromoCodeRepositoryPersistence;
 use Shared\Domain\Model\FestivalId;
 use Shared\Domain\ValueObject\ValidateException;
-use Shared\Infrastructure\Bus\Projection\Projector\Redis\ProjectorConsumer;
 use Shared\Infrastructure\Tests\PhpUnit\InfrastructureTestCase;
-use Tests\OrganizationalFees\BaseKernelTestCase;
+use Shared\Infrastructure\Tests\PhpUnit\ReadModelTrait;
+use OrganizationalFees\Domain\PromoCode\Model\PromoCode;
+use Tests\OrganizationalFees\Constant\TestConstant;
 
 class AddPromoCodeCommandHandlerTest extends InfrastructureTestCase
 {
-    private EsPromoCodeRepositoryPersistence $persistence;
+    use ReadModelTrait;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $kernel = self::bootKernel();
-        /** @var EsPromoCodeRepositoryPersistence $persistence */
-        $persistence = $kernel->getContainer()->get(EsPromoCodeRepositoryPersistence::class);
-        $this->persistence = $persistence;
-    }
+    private EsPromoCodeRepositoryPersistence $persistence;
 
     /**
      * @throws ValidateException
      * @throws PromoCodeSingDontCorrectException
+     * @throws Exception
      */
-    public function testCreate(): void
+    public function testCreate(): PromoCode
     {
-        $kernel = self::bootKernel();
         /** @var AddPromoCodeCommandHandler $handler */
-        $handler = $kernel->getContainer()->get(AddPromoCodeCommandHandler::class);
+        $handler = $this->get(AddPromoCodeCommandHandler::class);
         $handlerResponse = $handler(new AddPromoCodeCommand(
             'test',
             100,
-            FestivalId::random()->value(),
+            TestConstant::FESTIVAL_ID,
             '%',
             100,
         ));
-        $resultPersistence = $this->persistence->ofId(PromoCodeId::fromString($handlerResponse->id));
-        $id = PromoCodeId::fromString($handlerResponse->id);
-        /** @var ProjectorConsumer $consumer */
-        $consumer = $kernel->getContainer()->get(ProjectorConsumer::class);
-        $consumer->consume();
+        /** @var EsPromoCodeRepositoryPersistence $persistence */
+        $persistence = $this->get(EsPromoCodeRepositoryPersistence::class);
+        $resultPersistence = $persistence->ofId(PromoCodeId::fromString($handlerResponse->id));
 
+        $id = PromoCodeId::fromString($handlerResponse->id);
         self::assertTrue($id->equals(PromoCodeId::fromString($resultPersistence->id()->value())));
+        $this->consumer();
+
+        self::assertNotEmpty($this->getReadModel('promo_code',$id->value()));
+
+        return $resultPersistence;
     }
 }

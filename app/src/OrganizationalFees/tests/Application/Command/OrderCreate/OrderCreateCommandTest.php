@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\OrganizationalFees\Application\Command\OrderCreate;
 
 use Auth\Domain\User\Model\UserId;
+use Doctrine\DBAL\Exception;
 use OrganizationalFees\Application\Command\AddArrangementFee\AddArrangementFeeCommand;
 use OrganizationalFees\Application\Command\AddArrangementFee\AddArrangementFeeCommandHandler;
 use OrganizationalFees\Application\Command\AddPromoCode\AddPromoCodeCommand;
@@ -13,6 +14,7 @@ use OrganizationalFees\Application\Command\OrderCreate\OrderCreateCommand;
 use OrganizationalFees\Application\Command\OrderCreate\OrderCreateCommandHandler;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFee;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
+use OrganizationalFees\Domain\Order\Model\Order;
 use OrganizationalFees\Domain\Order\Model\OrderId;
 use OrganizationalFees\Domain\Order\Model\OrderRepositoryPersistence;
 use OrganizationalFees\Domain\PromoCode\Exception\PromoCodeSingDontCorrectException;
@@ -25,93 +27,34 @@ use Shared\Domain\Model\FestivalId;
 use Shared\Domain\ValueObject\ValidateException;
 use Shared\Infrastructure\Bus\Projection\Projector\Redis\ProjectorConsumer;
 use Shared\Infrastructure\Tests\PhpUnit\InfrastructureTestCase;
+use Shared\Infrastructure\Tests\PhpUnit\ReadModelTrait;
+use Tests\OrganizationalFees\Application\Command\AddArrangementFee\AddArrangementFeeCommandHandlerTest;
+use Tests\OrganizationalFees\Application\Command\PromoCode\AddPromoCodeCommandHandlerTest;
 use Tests\OrganizationalFees\BaseKernelTestCase;
 use Tests\OrganizationalFees\Constant\TestConstant;
+use Tests\OrganizationalFees\Domain\PromoCode\Model\PromoCodeTest;
 
 class OrderCreateCommandTest extends InfrastructureTestCase
 {
-    private OrderRepositoryPersistence $orderRepositoryPersistence;
-    private EsArrangementFeeRepositoryPersistence $arrangementFeeRepositoryPersistence;
-    private EsPromoCodeRepositoryPersistence $promoCodeRepositoryPersistence;
-
-    private FestivalId $festivalId;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $kernel = self::bootKernel();
-
-        /** @var OrderRepositoryPersistence $orderRepositoryPersistence */
-        $orderRepositoryPersistence = $kernel->getContainer()->get(EsOrderRepositoryPersistence::class);
-        $this->orderRepositoryPersistence = $orderRepositoryPersistence;
-
-        /** @var EsArrangementFeeRepositoryPersistence $arrangementFeeRepositoryPersistence */
-        $arrangementFeeRepositoryPersistence = $kernel->getContainer()->get(EsArrangementFeeRepositoryPersistence::class);
-        $this->arrangementFeeRepositoryPersistence = $arrangementFeeRepositoryPersistence;
-
-        /** @var EsPromoCodeRepositoryPersistence $promoCodeRepositoryPersistence */
-        $promoCodeRepositoryPersistence = $kernel->getContainer()->get(EsPromoCodeRepositoryPersistence::class);
-        $this->promoCodeRepositoryPersistence = $promoCodeRepositoryPersistence;
-    }
-
-    public function testCreateArrangementFee(): ArrangementFee
-    {
-        $kernel = self::bootKernel();
-        /** @var AddArrangementFeeCommandHandler $handler */
-        $handler = $kernel->getContainer()->get(AddArrangementFeeCommandHandler::class);
-        $handlerResponse = $handler(new AddArrangementFeeCommand(
-            'test',
-            TestConstant::FESTIVAL_ID,
-            1000
-        ));
-        $resultPersistence = $this->arrangementFeeRepositoryPersistence->ofId(ArrangementId::fromString($handlerResponse->id));
-        $id = ArrangementId::fromString($handlerResponse->id);
-        self::assertTrue($id->equals(ArrangementId::fromString($resultPersistence->id()->value())));
-
-        return $resultPersistence;
-    }
+    use ReadModelTrait;
 
     /**
      * @throws ValidateException
      * @throws PromoCodeSingDontCorrectException
+     * @throws Exception
      */
-    public function testCreatePromoCode(): PromoCode
+    public function testCreate(): Order
     {
-        $kernel = self::bootKernel();
-        /** @var AddPromoCodeCommandHandler $handler */
-        $handler = $kernel->getContainer()->get(AddPromoCodeCommandHandler::class);
-        $handlerResponse = $handler(new AddPromoCodeCommand(
-            'test',
-            100,
-            TestConstant::FESTIVAL_ID,
-            '%',
-            100,
-        ));
-        $resultPersistence = $this->promoCodeRepositoryPersistence->ofId(PromoCodeId::fromString($handlerResponse->id));
-        $id = PromoCodeId::fromString($handlerResponse->id);
+        /** @var AddPromoCodeCommandHandlerTest $addPromoCodeCommandHandlerTest */
+        $addPromoCodeCommandHandlerTest = $this->get(AddPromoCodeCommandHandlerTest::class);
+        $promoCode = $addPromoCodeCommandHandlerTest->testCreate();
+        /** @var AddArrangementFeeCommandHandlerTest $addArrangementFeeCommandHandlerTest */
+        $addArrangementFeeCommandHandlerTest = $this->get(AddArrangementFeeCommandHandlerTest::class);
+        $arrangementFee  = $addArrangementFeeCommandHandlerTest->testCreate();
 
-        self::assertTrue($id->equals(PromoCodeId::fromString($resultPersistence->id()->value())));
 
-        /** @var ProjectorConsumer $consumer */
-        $consumer = $kernel->getContainer()->get(ProjectorConsumer::class);
-        $consumer->consume();
-
-        return $resultPersistence;
-    }
-
-    /**
-     * @throws ValidateException
-     * @throws PromoCodeSingDontCorrectException
-     */
-    public function testCreate(): void
-    {
-        $kernel = self::bootKernel();
         /** @var OrderCreateCommandHandler $handler */
-        $handler = $kernel->getContainer()->get(OrderCreateCommandHandler::class);
-
-        $arrangementFee = $this->testCreateArrangementFee();
-        $promoCode = $this->testCreatePromoCode();
-
+        $handler = $this->get(OrderCreateCommandHandler::class);
         $orderResponse = $handler(new OrderCreateCommand(
             ['test1', 'test2'],
             UserId::random()->value(),
@@ -121,7 +64,14 @@ class OrderCreateCommandTest extends InfrastructureTestCase
         ));
 
         $orderId = OrderId::fromString($orderResponse->orderId);
-        $order = $this->orderRepositoryPersistence->ofId(OrderId::fromString($orderResponse->orderId));
+        /** @var OrderRepositoryPersistence $orderRepositoryPersistence */
+        $orderRepositoryPersistence = $this->get(OrderRepositoryPersistence::class);
+        $order = $orderRepositoryPersistence->ofId(OrderId::fromString($orderResponse->orderId));
         self::assertTrue($orderId->equals(OrderId::fromString($order->id()->value())));
+
+        $this->consumer();
+        $this->getReadModel('"order"',$orderId->value());
+
+        return $order;
     }
 }

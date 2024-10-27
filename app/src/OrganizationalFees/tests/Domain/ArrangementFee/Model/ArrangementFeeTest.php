@@ -8,6 +8,7 @@ use OrganizationalFees\Domain\ArrangementFee\Event\ArrangementFeeWasCreating;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFee;
 use PHPUnit\Framework\TestCase;
 use Shared\Domain\Model\FestivalId;
+use Tests\OrganizationalFees\Constant\TestConstant;
 
 class ArrangementFeeTest extends TestCase
 {
@@ -16,7 +17,7 @@ class ArrangementFeeTest extends TestCase
         $arrangementFee = ArrangementFee::create(
             'test',
             100,
-            FestivalId::random(),
+            new FestivalId(TestConstant::FESTIVAL_ID),
         );
 
         $events = $arrangementFee->pullEvents();

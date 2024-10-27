@@ -16,6 +16,7 @@ use PHPUnit\Framework\TestCase;
 use Shared\Domain\Exception\DomainException;
 use Shared\Domain\Model\FestivalId;
 use Shared\Domain\ValueObject\ValidateException;
+use Tests\OrganizationalFees\Constant\TestConstant;
 
 class PromoCodeTest extends TestCase
 {
@@ -28,7 +29,7 @@ class PromoCodeTest extends TestCase
         $promoCode = PromoCode::create(
             Title::fromString('test'),
             new Discount(100),
-            FestivalId::random(),
+            new FestivalId(TestConstant::FESTIVAL_ID),
             Sing::fromString(Sing::FIX),
             null,
         );
@@ -50,7 +51,7 @@ class PromoCodeTest extends TestCase
         $promoCode = PromoCode::create(
             Title::fromString('test'),
             new Discount(100),
-            FestivalId::random(),
+            new FestivalId(TestConstant::FESTIVAL_ID),
             Sing::fromString(Sing::FIX),
             new Limit(2),
         );

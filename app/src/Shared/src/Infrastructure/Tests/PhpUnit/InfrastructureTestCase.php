@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Shared\Infrastructure\Tests\PhpUnit;
 
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Exception;
 use Shared\Infrastructure\Tests\Doctrine\DatabaseArrangerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -49,4 +51,6 @@ abstract class InfrastructureTestCase extends KernelTestCase
 
         return $database;
     }
+
+
 }

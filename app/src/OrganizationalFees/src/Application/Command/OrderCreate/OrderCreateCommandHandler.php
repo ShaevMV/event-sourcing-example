@@ -37,7 +37,7 @@ class OrderCreateCommandHandler implements CommandHandler
             $orderCreateCommand->guestNames,
             $arrangementFee,
             UserId::fromString($orderCreateCommand->userId),
-            $promoCode,
+            $promoCode ?? null,
         );
         $this->orderRepositoryPersistence->persist($order);
 
