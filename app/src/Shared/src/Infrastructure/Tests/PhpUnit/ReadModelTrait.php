@@ -24,6 +24,7 @@ trait ReadModelTrait
 
     protected function consumer(): void
     {
+        /** @var ProjectorConsumer $consumer */
         $consumer = $this->get(ProjectorConsumer::class);
         $consumer->consume();
     }

@@ -29,7 +29,7 @@ class ArrangementFeeUpdatePriceProjection implements Projection
      */
     public function project(mixed $event): void
     {
-        if (false === $event instanceof ArrangementFeeWasCreating) {
+        if (false === $event instanceof ArrangementFeeWasUpdatePrice) {
             return;
         }
 
