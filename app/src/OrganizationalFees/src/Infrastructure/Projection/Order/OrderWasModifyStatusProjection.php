@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace OrganizationalFees\Infrastructure\Projection\ArrangementFee;
+namespace OrganizationalFees\Infrastructure\Projection\Order;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
-use OrganizationalFees\Domain\ArrangementFee\Event\ArrangementFeeWasUpdatePrice;
+use OrganizationalFees\Domain\Order\Event\OrderWasApproved;
 use Shared\Domain\Bus\Projection\Projection;
 
-class ArrangementFeeUpdatePriceProjection implements Projection
+class OrderWasModifyStatusProjection implements Projection
 {
     public function __construct(
         private readonly Connection $connection,
@@ -19,7 +19,7 @@ class ArrangementFeeUpdatePriceProjection implements Projection
     public function listenTo(): array
     {
         return [
-            ArrangementFeeWasUpdatePrice::class,
+            OrderWasApproved::class,
         ];
     }
 
@@ -28,13 +28,13 @@ class ArrangementFeeUpdatePriceProjection implements Projection
      */
     public function project(mixed $event): void
     {
-        if (false === $event instanceof ArrangementFeeWasUpdatePrice) {
+        if (false === $event instanceof OrderWasApproved) {
             return;
         }
 
-        $this->connection->update('arrangement_fee',
+        $this->connection->update('"order"',
             [
-                'price' => $event->price,
+                'status' => $event->getStatus(),
             ],
             [
                 'id' => $event->getAggregateId(),

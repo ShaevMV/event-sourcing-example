@@ -40,8 +40,7 @@ class UpdatePriceCommandHandlerTest extends InfrastructureTestCase
 
         $this->consumer();
 
-        $result = $this->getReadModel('arrangement_fee',$arrangementFee->id()->value());
+        $result = $this->getReadModel('arrangement_fee', $arrangementFee->id()->value());
         self::assertEquals(1100, $result['price']);
-
     }
 }

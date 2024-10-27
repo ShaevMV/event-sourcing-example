@@ -41,6 +41,6 @@ class DatabaseArranger implements DatabaseArrangerInterface
 
     public function afterTest(): void
     {
-        //$this->cleaner->clear($this->entityManager);
+        // $this->cleaner->clear($this->entityManager);
     }
 }

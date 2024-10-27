@@ -5,7 +5,6 @@ namespace OrganizationalFees\Infrastructure\Projection\Order;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use OrganizationalFees\Domain\Order\Event\OrderWasCreating;
-use OrganizationalFees\Domain\Order\Model\OrderStatus;
 use Shared\Domain\Bus\Event\Event;
 use Shared\Domain\Bus\Projection\Projection;
 

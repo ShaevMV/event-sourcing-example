@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Shared\Infrastructure\Tests\PhpUnit;
 
-use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Exception;
 use Shared\Infrastructure\Tests\Doctrine\DatabaseArrangerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -35,6 +33,9 @@ abstract class InfrastructureTestCase extends KernelTestCase
         self::databaseArranger()->afterClass();
     }
 
+    /**
+     * @throws \Exception
+     */
     public function get(string $class): ?object
     {
         self::bootKernel(['environment' => 'test']);
@@ -42,6 +43,9 @@ abstract class InfrastructureTestCase extends KernelTestCase
         return self::getContainer()->get($class);
     }
 
+    /**
+     * @throws \Exception
+     */
     protected static function databaseArranger(): DatabaseArrangerInterface
     {
         self::bootKernel(['environment' => 'test']);
@@ -51,6 +55,4 @@ abstract class InfrastructureTestCase extends KernelTestCase
 
         return $database;
     }
-
-
 }

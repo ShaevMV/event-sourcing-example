@@ -12,6 +12,7 @@ trait ReadModelTrait
 {
     /**
      * @throws Exception
+     * @throws \Exception
      */
     protected function getReadModel(string $table, string $id): array
     {
@@ -19,9 +20,12 @@ trait ReadModelTrait
         $connect = $this->get(Connection::class);
         $result = $connect->executeQuery("SELECT * FROM $table WHERE id = '{$id}'")->fetchAssociative();
 
-        return $result === false ? [] : $result;
+        return false === $result ? [] : $result;
     }
 
+    /**
+     * @throws \Exception
+     */
     protected function consumer(): void
     {
         /** @var ProjectorConsumer $consumer */

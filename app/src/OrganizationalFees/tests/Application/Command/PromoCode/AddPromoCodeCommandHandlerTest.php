@@ -8,13 +8,12 @@ use Doctrine\DBAL\Exception;
 use OrganizationalFees\Application\Command\AddPromoCode\AddPromoCodeCommand;
 use OrganizationalFees\Application\Command\AddPromoCode\AddPromoCodeCommandHandler;
 use OrganizationalFees\Domain\PromoCode\Exception\PromoCodeSingDontCorrectException;
+use OrganizationalFees\Domain\PromoCode\Model\PromoCode;
 use OrganizationalFees\Domain\PromoCode\Model\PromoCodeId;
 use OrganizationalFees\Infrastructure\Repository\Domain\PromoCode\EventStory\EsPromoCodeRepositoryPersistence;
-use Shared\Domain\Model\FestivalId;
 use Shared\Domain\ValueObject\ValidateException;
 use Shared\Infrastructure\Tests\PhpUnit\InfrastructureTestCase;
 use Shared\Infrastructure\Tests\PhpUnit\ReadModelTrait;
-use OrganizationalFees\Domain\PromoCode\Model\PromoCode;
 use Tests\OrganizationalFees\Constant\TestConstant;
 
 class AddPromoCodeCommandHandlerTest extends InfrastructureTestCase
@@ -47,7 +46,7 @@ class AddPromoCodeCommandHandlerTest extends InfrastructureTestCase
         self::assertTrue($id->equals(PromoCodeId::fromString($resultPersistence->id()->value())));
         $this->consumer();
 
-        self::assertNotEmpty($this->getReadModel('promo_code',$id->value()));
+        self::assertNotEmpty($this->getReadModel('promo_code', $id->value()));
 
         return $resultPersistence;
     }

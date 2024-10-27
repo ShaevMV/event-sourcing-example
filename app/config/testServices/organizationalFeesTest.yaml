@@ -39,3 +39,6 @@ services:
 
   Tests\OrganizationalFees\Application\Command\AddArrangementFee\AddArrangementFeeCommandHandlerTest:
     public: true
+
+  OrganizationalFees\Application\Command\OrderApproved\OrderApprovedCommandHandler:
+    public: true

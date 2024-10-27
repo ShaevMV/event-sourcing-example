@@ -2,15 +2,11 @@
 
 namespace Tests\OrganizationalFees\Application\Command\Festival;
 
-use DateTime;
-use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use OrganizationalFees\Application\Command\FestivalCreate\FestivalCreateCommand;
 use OrganizationalFees\Application\Command\FestivalCreate\FestivalCreateCommandHandler;
 use OrganizationalFees\Domain\Festival\Model\FestivalId;
-use OrganizationalFees\Domain\Festival\Model\FestivalRepositoryPersistence;
 use OrganizationalFees\Infrastructure\Repository\Domain\Festival\EventStory\EsFestivalRepositoryPersistence;
-use Shared\Infrastructure\Bus\Projection\Projector\Redis\ProjectorConsumer;
 use Shared\Infrastructure\Tests\PhpUnit\ReadModelTrait;
 use Tests\OrganizationalFees\Infrastructure\Service\Template\BaseTemplateTestCase;
 
@@ -36,8 +32,8 @@ class FestivalCreateCommandTest extends BaseTemplateTestCase
         $handler = $this->get(FestivalCreateCommandHandler::class);
         $handlerResponse = $handler(new FestivalCreateCommand(
             'test',
-            new DateTime(),
-            (new DateTime())->modify('+1 day'),
+            new \DateTime(),
+            (new \DateTime())->modify('+1 day'),
             $this->getFile(self::TEMPLATE_MAIL),
             $this->getFile(self::TEMPLATE_PDF),
         ));

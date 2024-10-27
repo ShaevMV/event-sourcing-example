@@ -7,6 +7,7 @@ namespace OrganizationalFees\Domain\Order\Model;
 use Auth\Domain\User\Model\UserId;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFee;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
+use OrganizationalFees\Domain\Order\Event\OrderWasApproved;
 use OrganizationalFees\Domain\Order\Event\OrderWasCreating;
 use OrganizationalFees\Domain\PromoCode\Model\PromoCode;
 use OrganizationalFees\Domain\PromoCode\Model\Title;
@@ -31,12 +32,11 @@ class Order extends AggregateRoot implements Aggregate, AggregateEventable, Aggr
     public readonly int $total;
 
     public static function create(
-        array          $guestNames,
+        array $guestNames,
         ArrangementFee $arrangementFee,
-        UserId         $userId,
-        ?PromoCode     $promoCode = null,
-    ): self
-    {
+        UserId $userId,
+        ?PromoCode $promoCode = null,
+    ): self {
         $order = new self(OrderId::random());
 
         $promoCode?->validateCountAchievedLimit();
@@ -68,7 +68,7 @@ class Order extends AggregateRoot implements Aggregate, AggregateEventable, Aggr
     {
         $this->id = OrderId::fromString($orderWasCreating->getAggregateId());
 
-        $this->guestNames = array_map(fn(string $name) => GuestName::fromString($name), $orderWasCreating->guestNames);
+        $this->guestNames = array_map(fn (string $name) => GuestName::fromString($name), $orderWasCreating->guestNames);
         $this->userId = new UserId($orderWasCreating->userId);
         $this->status = new OrderStatus(Status::fromString(Status::NEW), $this->userId);
         $this->arrangementFeeId = ArrangementId::fromString($orderWasCreating->arrangementFeeId);
@@ -76,6 +76,24 @@ class Order extends AggregateRoot implements Aggregate, AggregateEventable, Aggr
         $this->promoCode = ($orderWasCreating->promoCode ?? false) ? new Title($orderWasCreating->promoCode) : null;
         $this->discount = $orderWasCreating->discount;
         $this->total = $orderWasCreating->total;
+    }
+
+    public function approved(UserId $userId): self
+    {
+        $this->recordAndApply(new OrderWasApproved(
+            $this->id->value(),
+            $userId->value(),
+        ));
+
+        return $this;
+    }
+
+    public function onOrderWasApproved(OrderWasApproved $orderWasApproved): void
+    {
+        $this->status = new OrderStatus(
+            Status::fromString(Status::APPROVED),
+            new UserId($orderWasApproved->userId)
+        );
     }
 
     public function getStatus(): OrderStatus

@@ -10,7 +10,6 @@ use OrganizationalFees\Application\Command\AddArrangementFee\AddArrangementFeeCo
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFee;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
 use OrganizationalFees\Infrastructure\Repository\Domain\ArrangementFee\EventStory\EsArrangementFeeRepositoryPersistence;
-use Shared\Infrastructure\Bus\Projection\Projector\Redis\ProjectorConsumer;
 use Shared\Infrastructure\Tests\PhpUnit\InfrastructureTestCase;
 use Shared\Infrastructure\Tests\PhpUnit\ReadModelTrait;
 
@@ -23,7 +22,7 @@ class AddArrangementFeeCommandHandlerTest extends InfrastructureTestCase
      */
     public function testCreate(): ArrangementFee
     {
-                /** @var EsArrangementFeeRepositoryPersistence $persistence */
+        /** @var EsArrangementFeeRepositoryPersistence $persistence */
         $persistence = $this->get(EsArrangementFeeRepositoryPersistence::class);
 
         /** @var AddArrangementFeeCommandHandler $handler */
@@ -38,8 +37,7 @@ class AddArrangementFeeCommandHandlerTest extends InfrastructureTestCase
         self::assertTrue($id->equals(ArrangementId::fromString($resultPersistence->id()->value())));
         $this->consumer();
 
-        self::assertNotEmpty($this->getReadModel('arrangement_fee',$id->value()));
-
+        self::assertNotEmpty($this->getReadModel('arrangement_fee', $id->value()));
 
         return $resultPersistence;
     }

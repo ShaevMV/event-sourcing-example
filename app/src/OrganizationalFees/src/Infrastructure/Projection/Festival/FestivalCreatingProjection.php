@@ -16,7 +16,6 @@ class FestivalCreatingProjection implements Projection
     ) {
     }
 
-
     public function listenTo(): array
     {
         return [

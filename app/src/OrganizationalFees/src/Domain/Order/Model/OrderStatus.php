@@ -12,7 +12,6 @@ class OrderStatus
     public function __construct(
         public Status $status,
         public Uuid $userModified,
-    )
-    {
+    ) {
     }
 }

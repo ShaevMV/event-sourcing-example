@@ -9,7 +9,6 @@ use OrganizationalFees\Infrastructure\Service\Template\TemplatePdf;
 use Shared\Infrastructure\Tests\PhpUnit\InfrastructureTestCase;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Tests\OrganizationalFees\BaseKernelTestCase;
 
 class BaseTemplateTestCase extends InfrastructureTestCase
 {

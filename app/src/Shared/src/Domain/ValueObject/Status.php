@@ -8,15 +8,15 @@ use PHPUnit\Util\Exception;
 
 class Status extends Keyword
 {
-    public const PAID = 'paid';
+    public const APPROVED = 'approved';
     public const NEW = 'new';
     public const CANCEL = 'cancel';
 
     public function isCorrectNextStatus(Status $status): bool
     {
         return match ($status->value()) {
-            self::NEW => self::PAID === $status->value(),
-            self::PAID => self::CANCEL === $status->value(),
+            self::NEW => self::APPROVED === $status->value(),
+            self::APPROVED => self::CANCEL === $status->value(),
             default => throw new Exception('Unexpected match value'),
         };
     }
