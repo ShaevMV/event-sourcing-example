@@ -8,7 +8,7 @@ use Shared\Domain\ValueObject\PositiveNumber;
 
 class Counter extends PositiveNumber
 {
-    public function nextCount(): void
+    public function addCount(): void
     {
         if (!isset($this->value)) {
             $this->value = 0;

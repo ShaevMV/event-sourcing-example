@@ -40,7 +40,7 @@ class OrderWasCreatingProjection implements Projection
                 'guest' => json_encode($event->guestNames),
                 'user_id' => $event->userId,
                 'type_arrangement_id' => $event->arrangementFeeId,
-                'status' => OrderStatus::NEW,
+                'status' => $event->status,
                 'price' => $event->price,
                 'promo_code' => $event->promoCode,
             ],

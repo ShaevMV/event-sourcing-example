@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace OrganizationalFees\Domain\Order\Event;
 
 use JMS\Serializer\Annotation\Type;
-use OrganizationalFees\Domain\Order\Model\OrderStatus;
 use Shared\Domain\Bus\Event\Event;
+use Shared\Domain\ValueObject\Status;
 
 class OrderWasCreating extends Event
 {
@@ -22,7 +22,7 @@ class OrderWasCreating extends Event
         public readonly int $total,
         public readonly int $discount = 0,
         public readonly ?string $promoCode = null,
-        public readonly string $status = OrderStatus::NEW,
+        public readonly string $status = Status::NEW,
     ) {
         parent::__construct($aggregateId);
         $this->guestNames = $guestNames;

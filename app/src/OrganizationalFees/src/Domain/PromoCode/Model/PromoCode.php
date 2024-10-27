@@ -75,7 +75,7 @@ class PromoCode extends AggregateRoot implements Aggregate, AggregateEventable, 
 
     public function onPromoCodeWasApply(PromoCodeWasApply $promoCodeWasApply): void
     {
-        $this->count->nextCount();
+        $this->count->addCount();
     }
 
     public function validateCountAchievedLimit(): void

@@ -5,22 +5,14 @@ declare(strict_types=1);
 namespace OrganizationalFees\Domain\Order\Model;
 
 use Shared\Domain\ValueObject\Status;
+use Shared\Domain\ValueObject\Uuid;
 
-class OrderStatus extends Status
+class OrderStatus
 {
-    public const PAID = 'paid';
-    public const NEW = 'new';
-    public const CANCEL = 'cancel';
-
-    /**
-     * @throws \Exception
-     */
-    public function isCorrectNextStatus(Status $status): bool
+    public function __construct(
+        public Status $status,
+        public Uuid $userModified,
+    )
     {
-        return match ($status->value()) {
-            self::NEW => self::PAID === $status->value(),
-            self::PAID => self::CANCEL === $status->value(),
-            default => throw new \Exception('Unexpected match value'),
-        };
     }
 }

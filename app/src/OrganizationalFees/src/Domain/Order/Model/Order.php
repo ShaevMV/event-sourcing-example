@@ -14,6 +14,7 @@ use Shared\Domain\Aggregate\Aggregate;
 use Shared\Domain\Aggregate\AggregateEventable;
 use Shared\Domain\Aggregate\AggregateReconstructable;
 use Shared\Domain\Aggregate\AggregateRoot;
+use Shared\Domain\ValueObject\Status;
 
 class Order extends AggregateRoot implements Aggregate, AggregateEventable, AggregateReconstructable
 {
@@ -30,11 +31,12 @@ class Order extends AggregateRoot implements Aggregate, AggregateEventable, Aggr
     public readonly int $total;
 
     public static function create(
-        array $guestNames,
+        array          $guestNames,
         ArrangementFee $arrangementFee,
-        UserId $userId,
-        ?PromoCode $promoCode = null,
-    ): self {
+        UserId         $userId,
+        ?PromoCode     $promoCode = null,
+    ): self
+    {
         $order = new self(OrderId::random());
 
         $promoCode?->validateCountAchievedLimit();
@@ -65,10 +67,10 @@ class Order extends AggregateRoot implements Aggregate, AggregateEventable, Aggr
     public function onOrderWasCreating(OrderWasCreating $orderWasCreating): void
     {
         $this->id = OrderId::fromString($orderWasCreating->getAggregateId());
-        $this->status = OrderStatus::fromString(OrderStatus::NEW);
-        $this->guestNames = array_map(fn (string $name) => GuestName::fromString($name), $orderWasCreating->guestNames);
-        $this->userId = new UserId($orderWasCreating->userId);
 
+        $this->guestNames = array_map(fn(string $name) => GuestName::fromString($name), $orderWasCreating->guestNames);
+        $this->userId = new UserId($orderWasCreating->userId);
+        $this->status = new OrderStatus(Status::fromString(Status::NEW), $this->userId);
         $this->arrangementFeeId = ArrangementId::fromString($orderWasCreating->arrangementFeeId);
         $this->price = $orderWasCreating->price;
         $this->promoCode = ($orderWasCreating->promoCode ?? false) ? new Title($orderWasCreating->promoCode) : null;
