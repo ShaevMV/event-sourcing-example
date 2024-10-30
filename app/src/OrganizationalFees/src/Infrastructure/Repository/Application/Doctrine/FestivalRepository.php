@@ -9,7 +9,7 @@ use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\ORM\EntityManagerInterface;
 use OrganizationalFees\Application\Model\Festival\Festival;
 use OrganizationalFees\Application\Model\Festival\FestivalRepositoryInterface;
-use Shared\Domain\ValueObject\DateTime;
+use DateTime;
 
 class FestivalRepository implements FestivalRepositoryInterface
 {
@@ -44,11 +44,12 @@ class FestivalRepository implements FestivalRepositoryInterface
     public function getActiveFestival(DateTime $dateTimeNow): ?Festival
     {
         $qb = new QueryBuilder($this->em->getConnection());
+        $dateTimeNowString = $dateTimeNow->format('Y-m-d H:i:s');
         $festival = $qb->select('f.*')
             ->from('festival', 'f')
-            ->where('date_start >= :dateNow')
-            ->andWhere('date_end <= :dateNow')
-            ->setParameter('dateNow', (string) $dateTimeNow)
+            ->where('date_start <= :dateNow')
+            ->andWhere('date_end >= :dateNow')
+            ->setParameter('dateNow', $dateTimeNowString)
             ->fetchAssociative();
 
         if ($festival) {

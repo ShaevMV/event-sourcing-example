@@ -23,6 +23,6 @@ class GetFestivalListQueryHandlerTest extends BaseTemplateTestCase
         /** @var GetFestivalListQueryHandler $handler */
         $handler = $this->get(GetFestivalListQueryHandler::class);
         $festivalList = $handler(new GetFestivalListQuery());
-        self::assertNotEmpty($festivalList);
+        self::assertNotEmpty($festivalList->festivalList);
     }
 }

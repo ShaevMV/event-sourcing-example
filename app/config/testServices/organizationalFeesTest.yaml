@@ -54,3 +54,6 @@ services:
 
   OrganizationalFees\Application\Query\GetFestivalList\GetFestivalListQueryHandler:
     public: true
+
+  OrganizationalFees\Application\Query\FindActiveFestival\FindActiveFestivalQueryHandler:
+    public: true
