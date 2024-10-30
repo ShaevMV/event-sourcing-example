@@ -20,6 +20,7 @@ class ArrangementTypeRepository implements ArrangementFeeRepositoryInterface
 
     /**
      * @throws Exception
+     * @throws \DateMalformedStringException
      */
     public function getList(FestivalId $festivalId): array
     {
@@ -37,6 +38,37 @@ class ArrangementTypeRepository implements ArrangementFeeRepositoryInterface
             $arrangementFee['name'],
             $arrangementFee['festival_id'],
             $arrangementFee['price'],
+            (new \DateTime($arrangementFee['updated_at']))->format('Y-m-d H:i:s'),
+        ), $arrangementFeeList);
+    }
+
+    /**
+     * @throws Exception|\DateMalformedStringException
+     */
+    public function getListAllPrice(FestivalId $festivalId): array
+    {
+        $qb = new QueryBuilder($this->em->getConnection());
+        $arrangementFeeList = $qb->from('arrangement_fee', 'af')
+            ->select([
+                'af.id',
+                'af.name',
+                'af.festival_id',
+                'afp.price',
+                'afp.timestamp',
+            ])
+            ->innerJoin('af', 'arrangement_fee_price', 'afp', $qb->expr()->eq('af.id', 'afp.arrangement_fee_id'))
+            ->andWhere('festival_id = :festivalId')
+            ->setParameters([
+                'festivalId' => $festivalId->value(),
+            ])
+            ->fetchAllAssociative();
+
+        return array_map(fn (array $arrangementFee) => new ArrangementFee(
+            $arrangementFee['id'],
+            $arrangementFee['name'],
+            $arrangementFee['festival_id'],
+            $arrangementFee['price'],
+            (new \DateTimeImmutable())->setTimestamp($arrangementFee['timestamp'])->format('Y-m-d H:i:s'),
         ), $arrangementFeeList);
     }
 }

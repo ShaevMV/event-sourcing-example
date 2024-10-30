@@ -11,6 +11,7 @@ class ArrangementFee
         public readonly string $title,
         public readonly string $festivalId,
         public readonly int $price,
+        public readonly string $createdAt,
     ) {
     }
 }

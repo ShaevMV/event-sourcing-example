@@ -12,4 +12,9 @@ interface ArrangementFeeRepositoryInterface
      * @return ArrangementFee[]
      */
     public function getList(FestivalId $festivalId): array;
+
+    /**
+     * @return ArrangementFee[]
+     */
+    public function getListAllPrice(FestivalId $festivalId): array;
 }

@@ -10,26 +10,25 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20240319121922 extends AbstractMigration
+final class Version20241030155849 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Создание таблице arrangement_fee_price';
     }
 
     public function up(Schema $schema): void
     {
         $sql = <<<SQL
-        CREATE TABLE IF NOT EXISTS public.order
+        CREATE TABLE IF NOT EXISTS public.arrangement_fee_price
         (
             id uuid NOT NULL,
-            user_id uuid NOT NULL,
-            guest jsonb NOT NULL default '[]',
             arrangement_fee_id uuid NOT NULL,
-            status varchar(255) default 'new',
+            price integer NOT NULL,
+            timestamp integer NOT NULL,
             created_at timestamp without time zone default NOW(),
             updated_at timestamp without time zone default NOW(),
-            CONSTRAINT order_pkey PRIMARY KEY (id)
+            CONSTRAINT arrangement_fee_price_pkey PRIMARY KEY (id)
         )
 SQL;
         $this->connection->executeStatement($sql);
@@ -37,6 +36,7 @@ SQL;
 
     public function down(Schema $schema): void
     {
-        $this->connection->executeStatement('DROP TABLE IF EXISTS public.order');
+
+
     }
 }

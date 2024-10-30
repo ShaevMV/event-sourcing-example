@@ -48,3 +48,6 @@ services:
 
   OrganizationalFees\Application\Query\GetArrangementFeeList\GetArrangementFeeListQueryHandler:
     public: true
+
+  OrganizationalFees\Application\Query\GetArrangementFeeAllPriceList\GetArrangementFeeAllPriceListQueryHandler:
+    public: true

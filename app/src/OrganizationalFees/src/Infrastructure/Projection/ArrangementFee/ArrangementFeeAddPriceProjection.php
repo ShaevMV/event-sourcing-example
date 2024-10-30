@@ -6,10 +6,12 @@ namespace OrganizationalFees\Infrastructure\Projection\ArrangementFee;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
+use OrganizationalFees\Domain\ArrangementFee\Event\ArrangementFeeWasCreating;
 use OrganizationalFees\Domain\ArrangementFee\Event\ArrangementFeeWasUpdatePrice;
 use Shared\Domain\Bus\Projection\Projection;
+use Shared\Domain\ValueObject\Uuid;
 
-class ArrangementFeeUpdatePriceProjection implements Projection
+class ArrangementFeeAddPriceProjection implements Projection
 {
     public function __construct(
         private readonly Connection $connection,
@@ -20,6 +22,7 @@ class ArrangementFeeUpdatePriceProjection implements Projection
     {
         return [
             ArrangementFeeWasUpdatePrice::class,
+            ArrangementFeeWasCreating::class,
         ];
     }
 
@@ -28,26 +31,20 @@ class ArrangementFeeUpdatePriceProjection implements Projection
      */
     public function project(mixed $event): void
     {
-        if (false === $event instanceof ArrangementFeeWasUpdatePrice) {
+        if (
+            false === $event instanceof ArrangementFeeWasUpdatePrice
+            && false === $event instanceof ArrangementFeeWasCreating
+        ) {
             return;
         }
 
-        $this->connection->update('arrangement_fee',
+        $this->connection->insert('arrangement_fee_price',
             [
+                'id' => Uuid::random()->value(),
+                'arrangement_fee_id' => $event->getAggregateId(),
                 'price' => $event->price,
+                'timestamp' => $event->timestamp ?? time(),
             ],
-            [
-                'id' => $event->getAggregateId(),
-            ]
-        );
-
-        $this->connection->insert('arrangement_fee',
-            [
-                'price' => $event->price,
-            ],
-            [
-                'id' => $event->getAggregateId(),
-            ]
         );
     }
 }

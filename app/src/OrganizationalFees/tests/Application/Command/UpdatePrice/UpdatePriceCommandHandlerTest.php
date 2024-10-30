@@ -17,6 +17,7 @@ class UpdatePriceCommandHandlerTest extends InfrastructureTestCase
 
     /**
      * @throws Exception
+     * @throws \Exception
      */
     public function testCreate(): void
     {

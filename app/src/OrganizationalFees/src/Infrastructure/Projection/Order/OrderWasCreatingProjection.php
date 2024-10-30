@@ -38,7 +38,7 @@ class OrderWasCreatingProjection implements Projection
                 'id' => $event->getAggregateId(),
                 'guest' => json_encode($event->guestNames),
                 'user_id' => $event->userId,
-                'type_arrangement_id' => $event->arrangementFeeId,
+                'arrangement_fee_id' => $event->arrangementFeeId,
                 'status' => $event->status,
                 'price' => $event->price,
                 'total' => $event->total,

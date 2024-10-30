@@ -59,7 +59,7 @@ class OrderRepository implements OrderRepositoryInterface
         return array_map(fn (array $data) => new Order(
             $data['id'],
             json_decode($data['guest'], true),
-            $data['type_arrangement_id'],
+            $data['arrangement_fee_id'],
             $data['user_id'],
             $data['status'],
             $data['price'],
