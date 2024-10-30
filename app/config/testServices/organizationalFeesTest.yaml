@@ -45,3 +45,6 @@ services:
 
   OrganizationalFees\Application\Query\FindPromoCode\FindPromoCodeQueryHandler:
     public: true
+
+  OrganizationalFees\Application\Query\GetArrangementFeeList\GetArrangementFeeListQueryHandler:
+    public: true

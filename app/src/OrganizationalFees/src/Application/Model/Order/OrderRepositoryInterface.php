@@ -1,6 +1,6 @@
 <?php
 
-namespace OrganizationalFees\Application\Model;
+namespace OrganizationalFees\Application\Model\Order;
 
 use OrganizationalFees\Application\Query\GetOrderList\GetOrderListQuery;
 

@@ -7,14 +7,14 @@ namespace OrganizationalFees\Infrastructure\Repository\Application\Doctrine;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\ORM\EntityManagerInterface;
-use OrganizationalFees\Application\Model\Order;
-use OrganizationalFees\Application\Model\OrderRepositoryInterface;
+use OrganizationalFees\Application\Model\Order\Order;
+use OrganizationalFees\Application\Model\Order\OrderRepositoryInterface;
 use OrganizationalFees\Application\Query\GetOrderList\GetOrderListQuery;
 
 class OrderRepository implements OrderRepositoryInterface
 {
     public function __construct(
-        private EntityManagerInterface $em,
+        private readonly EntityManagerInterface $em,
     ) {
     }
 

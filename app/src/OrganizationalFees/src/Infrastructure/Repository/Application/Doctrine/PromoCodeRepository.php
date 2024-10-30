@@ -7,15 +7,15 @@ namespace OrganizationalFees\Infrastructure\Repository\Application\Doctrine;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\ORM\EntityManagerInterface;
-use OrganizationalFees\Application\Model\PromoCode;
-use OrganizationalFees\Application\Model\PromoCodeRepositoryInterface;
+use OrganizationalFees\Application\Model\PromoCode\PromoCode;
+use OrganizationalFees\Application\Model\PromoCode\PromoCodeRepositoryInterface;
 use OrganizationalFees\Domain\PromoCode\Model\Title;
 use Shared\Domain\Model\FestivalId;
 
 class PromoCodeRepository implements PromoCodeRepositoryInterface
 {
     public function __construct(
-        private EntityManagerInterface $em,
+        private readonly EntityManagerInterface $em,
     ) {
     }
 

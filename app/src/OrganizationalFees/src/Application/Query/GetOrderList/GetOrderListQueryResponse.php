@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace OrganizationalFees\Application\Query\GetOrderList;
 
-use OrganizationalFees\Application\Model\Order;
+use OrganizationalFees\Application\Model\Order\Order;
 use Shared\Domain\Bus\Query\QueryResponse;
 
 class GetOrderListQueryResponse implements QueryResponse

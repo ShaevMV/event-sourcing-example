@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace OrganizationalFees\Application\Query\GetOrderList;
 
-use OrganizationalFees\Application\Model\OrderRepositoryInterface;
+use OrganizationalFees\Application\Model\Order\OrderRepositoryInterface;
 use Shared\Domain\Bus\Query\QueryHandler;
 
 class GetOrderListQueryHandler implements QueryHandler

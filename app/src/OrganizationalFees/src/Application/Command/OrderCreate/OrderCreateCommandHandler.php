@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace OrganizationalFees\Application\Command\OrderCreate;
 
 use Auth\Domain\User\Model\UserId;
-use OrganizationalFees\Application\Model\PromoCodeRepositoryInterface;
+use OrganizationalFees\Application\Model\PromoCode\PromoCodeRepositoryInterface;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFeeRepositoryPersistence;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
 use OrganizationalFees\Domain\Order\Model\Order;

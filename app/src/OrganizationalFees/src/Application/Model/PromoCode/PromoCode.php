@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OrganizationalFees\Application\Model;
+namespace OrganizationalFees\Application\Model\PromoCode;
 
 class PromoCode
 {

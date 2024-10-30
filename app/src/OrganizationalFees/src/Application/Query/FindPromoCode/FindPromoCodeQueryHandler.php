@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace OrganizationalFees\Application\Query\FindPromoCode;
 
-use OrganizationalFees\Application\Model\PromoCodeRepositoryInterface;
+use OrganizationalFees\Application\Model\PromoCode\PromoCodeRepositoryInterface;
 use OrganizationalFees\Domain\PromoCode\Model\Title;
 use Shared\Domain\Bus\Query\QueryHandler;
 use Shared\Domain\Model\FestivalId;
