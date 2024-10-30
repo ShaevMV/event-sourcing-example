@@ -9,7 +9,6 @@ use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\ORM\EntityManagerInterface;
 use OrganizationalFees\Application\Model\Festival\Festival;
 use OrganizationalFees\Application\Model\Festival\FestivalRepositoryInterface;
-use DateTime;
 
 class FestivalRepository implements FestivalRepositoryInterface
 {
@@ -41,7 +40,7 @@ class FestivalRepository implements FestivalRepositoryInterface
     /**
      * @throws Exception
      */
-    public function getActiveFestival(DateTime $dateTimeNow): ?Festival
+    public function getActiveFestival(\DateTime $dateTimeNow): ?Festival
     {
         $qb = new QueryBuilder($this->em->getConnection());
         $dateTimeNowString = $dateTimeNow->format('Y-m-d H:i:s');

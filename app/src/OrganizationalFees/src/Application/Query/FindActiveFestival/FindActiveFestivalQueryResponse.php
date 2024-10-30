@@ -11,7 +11,6 @@ class FindActiveFestivalQueryResponse implements QueryResponse
 {
     public function __construct(
         public readonly ?Festival $festival = null,
-    )
-    {
+    ) {
     }
 }

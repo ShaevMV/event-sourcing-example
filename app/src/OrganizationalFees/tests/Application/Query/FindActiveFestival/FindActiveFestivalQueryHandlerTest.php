@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\OrganizationalFees\Application\Query\FindActiveFestival;
 
-use DateTime;
 use Doctrine\DBAL\Exception;
 use OrganizationalFees\Application\Query\FindActiveFestival\FindActiveFestivalQuery;
 use OrganizationalFees\Application\Query\FindActiveFestival\FindActiveFestivalQueryHandler;
@@ -26,7 +25,7 @@ class FindActiveFestivalQueryHandlerTest extends BaseTemplateTestCase
         /** @var FindActiveFestivalQueryHandler $handler */
         $handler = $this->get(FindActiveFestivalQueryHandler::class);
         $festival = $handler(new FindActiveFestivalQuery(
-            (new DateTime('now'))->format('Y-m-d H:i:s'),
+            (new \DateTime('now'))->format('Y-m-d H:i:s'),
         ));
         self::assertNotEmpty($festival->festival);
     }
