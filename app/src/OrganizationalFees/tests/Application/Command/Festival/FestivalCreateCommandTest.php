@@ -7,6 +7,7 @@ namespace Tests\OrganizationalFees\Application\Command\Festival;
 use Doctrine\DBAL\Exception;
 use OrganizationalFees\Application\Command\FestivalCreate\FestivalCreateCommand;
 use OrganizationalFees\Application\Command\FestivalCreate\FestivalCreateCommandHandler;
+use OrganizationalFees\Domain\Festival\Model\Festival;
 use OrganizationalFees\Domain\Festival\Model\FestivalId;
 use OrganizationalFees\Infrastructure\Repository\Domain\Festival\EventStory\EsFestivalRepositoryPersistence;
 use Shared\Infrastructure\Tests\PhpUnit\ReadModelTrait;
@@ -16,17 +17,11 @@ class FestivalCreateCommandTest extends BaseTemplateTestCase
 {
     use ReadModelTrait;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-        self::bootKernel();
-    }
-
     /**
      * @throws Exception
      * @throws \Exception
      */
-    public function testCreate(): void
+    public function testCreate(): Festival
     {
         /** @var EsFestivalRepositoryPersistence $persistence */
         $persistence = $this->get(EsFestivalRepositoryPersistence::class);
@@ -47,5 +42,7 @@ class FestivalCreateCommandTest extends BaseTemplateTestCase
 
         $rearModelResult = $this->getReadModel('festival', $id->value());
         self::assertNotEmpty($rearModelResult);
+
+        return $resultPersistence;
     }
 }

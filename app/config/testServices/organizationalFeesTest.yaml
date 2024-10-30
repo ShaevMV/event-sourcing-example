@@ -51,3 +51,6 @@ services:
 
   OrganizationalFees\Application\Query\GetArrangementFeeAllPriceList\GetArrangementFeeAllPriceListQueryHandler:
     public: true
+
+  OrganizationalFees\Application\Query\GetFestivalList\GetFestivalListQueryHandler:
+    public: true

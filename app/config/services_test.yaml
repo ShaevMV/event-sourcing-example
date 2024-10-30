@@ -16,5 +16,8 @@ services:
   Tests\OrganizationalFees\Application\Command\OrderCreate\OrderCreateCommandTest:
     public: true
 
+  Tests\OrganizationalFees\Application\Command\Festival\FestivalCreateCommandTest:
+    public: true
+
   Shared\Infrastructure\Tests\Doctrine\DatabaseArrangerInterface: '@DatabaseArranger'
 

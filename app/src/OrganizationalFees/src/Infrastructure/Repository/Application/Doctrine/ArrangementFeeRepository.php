@@ -11,7 +11,7 @@ use OrganizationalFees\Application\Model\ArrangementFee\ArrangementFee;
 use OrganizationalFees\Application\Model\ArrangementFee\ArrangementFeeRepositoryInterface;
 use Shared\Domain\Model\FestivalId;
 
-class ArrangementTypeRepository implements ArrangementFeeRepositoryInterface
+class ArrangementFeeRepository implements ArrangementFeeRepositoryInterface
 {
     public function __construct(
         private readonly EntityManagerInterface $em,
