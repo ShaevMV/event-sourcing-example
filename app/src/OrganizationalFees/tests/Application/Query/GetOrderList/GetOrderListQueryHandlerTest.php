@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Tests\OrganizationalFees\Application\Query\GetOrderList;
 
 use App\DataFixtures\UserFixture;
-use Exception;
 use OrganizationalFees\Application\Query\GetOrderList\GetOrderListQuery;
 use OrganizationalFees\Application\Query\GetOrderList\GetOrderListQueryHandler;
 use Shared\Domain\ValueObject\Status;
@@ -17,7 +16,7 @@ use Tests\OrganizationalFees\Constant\TestConstant;
 class GetOrderListQueryHandlerTest extends InfrastructureTestCase
 {
     /**
-     * @throws Exception
+     * @throws \Exception
      */
     public function testGetOrderList(): void
     {
