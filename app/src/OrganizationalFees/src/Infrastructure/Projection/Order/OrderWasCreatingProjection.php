@@ -41,7 +41,10 @@ class OrderWasCreatingProjection implements Projection
                 'type_arrangement_id' => $event->arrangementFeeId,
                 'status' => $event->status,
                 'price' => $event->price,
+                'total' => $event->total,
                 'promo_code' => $event->promoCode,
+                'discount' => $event->discount,
+                'festival_id' => $event->festivalId,
             ],
         );
     }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\OrganizationalFees\Application\Command\OrderCreate;
 
-use Auth\Domain\User\Model\UserId;
+use App\DataFixtures\UserFixture;
 use Doctrine\DBAL\Exception;
 use OrganizationalFees\Application\Command\OrderCreate\OrderCreateCommand;
 use OrganizationalFees\Application\Command\OrderCreate\OrderCreateCommandHandler;
@@ -42,7 +42,7 @@ class OrderCreateCommandTest extends InfrastructureTestCase
         $handler = $this->get(OrderCreateCommandHandler::class);
         $orderResponse = $handler(new OrderCreateCommand(
             ['test1', 'test2'],
-            UserId::random()->value(),
+            UserFixture::USER_ID,
             $arrangementFee->id()->value(),
             TestConstant::FESTIVAL_ID,
             $promoCode->getTitle()->value(),

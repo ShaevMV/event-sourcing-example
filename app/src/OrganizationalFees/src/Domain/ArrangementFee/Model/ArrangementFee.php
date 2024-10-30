@@ -17,7 +17,7 @@ class ArrangementFee extends AggregateRoot implements Aggregate, AggregateEventa
     protected readonly ArrangementPriceList $price;
 
     protected readonly ArrangementName $name;
-    protected readonly FestivalId $festivalId;
+    public readonly FestivalId $festivalId;
 
     public static function create(
         string $name,

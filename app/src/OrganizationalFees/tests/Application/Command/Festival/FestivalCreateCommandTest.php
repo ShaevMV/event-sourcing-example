@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\OrganizationalFees\Application\Command\Festival;
 
 use Doctrine\DBAL\Exception;
@@ -21,8 +23,8 @@ class FestivalCreateCommandTest extends BaseTemplateTestCase
     }
 
     /**
-     * @throws \DateMalformedStringException
      * @throws Exception
+     * @throws \Exception
      */
     public function testCreate(): void
     {

@@ -19,11 +19,18 @@ class OrderApprovedCommandHandler implements CommandHandler
     public function __invoke(OrderApprovedCommand $orderApprovedCommand): OrderApprovedCommandResponse
     {
         $order = $this->orderRepositoryPersistence->ofId(OrderId::fromString($orderApprovedCommand->orderId));
-        $order->approved(UserId::fromString($orderApprovedCommand->userId));
-        $this->orderRepositoryPersistence->persist($order);
+        try {
+            $order->approved(UserId::fromString($orderApprovedCommand->userId));
+            $this->orderRepositoryPersistence->persist($order);
 
-        return new OrderApprovedCommandResponse(
-            true
-        );
+            return new OrderApprovedCommandResponse(
+                true
+            );
+        } catch (\DomainException $errorDomainException) {
+            return new OrderApprovedCommandResponse(
+                false,
+                $errorDomainException->getMessage()
+            );
+        }
     }
 }

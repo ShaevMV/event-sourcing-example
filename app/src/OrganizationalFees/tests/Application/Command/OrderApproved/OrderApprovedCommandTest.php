@@ -44,11 +44,15 @@ class OrderApprovedCommandTest extends InfrastructureTestCase
 
         self::assertEquals(Status::APPROVED, $order->getStatus()->status->value());
         self::assertEquals($userId, $order->getStatus()->userModified->value());
-        self::assertNotEmpty($orderOld->getStatus()->userModified->value(), $order->getStatus()->userModified->value());
+        self::assertNotEquals($orderOld->getStatus()->userModified->value(), $order->getStatus()->userModified->value());
 
         $this->consumer();
         $orderArr = $this->getReadModel('"order"', $order->id()->value());
 
         self::assertEquals(Status::APPROVED, $orderArr['status']);
+
+        $orderResponse = $handler(new OrderApprovedCommand($orderOld->id()->value(), $userId));
+        self::assertFalse($orderResponse->success);
+        self::assertNotEmpty($orderResponse->message);
     }
 }

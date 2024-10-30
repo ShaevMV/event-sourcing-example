@@ -23,9 +23,9 @@ final class Version20240319121922 extends AbstractMigration
         CREATE TABLE IF NOT EXISTS public.order
         (
             id uuid NOT NULL,
-            user_id character varying NOT NULL,
+            user_id uuid NOT NULL,
             guest jsonb NOT NULL default '[]',
-            type_arrangement_id character varying NOT NULL,
+            type_arrangement_id uuid NOT NULL,
             status varchar(255) default 'new',
             created_at timestamp without time zone default NOW(),
             updated_at timestamp without time zone default NOW(),

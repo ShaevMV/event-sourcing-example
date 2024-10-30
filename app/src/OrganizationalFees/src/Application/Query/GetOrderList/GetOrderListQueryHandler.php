@@ -16,7 +16,7 @@ class GetOrderListQueryHandler implements QueryHandler
 
     public function __invoke(GetOrderListQuery $query): GetOrderListQueryResponse
     {
-        $orderList = $this->arrangementFeeRepository->getOrderList();
+        $orderList = $this->arrangementFeeRepository->getOrderList($query);
 
         return new GetOrderListQueryResponse($orderList);
     }

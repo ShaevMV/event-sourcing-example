@@ -16,7 +16,5 @@ services:
   Tests\OrganizationalFees\Application\Command\OrderCreate\OrderCreateCommandTest:
     public: true
 
-
-
   Shared\Infrastructure\Tests\Doctrine\DatabaseArrangerInterface: '@DatabaseArranger'
 

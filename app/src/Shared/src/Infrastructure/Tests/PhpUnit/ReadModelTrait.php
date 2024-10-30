@@ -18,7 +18,7 @@ trait ReadModelTrait
     {
         /** @var Connection $connect */
         $connect = $this->get(Connection::class);
-        $result = $connect->executeQuery("SELECT * FROM $table WHERE id = '{$id}'")->fetchAssociative();
+        $result = $connect->executeQuery("SELECT * FROM $table WHERE id = '$id'")->fetchAssociative();
 
         return false === $result ? [] : $result;
     }

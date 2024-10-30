@@ -23,6 +23,7 @@ final class Version20240320080919 extends AbstractMigration
         ALTER TABLE public.order 
             ADD COLUMN discount integer DEFAULT 0,
             ADD COLUMN price integer,
+            ADD COLUMN total integer,
             ADD promo_code varchar DEFAULT '',
             ADD festival_id uuid;
 SQL;

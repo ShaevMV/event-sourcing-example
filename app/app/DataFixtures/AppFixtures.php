@@ -10,20 +10,30 @@ use Doctrine\Persistence\ObjectManager;
 class AppFixtures extends Fixture
 {
     public function __construct(
-        private readonly Connection $connection,
+        private readonly Connection  $connection,
+
+        private readonly UserFixture $userFixtures,
+
     )
     {
     }
 
     /**
      * @throws Exception
+     * @throws \DateMalformedStringException
      */
     public function load(ObjectManager $manager): void
     {
         //$this->dropData();
         // $product = new Product();
         // $manager->persist($product);
+        $this->connection->beginTransaction();
+
+        $this->userFixtures->load($manager);
+
         $manager->flush();
+
+        $this->connection->commit();
     }
 
     /**

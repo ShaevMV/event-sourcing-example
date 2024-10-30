@@ -14,7 +14,7 @@ class Status extends Keyword
 
     public function isCorrectNextStatus(Status $status): bool
     {
-        return match ($status->value()) {
+        return match ($this->value()) {
             self::NEW => self::APPROVED === $status->value(),
             self::APPROVED => self::CANCEL === $status->value(),
             default => throw new Exception('Unexpected match value'),

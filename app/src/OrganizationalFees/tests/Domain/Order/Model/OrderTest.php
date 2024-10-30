@@ -72,7 +72,7 @@ class OrderTest extends BaseKernelTestCase
         );
         $this->assertEquals(100, $order->price);
         $this->assertEquals(100, $order->discount);
-        $this->assertEquals(0, $order->total);
+        $this->assertEquals(100, $order->total);
 
         return $order;
     }

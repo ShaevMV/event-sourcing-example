@@ -15,6 +15,7 @@ class Order
         public readonly string $userId,
         public readonly string $status,
         public readonly int $price,
+        public readonly int $total,
         public readonly string $promoCode = '',
         public readonly int $discount = 0,
     ) {

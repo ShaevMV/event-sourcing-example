@@ -12,6 +12,7 @@ use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
 use OrganizationalFees\Infrastructure\Repository\Domain\ArrangementFee\EventStory\EsArrangementFeeRepositoryPersistence;
 use Shared\Infrastructure\Tests\PhpUnit\InfrastructureTestCase;
 use Shared\Infrastructure\Tests\PhpUnit\ReadModelTrait;
+use Tests\OrganizationalFees\Constant\TestConstant;
 
 class AddArrangementFeeCommandHandlerTest extends InfrastructureTestCase
 {
@@ -19,6 +20,7 @@ class AddArrangementFeeCommandHandlerTest extends InfrastructureTestCase
 
     /**
      * @throws Exception
+     * @throws \Exception
      */
     public function testCreate(): ArrangementFee
     {
@@ -29,7 +31,7 @@ class AddArrangementFeeCommandHandlerTest extends InfrastructureTestCase
         $handler = $this->get(AddArrangementFeeCommandHandler::class);
         $handlerResponse = $handler(new AddArrangementFeeCommand(
             'test',
-            ArrangementId::random()->value(),
+            TestConstant::FESTIVAL_ID,
             1000
         ));
         $resultPersistence = $persistence->ofId(ArrangementId::fromString($handlerResponse->id));

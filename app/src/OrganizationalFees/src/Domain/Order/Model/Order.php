@@ -7,6 +7,7 @@ namespace OrganizationalFees\Domain\Order\Model;
 use Auth\Domain\User\Model\UserId;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFee;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
+use OrganizationalFees\Domain\Festival\Model\FestivalId;
 use OrganizationalFees\Domain\Order\Event\OrderWasApproved;
 use OrganizationalFees\Domain\Order\Event\OrderWasCreating;
 use OrganizationalFees\Domain\PromoCode\Model\PromoCode;
@@ -30,6 +31,7 @@ class Order extends AggregateRoot implements Aggregate, AggregateEventable, Aggr
     public readonly int $price;
     public readonly int $discount;
     public readonly int $total;
+    public readonly FestivalId $festivalId;
 
     public static function create(
         array $guestNames,
@@ -41,27 +43,22 @@ class Order extends AggregateRoot implements Aggregate, AggregateEventable, Aggr
 
         $promoCode?->validateCountAchievedLimit();
 
+        $totalPrice = $arrangementFee->getPrice(time()) * count($guestNames);
+        $totalPriceDiscount = $promoCode?->calculateDiscount($totalPrice);
+
         $order->recordAndApply(new OrderWasCreating(
             $order->id()->value(),
             $guestNames,
             $userId->value(),
             $arrangementFee->id()->value(),
             $arrangementFee->getPrice(time()),
-            $order->calculateTotal(
-                $arrangementFee->getPrice(time()),
-                count($guestNames),
-                $promoCode?->getDiscount()->value() ?? 0
-            ),
-            $promoCode?->getDiscount()->value() ?? 0,
+            null !== $totalPriceDiscount ? $totalPrice - $totalPriceDiscount : $totalPrice,
+            $arrangementFee->festivalId->value(),
+            $totalPriceDiscount ?? 0,
             $promoCode?->getTitle()->value() ?? null,
         ));
 
         return $order;
-    }
-
-    private function calculateTotal(int $price, int $count, int $discount = 0): int
-    {
-        return ($price * $count) - ($count * $discount);
     }
 
     public function onOrderWasCreating(OrderWasCreating $orderWasCreating): void
@@ -75,15 +72,20 @@ class Order extends AggregateRoot implements Aggregate, AggregateEventable, Aggr
         $this->price = $orderWasCreating->price;
         $this->promoCode = ($orderWasCreating->promoCode ?? false) ? new Title($orderWasCreating->promoCode) : null;
         $this->discount = $orderWasCreating->discount;
+        $this->festivalId = new FestivalId($orderWasCreating->festivalId);
         $this->total = $orderWasCreating->total;
     }
 
     public function approved(UserId $userId): self
     {
-        $this->recordAndApply(new OrderWasApproved(
-            $this->id->value(),
-            $userId->value(),
-        ));
+        if ($this->status->status->isCorrectNextStatus(new Status(Status::APPROVED))) {
+            $this->recordAndApply(new OrderWasApproved(
+                $this->id->value(),
+                $userId->value(),
+            ));
+        } else {
+            throw new \DomainException("Нельзя перевести заказ с {$this->status->status->value()} в ".Status::APPROVED);
+        }
 
         return $this;
     }

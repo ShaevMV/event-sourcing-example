@@ -94,4 +94,14 @@ class PromoCode extends AggregateRoot implements Aggregate, AggregateEventable, 
     {
         return $this->title;
     }
+
+    public function calculateDiscount(int $totalPrice): int
+    {
+        $discount = $this->discount->value();
+        if (Sing::PERCENT === $this->promoCodeSing->value()) {
+            return (int) ($this->discount->value() / 100) * $totalPrice;
+        }
+
+        return $discount;
+    }
 }

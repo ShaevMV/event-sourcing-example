@@ -20,6 +20,7 @@ class OrderWasCreating extends Event
         public readonly string $arrangementFeeId,
         public readonly int $price,
         public readonly int $total,
+        public readonly string $festivalId,
         public readonly int $discount = 0,
         public readonly ?string $promoCode = null,
         public readonly string $status = Status::NEW,

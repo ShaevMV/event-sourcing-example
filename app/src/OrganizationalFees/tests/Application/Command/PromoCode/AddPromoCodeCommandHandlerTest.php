@@ -20,6 +20,7 @@ class AddPromoCodeCommandHandlerTest extends InfrastructureTestCase
 {
     use ReadModelTrait;
     public const DISCOUNT = 100;
+    public const TITLE = 'test';
 
     private EsPromoCodeRepositoryPersistence $persistence;
 
@@ -27,6 +28,7 @@ class AddPromoCodeCommandHandlerTest extends InfrastructureTestCase
      * @throws ValidateException
      * @throws PromoCodeSingDontCorrectException
      * @throws Exception
+     * @throws \Exception
      */
     public function testCreate(): PromoCode
     {
