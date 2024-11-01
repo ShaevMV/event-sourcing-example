@@ -34,6 +34,8 @@ class FestivalRepository implements FestivalRepositoryInterface
             $festival['date_end'],
             $festival['pdf_template'],
             $festival['mail_template'],
+            $festival['created_at'],
+            $festival['updated_at'],
         ), $festivalList);
     }
 

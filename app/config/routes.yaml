@@ -1,3 +1,7 @@
-controllers:
+auth:
     resource: ../src/Auth/src/Infrastructure/Http/Controller/
+    type: attribute
+
+festival:
+    resource: ../src/OrganizationalFees/src/Infrastructure/Http/Controller/
     type: attribute
