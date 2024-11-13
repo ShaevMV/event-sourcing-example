@@ -8,8 +8,7 @@ class WorkerProjectionMessage
 {
     public function __construct(
         private readonly string $serialize,
-    )
-    {
+    ) {
     }
 
     public function getSerialize(): string

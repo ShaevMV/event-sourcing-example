@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace OrganizationalFees\Application\Command\FestivalCreate;
 
-use DateMalformedStringException;
-use DateTimeImmutable;
 use OrganizationalFees\Domain\Festival\Model\Festival;
 use OrganizationalFees\Domain\Festival\Model\FestivalRepositoryPersistence;
 use Shared\Domain\Bus\Command\CommandHandler;
@@ -18,14 +16,14 @@ class FestivalCreateCommandHandler implements CommandHandler
     }
 
     /**
-     * @throws DateMalformedStringException
+     * @throws \DateMalformedStringException
      */
     public function __invoke(FestivalCreateCommand $command): FestivalCreateCommandResponse
     {
         $festival = Festival::create(
             $command->name,
-            new DateTimeImmutable($command->dateStart),
-            new DateTimeImmutable($command->dateEnd),
+            new \DateTimeImmutable($command->dateStart),
+            new \DateTimeImmutable($command->dateEnd),
             $command->pdfTemplate,
             $command->mailTemplate,
         );

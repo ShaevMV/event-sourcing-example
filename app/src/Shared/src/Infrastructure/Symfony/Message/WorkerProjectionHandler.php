@@ -11,6 +11,5 @@ class WorkerProjectionHandler
 {
     public function __invoke(WorkerProjectionMessage $message): void
     {
-
     }
 }

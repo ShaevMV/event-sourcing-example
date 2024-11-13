@@ -13,7 +13,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 #[Route('/festival', name: 'festival')]
@@ -22,10 +21,8 @@ class FestivalController extends AbstractController
     public function __construct(
         private readonly ValidatorInterface $validator,
         private readonly SerializerService $serializer,
-    )
-    {
+    ) {
     }
-
 
     /**
      * @throws \DateMalformedStringException
@@ -50,12 +47,10 @@ class FestivalController extends AbstractController
             ]);
         }
 
-
         $errors = $this->validator->validate($command);
-        $errorArray = array();
+        $errorArray = [];
 
-        foreach($errors as $error)
-        {
+        foreach ($errors as $error) {
             $errorArray[$error->getPropertyPath()] = $error->getMessage();
         }
 
@@ -69,7 +64,6 @@ class FestivalController extends AbstractController
         $response = $commandHandler($command);
 
         return new JsonResponse($response);
-
     }
 
     #[Route('/getList', name: 'festival_get_list', methods: 'GET')]

@@ -30,7 +30,7 @@ class FestivalCreateCommandTest extends BaseTemplateTestCase
         $handlerResponse = $handler(new FestivalCreateCommand(
             'test',
             (new \DateTimeImmutable())->format('Y-m-d'),
-            ((new \DateTimeImmutable())->modify('+1 day'))->format('Y-m-d'),
+            (new \DateTimeImmutable())->modify('+1 day')->format('Y-m-d'),
             $this->getFile(self::TEMPLATE_MAIL)->getContent(),
             $this->getFile(self::TEMPLATE_PDF)->getContent(),
         ));

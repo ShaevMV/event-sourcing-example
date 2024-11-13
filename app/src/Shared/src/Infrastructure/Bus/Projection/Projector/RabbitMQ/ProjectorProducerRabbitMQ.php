@@ -12,12 +12,10 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 class ProjectorProducerRabbitMQ implements Projector
 {
-
     public function __construct(
         private readonly MessageBusInterface $messageBus,
         protected readonly Serializer $serializer,
-    )
-    {
+    ) {
     }
 
     public function project(EventStream $eventStream): void
