@@ -54,28 +54,14 @@ services:
     networks:
       - default
 
-  pgadmin:
-    container_name: ${APP_NAME}-pgadmin
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: 'v.timofeev@iqdev.digital'
-      PGADMIN_DEFAULT_PASSWORD: root
-      PGADMIN_CONFIG_SERVER_MODE: 'False'
+  rabbitmq:
+    image: rabbitmq:3.10.7-management
+    hostname: rabbitmq
+    restart: always
     volumes:
-      - ./data/pgadmin:/var/lib/pgadmin
+      - ./data/rabbitmq:/var/lib/rabbitmq
     ports:
-      - "${INFRA_PGADMIN_PORT:-5050}:80"
-    restart: unless-stopped
-    networks:
-      - default
-
-  redis:
-    image: bitnami/redis:latest
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    volumes:
-      - ./data/redis:/bitnami/redis/data
-    ports:
-      - "${INFRA_REDIS_PORT:-6379}:6379"
+      - "5672:5672"
+      - "${INFRA_AMQP_PORT:-15672}:15672"
     networks:
       - default

@@ -1,0 +1,32 @@
+POST http://localhost:{{PORT}}/festival/create
+Content-Type: application/json
+
+{
+    "name": "test",
+    "dateStart": "2024-01-01",
+    "dateEnd": "2024-12-31",
+    "mailTemplate": "textMail",
+    "pdfTemplate": "textPdf"
+}
+
+###
+
+POST http://localhost:{{PORT}}/auth/login/
+Content-Type: application/json
+
+{
+    "username": "somebody",
+    "password": "qwerty123"
+}
+
+###
+
+POST http://localhost:{{PORT}}/auth/change_password/
+Content-Type: application/json
+Authorization: Bearer {{TOKEN}}
+
+{
+    "new_password": "qwerty123"
+}
+
+

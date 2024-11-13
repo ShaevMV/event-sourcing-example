@@ -44,7 +44,7 @@ services:
 
   Shared\Infrastructure\Tests\Doctrine\DatabaseCleaner: '@Shared\Infrastructure\Tests\Doctrine\PgsqlDatabaseCleaner'
 
-  Shared\Domain\Bus\Projection\Projector: '@Shared\Infrastructure\Bus\Projection\Projector\Redis\ProjectorProducer'
+  Shared\Domain\Bus\Projection\Projector: '@Shared\Infrastructure\Bus\Projection\Projector\RabbitMQ\ProjectorProducerRabbitMQ'
 
   Shared\Domain\Bus\Event\Deserializer: '@Shared\Infrastructure\Bus\Event\Serializer\JMS\JMSSerializer'
 

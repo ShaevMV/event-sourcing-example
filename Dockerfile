@@ -35,16 +35,18 @@ RUN RUNTIME_DEPS="tini fcgi"; \
     apk add --no-cache --upgrade ${RUNTIME_DEPS} ${SECURITY_UPGRADES}
 
 # ---------------------------------------- Install / Enable PHP Extensions ---------------------------------------------
-
-
 RUN apk add --no-cache --virtual .build-deps \
       $PHPIZE_DEPS  \
       libzip-dev    \
       icu-dev       \
+      rabbitmq-c  \
+      rabbitmq-c-dev \
+      autoconf      \
       libpq-dev     \
  # PHP Extensions --------------------------------- \
  && docker-php-ext-install -j$(nproc) \
       intl        \
+      sockets     \
       opcache     \
       zip         \
       pdo_pgsql   \
@@ -72,7 +74,12 @@ RUN apk add --no-cache --virtual .build-deps \
 		# check for output like "PHP Warning:  PHP Startup: Unable to load dynamic library 'foo' (tried: ...)
 		err="$(php --version 3>&1 1>&2 2>&3)"; 	[ -z "$err" ]
 # -----------------------------------------------
-
+RUN apk --update upgrade \
+    && apk add --no-cache autoconf automake make gcc g++ git bash icu-dev libzip-dev rabbitmq-c rabbitmq-c-dev linux-headers
+RUN apk add autoconf
+RUN pecl install amqp \
+        && rm -rf /tmp/pear \
+        && docker-php-ext-enable amqp
 # ------------------------------------------------- Permissions --------------------------------------------------------
 
 # - Clean bundled config/users & recreate them with UID 1000 for docker compatability in dev container.

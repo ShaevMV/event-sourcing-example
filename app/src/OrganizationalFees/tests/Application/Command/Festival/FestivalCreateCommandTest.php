@@ -29,10 +29,10 @@ class FestivalCreateCommandTest extends BaseTemplateTestCase
         $handler = $this->get(FestivalCreateCommandHandler::class);
         $handlerResponse = $handler(new FestivalCreateCommand(
             'test',
-            new \DateTime(),
-            (new \DateTime())->modify('+1 day'),
-            $this->getFile(self::TEMPLATE_MAIL),
-            $this->getFile(self::TEMPLATE_PDF),
+            (new \DateTimeImmutable())->format('Y-m-d'),
+            ((new \DateTimeImmutable())->modify('+1 day'))->format('Y-m-d'),
+            $this->getFile(self::TEMPLATE_MAIL)->getContent(),
+            $this->getFile(self::TEMPLATE_PDF)->getContent(),
         ));
         $resultPersistence = $persistence->ofId(FestivalId::fromString($handlerResponse->id));
         $id = FestivalId::fromString($handlerResponse->id);

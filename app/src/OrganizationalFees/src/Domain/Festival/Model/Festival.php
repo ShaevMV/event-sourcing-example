@@ -13,15 +13,15 @@ use Shared\Domain\Aggregate\AggregateRoot;
 class Festival extends AggregateRoot implements Aggregate, AggregateEventable, AggregateReconstructable
 {
     private FestivalName $name;
-    private FestivalDateStart $dateStart;
-    private FestivalDateEnd $dateEnd;
+    private FestivalDateStartImmutable $dateStart;
+    private FestivalDateEndImmutable $dateEnd;
     private FestivalMailTemplate $mailTemplate;
     private FestivalPdfTemplate $pdfTemplate;
 
     public static function create(
         string $name,
-        \DateTime $dateStart,
-        \DateTime $dateEnd,
+        \DateTimeImmutable $dateStart,
+        \DateTimeImmutable $dateEnd,
         string $pdfTemplate,
         string $mailTemplate,
     ): self {
@@ -44,8 +44,8 @@ class Festival extends AggregateRoot implements Aggregate, AggregateEventable, A
         $this->id = FestivalId::fromString($festivalWasCreating->getAggregateId());
         $this->name = FestivalName::fromString($festivalWasCreating->name);
 
-        $this->dateStart = new FestivalDateStart($festivalWasCreating->dateStart);
-        $this->dateEnd = new FestivalDateEnd($festivalWasCreating->dateEnd);
+        $this->dateStart = new FestivalDateStartImmutable($festivalWasCreating->dateStart);
+        $this->dateEnd = new FestivalDateEndImmutable($festivalWasCreating->dateEnd);
 
         $this->mailTemplate = FestivalMailTemplate::fromString($festivalWasCreating->mailTemplate);
         $this->pdfTemplate = FestivalPdfTemplate::fromString($festivalWasCreating->pdfTemplate);

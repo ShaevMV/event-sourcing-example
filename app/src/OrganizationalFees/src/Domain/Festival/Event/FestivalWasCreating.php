@@ -11,8 +11,8 @@ class FestivalWasCreating extends Event
     public function __construct(
         string $aggregateId,
         public readonly string $name,
-        public readonly \DateTime $dateStart,
-        public readonly \DateTime $dateEnd,
+        public readonly \DateTimeImmutable $dateStart,
+        public readonly \DateTimeImmutable $dateEnd,
         public readonly string $pdfTemplate,
         public readonly string $mailTemplate,
     ) {
