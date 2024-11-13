@@ -4,6 +4,7 @@
     "prefer-stable": true,
     "require": {
         "php": ">=8.1",
+        "ext-amqp": "*",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/doctrine-bundle": "^2.7",
@@ -13,7 +14,7 @@
         "lexik/jwt-authentication-bundle": "2.*",
         "ramsey/uuid": "^4.7",
         "symfony-bundles/redis-bundle": "^3.1",
-        "symfony/amqp-messenger": "6.1.*",
+        "symfony/amqp-messenger": "6.3.*",
         "symfony/cache": "6.1.*",
         "symfony/console": "6.1.*",
         "symfony/dotenv": "6.1.*",

@@ -19,16 +19,13 @@ class ProjectorConsumer
      * @param Projection[] $projections
      */
     public function __construct(
-        iterable $projections,
-        protected readonly ClientInterface $client,
-        protected readonly Deserializer $deserializer,
-        protected readonly string $queueName = 'projection_event',
+      //  iterable $projections,
     ) {
-        foreach ($projections as $projection) {
+       /* foreach ($projections as $projection) {
             foreach ($projection->listenTo() as $classEvent) {
                 $this->projections[$classEvent][] = $projection;
             }
-        }
+        }*/
     }
 
     public function consume(): void
@@ -36,6 +33,7 @@ class ProjectorConsumer
         /*
          * @psalm-suppress MixedAssignment
          */
+        /*
         while ($data = $this->client->lpop($this->queueName)) {
             try {
                 $event = $this->deserializer->deserialize((string) $data);
@@ -50,6 +48,6 @@ class ProjectorConsumer
                 }
             } catch (\Exception $exception) {
             }
-        }
+        } */
     }
 }

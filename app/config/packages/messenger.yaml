@@ -4,14 +4,18 @@ framework:
         # failure_transport: failed
 
         transports:
-            # https://symfony.com/doc/current/messenger.html#transport-configuration
-            async: '%env(MESSENGER_TRANSPORT_DSN)%'
-            # failed: 'doctrine://default?queue_name=failed'
-            # sync: 'sync://'
+            projection_event:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                options:
+                    exchange:
+                        name: projection.event
+                        type: direct
+                    queues:
+                        projection.event: ~
 
         routing:
             # Route your messages to the transports
-            'Shared\Infrastructure\Symfony\Message\WorkerProjectionMessage': async
+            'Shared\Infrastructure\Symfony\Message\WorkerProjectionMessage': projection_event
 
 # when@test:
 #    framework:
