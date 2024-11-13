@@ -6,7 +6,6 @@ namespace Shared\Infrastructure\Bus\Projection\Projector\Redis;
 
 use Shared\Domain\Bus\Event\Deserializer;
 use Shared\Domain\Bus\Projection\Projection;
-use SymfonyBundles\RedisBundle\Redis\ClientInterface;
 
 class ProjectorConsumer
 {
@@ -15,17 +14,14 @@ class ProjectorConsumer
      */
     private array $projections = [];
 
-    /**
-     * @param Projection[] $projections
-     */
     public function __construct(
-      //  iterable $projections,
+        //  iterable $projections,
     ) {
-       /* foreach ($projections as $projection) {
-            foreach ($projection->listenTo() as $classEvent) {
-                $this->projections[$classEvent][] = $projection;
-            }
-        }*/
+        /* foreach ($projections as $projection) {
+             foreach ($projection->listenTo() as $classEvent) {
+                 $this->projections[$classEvent][] = $projection;
+             }
+         }*/
     }
 
     public function consume(): void
