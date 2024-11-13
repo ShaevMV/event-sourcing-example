@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tests\OrganizationalFees\Application\Query\FindActiveFestival;
 
 use Doctrine\DBAL\Exception;
-use OrganizationalFees\Application\Query\FindActiveFestival\FindActiveFestivalQuery;
-use OrganizationalFees\Application\Query\FindActiveFestival\FindActiveFestivalQueryHandler;
+use OrganizationalFees\Application\Query\Festival\FindActiveFestival\FindActiveFestivalQuery;
+use OrganizationalFees\Application\Query\Festival\FindActiveFestival\FindActiveFestivalQueryHandler;
 use Tests\OrganizationalFees\Application\Command\Festival\FestivalCreateCommandTest;
 use Tests\OrganizationalFees\Infrastructure\Service\Template\BaseTemplateTestCase;
 

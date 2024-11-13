@@ -3,8 +3,8 @@
 namespace Tests\OrganizationalFees\Application\Command\UpdatePrice;
 
 use Doctrine\DBAL\Exception;
-use OrganizationalFees\Application\Command\UpdatePrice\UpdatePriceCommand;
-use OrganizationalFees\Application\Command\UpdatePrice\UpdatePriceCommandHandler;
+use OrganizationalFees\Application\Command\ArrangementFee\UpdatePrice\UpdatePriceCommand;
+use OrganizationalFees\Application\Command\ArrangementFee\UpdatePrice\UpdatePriceCommandHandler;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
 use OrganizationalFees\Infrastructure\Repository\Domain\ArrangementFee\EventStory\EsArrangementFeeRepositoryPersistence;
 use Shared\Infrastructure\Tests\PhpUnit\InfrastructureTestCase;

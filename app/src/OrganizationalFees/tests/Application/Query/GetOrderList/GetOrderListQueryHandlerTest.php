@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tests\OrganizationalFees\Application\Query\GetOrderList;
 
 use App\DataFixtures\UserFixture;
-use OrganizationalFees\Application\Query\GetOrderList\GetOrderListQuery;
-use OrganizationalFees\Application\Query\GetOrderList\GetOrderListQueryHandler;
+use OrganizationalFees\Application\Query\Order\GetOrderList\GetOrderListQuery;
+use OrganizationalFees\Application\Query\Order\GetOrderList\GetOrderListQueryHandler;
 use Shared\Domain\ValueObject\Status;
 use Shared\Infrastructure\Tests\PhpUnit\InfrastructureTestCase;
 use Tests\OrganizationalFees\Application\Command\OrderCreate\OrderCreateCommandTest;

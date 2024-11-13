@@ -6,8 +6,8 @@ namespace Tests\OrganizationalFees\Application\Command\OrderApproved;
 
 use Auth\Domain\User\Model\UserId;
 use Doctrine\DBAL\Exception;
-use OrganizationalFees\Application\Command\OrderApproved\OrderApprovedCommand;
-use OrganizationalFees\Application\Command\OrderApproved\OrderApprovedCommandHandler;
+use OrganizationalFees\Application\Command\Order\OrderApproved\OrderApprovedCommand;
+use OrganizationalFees\Application\Command\Order\OrderApproved\OrderApprovedCommandHandler;
 use OrganizationalFees\Domain\Order\Model\OrderId;
 use OrganizationalFees\Domain\Order\Model\OrderRepositoryPersistence;
 use OrganizationalFees\Domain\PromoCode\Exception\PromoCodeSingDontCorrectException;

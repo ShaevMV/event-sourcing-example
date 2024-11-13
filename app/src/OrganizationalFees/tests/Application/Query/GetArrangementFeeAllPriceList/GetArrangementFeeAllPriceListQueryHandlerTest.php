@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tests\OrganizationalFees\Application\Query\GetArrangementFeeAllPriceList;
 
 use Doctrine\DBAL\Exception;
-use OrganizationalFees\Application\Query\GetArrangementFeeAllPriceList\GetArrangementFeeAllPriceListQuery;
-use OrganizationalFees\Application\Query\GetArrangementFeeAllPriceList\GetArrangementFeeAllPriceListQueryHandler;
+use OrganizationalFees\Application\Query\ArrangementFee\GetArrangementFeeAllPriceList\GetArrangementFeeAllPriceListQuery;
+use OrganizationalFees\Application\Query\ArrangementFee\GetArrangementFeeAllPriceList\GetArrangementFeeAllPriceListQueryHandler;
 use Shared\Infrastructure\Tests\PhpUnit\InfrastructureTestCase;
 use Tests\OrganizationalFees\Application\Command\UpdatePrice\UpdatePriceCommandHandlerTest;
 use Tests\OrganizationalFees\Constant\TestConstant;

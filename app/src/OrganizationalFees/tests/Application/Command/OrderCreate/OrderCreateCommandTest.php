@@ -6,8 +6,8 @@ namespace Tests\OrganizationalFees\Application\Command\OrderCreate;
 
 use App\DataFixtures\UserFixture;
 use Doctrine\DBAL\Exception;
-use OrganizationalFees\Application\Command\OrderCreate\OrderCreateCommand;
-use OrganizationalFees\Application\Command\OrderCreate\OrderCreateCommandHandler;
+use OrganizationalFees\Application\Command\Order\OrderCreate\OrderCreateCommand;
+use OrganizationalFees\Application\Command\Order\OrderCreate\OrderCreateCommandHandler;
 use OrganizationalFees\Domain\Order\Model\Order;
 use OrganizationalFees\Domain\Order\Model\OrderId;
 use OrganizationalFees\Domain\Order\Model\OrderRepositoryPersistence;

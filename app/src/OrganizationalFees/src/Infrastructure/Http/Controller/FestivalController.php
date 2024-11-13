@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace OrganizationalFees\Infrastructure\Http\Controller;
 
-use OrganizationalFees\Application\Command\FestivalCreate\FestivalCreateCommand;
-use OrganizationalFees\Application\Command\FestivalCreate\FestivalCreateCommandHandler;
-use OrganizationalFees\Application\Query\GetFestivalList\GetFestivalListQuery;
-use OrganizationalFees\Application\Query\GetFestivalList\GetFestivalListQueryHandler;
-use Shared\Infrastructure\Symfony\Serializer\SerializerService;
+use OrganizationalFees\Application\Command\Festival\FestivalCreate\FestivalCreateCommand;
+use OrganizationalFees\Application\Command\Festival\FestivalCreate\FestivalCreateCommandHandler;
+use OrganizationalFees\Application\Query\Festival\GetFestivalList\GetFestivalListQuery;
+use OrganizationalFees\Application\Query\Festival\GetFestivalList\GetFestivalListQueryHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +19,6 @@ class FestivalController extends AbstractController
 {
     public function __construct(
         private readonly ValidatorInterface $validator,
-        private readonly SerializerService $serializer,
     ) {
     }
 
@@ -68,6 +66,14 @@ class FestivalController extends AbstractController
 
     #[Route('/getList', name: 'festival_get_list', methods: 'GET')]
     public function getList(Request $request, GetFestivalListQueryHandler $handler): JsonResponse
+    {
+        return new JsonResponse(
+            $handler(new GetFestivalListQuery())
+        );
+    }
+
+    #[Route('/find', name: 'festival_find', methods: 'GET')]
+    public function find(Request $request, GetFestivalListQueryHandler $handler): JsonResponse
     {
         return new JsonResponse(
             $handler(new GetFestivalListQuery())

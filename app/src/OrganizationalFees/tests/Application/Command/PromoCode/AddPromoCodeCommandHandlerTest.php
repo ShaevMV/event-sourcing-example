@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tests\OrganizationalFees\Application\Command\PromoCode;
 
 use Doctrine\DBAL\Exception;
-use OrganizationalFees\Application\Command\AddPromoCode\AddPromoCodeCommand;
-use OrganizationalFees\Application\Command\AddPromoCode\AddPromoCodeCommandHandler;
+use OrganizationalFees\Application\Command\PromoCode\AddPromoCode\AddPromoCodeCommand;
+use OrganizationalFees\Application\Command\PromoCode\AddPromoCode\AddPromoCodeCommandHandler;
 use OrganizationalFees\Domain\PromoCode\Exception\PromoCodeSingDontCorrectException;
 use OrganizationalFees\Domain\PromoCode\Model\PromoCode;
 use OrganizationalFees\Domain\PromoCode\Model\PromoCodeId;

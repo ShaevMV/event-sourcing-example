@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tests\OrganizationalFees\Application\Query\FindPromoCode;
 
 use Doctrine\DBAL\Exception;
-use OrganizationalFees\Application\Query\FindPromoCode\FindPromoCodeQuery;
-use OrganizationalFees\Application\Query\FindPromoCode\FindPromoCodeQueryHandler;
+use OrganizationalFees\Application\Query\PromoCode\FindPromoCode\FindPromoCodeQuery;
+use OrganizationalFees\Application\Query\PromoCode\FindPromoCode\FindPromoCodeQueryHandler;
 use OrganizationalFees\Domain\PromoCode\Exception\PromoCodeSingDontCorrectException;
 use Shared\Domain\ValueObject\ValidateException;
 use Shared\Infrastructure\Tests\PhpUnit\InfrastructureTestCase;

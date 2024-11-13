@@ -9,7 +9,7 @@ use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\ORM\EntityManagerInterface;
 use OrganizationalFees\Application\Model\Order\Order;
 use OrganizationalFees\Application\Model\Order\OrderRepositoryInterface;
-use OrganizationalFees\Application\Query\GetOrderList\GetOrderListQuery;
+use OrganizationalFees\Application\Query\Order\GetOrderList\GetOrderListQuery;
 
 class OrderRepository implements OrderRepositoryInterface
 {

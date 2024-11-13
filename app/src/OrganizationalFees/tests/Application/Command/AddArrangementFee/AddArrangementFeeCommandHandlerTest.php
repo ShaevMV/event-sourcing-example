@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tests\OrganizationalFees\Application\Command\AddArrangementFee;
 
 use Doctrine\DBAL\Exception;
-use OrganizationalFees\Application\Command\AddArrangementFee\AddArrangementFeeCommand;
-use OrganizationalFees\Application\Command\AddArrangementFee\AddArrangementFeeCommandHandler;
+use OrganizationalFees\Application\Command\ArrangementFee\AddArrangementFee\AddArrangementFeeCommand;
+use OrganizationalFees\Application\Command\ArrangementFee\AddArrangementFee\AddArrangementFeeCommandHandler;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFee;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
 use OrganizationalFees\Infrastructure\Repository\Domain\ArrangementFee\EventStory\EsArrangementFeeRepositoryPersistence;

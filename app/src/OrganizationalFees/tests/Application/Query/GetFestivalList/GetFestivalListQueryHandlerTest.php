@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\OrganizationalFees\Application\Query\GetFestivalList;
 
-use OrganizationalFees\Application\Query\GetFestivalList\GetFestivalListQuery;
-use OrganizationalFees\Application\Query\GetFestivalList\GetFestivalListQueryHandler;
+use OrganizationalFees\Application\Query\Festival\GetFestivalList\GetFestivalListQuery;
+use OrganizationalFees\Application\Query\Festival\GetFestivalList\GetFestivalListQueryHandler;
 use Tests\OrganizationalFees\Application\Command\Festival\FestivalCreateCommandTest;
 use Tests\OrganizationalFees\Infrastructure\Service\Template\BaseTemplateTestCase;
 

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Tests\OrganizationalFees\Application\Command\Festival;
 
 use Doctrine\DBAL\Exception;
-use OrganizationalFees\Application\Command\FestivalCreate\FestivalCreateCommand;
-use OrganizationalFees\Application\Command\FestivalCreate\FestivalCreateCommandHandler;
+use OrganizationalFees\Application\Command\Festival\FestivalCreate\FestivalCreateCommand;
+use OrganizationalFees\Application\Command\Festival\FestivalCreate\FestivalCreateCommandHandler;
 use OrganizationalFees\Domain\Festival\Model\Festival;
 use OrganizationalFees\Domain\Festival\Model\FestivalId;
 use OrganizationalFees\Infrastructure\Repository\Domain\Festival\EventStory\EsFestivalRepositoryPersistence;
