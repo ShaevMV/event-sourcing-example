@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\OrganizationalFees\Domain\PromoCode\Model;
 
+use OrganizationalFees\Domain\Festival\Model\FestivalId;
 use OrganizationalFees\Domain\PromoCode\Event\PromoCodeWasCreating;
 use OrganizationalFees\Domain\PromoCode\Exception\PromoCodeExceedingTheLimitException;
 use OrganizationalFees\Domain\PromoCode\Exception\PromoCodeSingDontCorrectException;
@@ -14,7 +15,6 @@ use OrganizationalFees\Domain\PromoCode\Model\Sing;
 use OrganizationalFees\Domain\PromoCode\Model\Title;
 use PHPUnit\Framework\TestCase;
 use Shared\Domain\Exception\DomainException;
-use Shared\Domain\Model\FestivalId;
 use Shared\Domain\ValueObject\ValidateException;
 use Tests\OrganizationalFees\Constant\TestConstant;
 

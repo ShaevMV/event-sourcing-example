@@ -6,8 +6,11 @@ namespace OrganizationalFees\Infrastructure\Http\Controller;
 
 use OrganizationalFees\Application\Command\Festival\FestivalCreate\FestivalCreateCommand;
 use OrganizationalFees\Application\Command\Festival\FestivalCreate\FestivalCreateCommandHandler;
+use OrganizationalFees\Application\Query\Festival\FindFestival\FindFestivalQuery;
+use OrganizationalFees\Application\Query\Festival\FindFestival\FindFestivalQueryHandler;
 use OrganizationalFees\Application\Query\Festival\GetFestivalList\GetFestivalListQuery;
 use OrganizationalFees\Application\Query\Festival\GetFestivalList\GetFestivalListQueryHandler;
+use Shared\Infrastructure\Symfony\Validator\ValidatorService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +21,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class FestivalController extends AbstractController
 {
     public function __construct(
-        private readonly ValidatorInterface $validator,
+        private readonly ValidatorService $validator,
     ) {
     }
 
@@ -45,17 +48,10 @@ class FestivalController extends AbstractController
             ]);
         }
 
-        $errors = $this->validator->validate($command);
-        $errorArray = [];
-
-        foreach ($errors as $error) {
-            $errorArray[$error->getPropertyPath()] = $error->getMessage();
-        }
-
-        if ($errors->count() > 0) {
+        if ($errors = $this->validator->validate($command)) {
             return new JsonResponse([
                 'success' => false,
-                'errors' => $errorArray,
+                'errors' => $errors,
             ]);
         }
 
@@ -73,10 +69,19 @@ class FestivalController extends AbstractController
     }
 
     #[Route('/find', name: 'festival_find', methods: 'GET')]
-    public function find(Request $request, GetFestivalListQueryHandler $handler): JsonResponse
+    public function find(Request $request, FindFestivalQueryHandler $handler): JsonResponse
     {
+        $query = new FindFestivalQuery($request->query->get('id'));
+
+        if($errors = $this->validator->validate($query)) {
+            return new JsonResponse([
+                'success' => false,
+                'errors' => $errors,
+            ]);
+        }
+
         return new JsonResponse(
-            $handler(new GetFestivalListQuery())
+            $handler($query)
         );
     }
 }

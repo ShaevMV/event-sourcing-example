@@ -6,11 +6,11 @@ namespace OrganizationalFees\Domain\ArrangementFee\Model;
 
 use OrganizationalFees\Domain\ArrangementFee\Event\ArrangementFeeWasCreating;
 use OrganizationalFees\Domain\ArrangementFee\Event\ArrangementFeeWasUpdatePrice;
+use OrganizationalFees\Domain\Festival\Model\FestivalId;
 use Shared\Domain\Aggregate\Aggregate;
 use Shared\Domain\Aggregate\AggregateEventable;
 use Shared\Domain\Aggregate\AggregateReconstructable;
 use Shared\Domain\Aggregate\AggregateRoot;
-use Shared\Domain\Model\FestivalId;
 
 class ArrangementFee extends AggregateRoot implements Aggregate, AggregateEventable, AggregateReconstructable
 {
@@ -20,8 +20,8 @@ class ArrangementFee extends AggregateRoot implements Aggregate, AggregateEventa
     public readonly FestivalId $festivalId;
 
     public static function create(
-        string $name,
-        int $price,
+        string         $name,
+        int            $price,
         FestivalId $festivalId,
     ): self {
         $arrangementFee = new self(ArrangementId::random());

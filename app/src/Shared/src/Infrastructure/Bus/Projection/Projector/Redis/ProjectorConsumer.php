@@ -6,6 +6,7 @@ namespace Shared\Infrastructure\Bus\Projection\Projector\Redis;
 
 use Shared\Domain\Bus\Event\Deserializer;
 use Shared\Domain\Bus\Projection\Projection;
+use SymfonyBundles\RedisBundle\Redis\ClientInterface;
 
 class ProjectorConsumer
 {
@@ -14,22 +15,24 @@ class ProjectorConsumer
      */
     private array $projections = [];
 
+    /**
+     * @param Projection[] $projections
+     */
     public function __construct(
-        //  iterable $projections,
+        iterable $projections,
+        protected readonly ClientInterface $client,
+        protected readonly Deserializer $deserializer,
+        protected readonly string $queueName = 'projection_event',
     ) {
-        /* foreach ($projections as $projection) {
-             foreach ($projection->listenTo() as $classEvent) {
-                 $this->projections[$classEvent][] = $projection;
-             }
-         }*/
+        foreach ($projections as $projection) {
+            foreach ($projection->listenTo() as $classEvent) {
+                $this->projections[$classEvent][] = $projection;
+            }
+        }
     }
 
     public function consume(): void
     {
-        /*
-         * @psalm-suppress MixedAssignment
-         */
-        /*
         while ($data = $this->client->lpop($this->queueName)) {
             try {
                 $event = $this->deserializer->deserialize((string) $data);
@@ -43,7 +46,8 @@ class ProjectorConsumer
                     $projection->project($event);
                 }
             } catch (\Exception $exception) {
+                $r = 5;
             }
-        } */
+        }
     }
 }

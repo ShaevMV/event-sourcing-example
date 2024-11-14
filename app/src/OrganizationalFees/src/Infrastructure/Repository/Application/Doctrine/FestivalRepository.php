@@ -9,6 +9,7 @@ use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\ORM\EntityManagerInterface;
 use OrganizationalFees\Application\Model\Festival\Festival;
 use OrganizationalFees\Application\Model\Festival\FestivalRepositoryInterface;
+use OrganizationalFees\Domain\Festival\Model\FestivalId;
 
 class FestivalRepository implements FestivalRepositoryInterface
 {
@@ -51,6 +52,35 @@ class FestivalRepository implements FestivalRepositoryInterface
             ->where('date_start <= :dateNow')
             ->andWhere('date_end >= :dateNow')
             ->setParameter('dateNow', $dateTimeNowString)
+            ->fetchAssociative();
+
+        if ($festival) {
+            return new Festival(
+                $festival['id'],
+                $festival['name'],
+                $festival['date_start'],
+                $festival['date_end'],
+                $festival['pdf_template'],
+                $festival['mail_template'],
+                $festival['created_at'],
+                $festival['updated_at'],
+            );
+        }
+
+        return null;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function find(FestivalId $id): ?Festival
+    {
+        $qb = new QueryBuilder($this->em->getConnection());
+
+        $festival = $qb->select('f.*')
+            ->from('festival', 'f')
+            ->where('f.id = :festivalId')
+            ->setParameter('festivalId', $id->value())
             ->fetchAssociative();
 
         if ($festival) {

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace OrganizationalFees\Application\Query\ArrangementFee\GetArrangementFeeList;
 
 use OrganizationalFees\Application\Model\ArrangementFee\ArrangementFeeRepositoryInterface;
-use Shared\Domain\Model\FestivalId;
+use OrganizationalFees\Domain\Festival\Model\FestivalId;
 
 class GetArrangementFeeListQueryHandler
 {

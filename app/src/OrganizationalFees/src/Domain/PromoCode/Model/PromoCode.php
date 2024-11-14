@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OrganizationalFees\Domain\PromoCode\Model;
 
+use OrganizationalFees\Domain\Festival\Model\FestivalId;
 use OrganizationalFees\Domain\PromoCode\Event\PromoCodeWasApply;
 use OrganizationalFees\Domain\PromoCode\Event\PromoCodeWasCreating;
 use OrganizationalFees\Domain\PromoCode\Exception\PromoCodeExceedingTheLimitException;
@@ -12,7 +13,6 @@ use Shared\Domain\Aggregate\Aggregate;
 use Shared\Domain\Aggregate\AggregateEventable;
 use Shared\Domain\Aggregate\AggregateReconstructable;
 use Shared\Domain\Aggregate\AggregateRoot;
-use Shared\Domain\Model\FestivalId;
 use Shared\Domain\ValueObject\ValidateException;
 
 class PromoCode extends AggregateRoot implements Aggregate, AggregateEventable, AggregateReconstructable
@@ -30,11 +30,11 @@ class PromoCode extends AggregateRoot implements Aggregate, AggregateEventable, 
     protected FestivalId $festivalId;
 
     public static function create(
-        Title $title,
-        Discount $discord,
+        Title          $title,
+        Discount       $discord,
         FestivalId $festivalId,
-        Sing $promoCodeSing,
-        ?Limit $limit = null,
+        Sing           $promoCodeSing,
+        ?Limit         $limit = null,
     ): self {
         $promoCode = new self(PromoCodeId::random());
         $promoCode->recordAndApply(new PromoCodeWasCreating(

@@ -9,7 +9,7 @@ use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\ORM\EntityManagerInterface;
 use OrganizationalFees\Application\Model\ArrangementFee\ArrangementFee;
 use OrganizationalFees\Application\Model\ArrangementFee\ArrangementFeeRepositoryInterface;
-use Shared\Domain\Model\FestivalId;
+use OrganizationalFees\Domain\Festival\Model\FestivalId;
 
 class ArrangementFeeRepository implements ArrangementFeeRepositoryInterface
 {

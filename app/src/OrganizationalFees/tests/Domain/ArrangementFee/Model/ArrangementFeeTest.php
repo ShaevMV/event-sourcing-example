@@ -6,8 +6,8 @@ namespace Tests\OrganizationalFees\Domain\ArrangementFee\Model;
 
 use OrganizationalFees\Domain\ArrangementFee\Event\ArrangementFeeWasCreating;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFee;
+use OrganizationalFees\Domain\Festival\Model\FestivalId;
 use PHPUnit\Framework\TestCase;
-use Shared\Domain\Model\FestivalId;
 use Tests\OrganizationalFees\Constant\TestConstant;
 
 class ArrangementFeeTest extends TestCase

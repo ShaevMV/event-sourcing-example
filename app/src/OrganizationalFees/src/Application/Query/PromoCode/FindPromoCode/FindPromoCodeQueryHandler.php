@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace OrganizationalFees\Application\Query\PromoCode\FindPromoCode;
 
 use OrganizationalFees\Application\Model\PromoCode\PromoCodeRepositoryInterface;
+use OrganizationalFees\Domain\Festival\Model\FestivalId;
 use OrganizationalFees\Domain\PromoCode\Model\Title;
 use Shared\Domain\Bus\Query\QueryHandler;
-use Shared\Domain\Model\FestivalId;
 
 class FindPromoCodeQueryHandler implements QueryHandler
 {

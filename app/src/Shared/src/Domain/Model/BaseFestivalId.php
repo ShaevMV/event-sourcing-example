@@ -6,6 +6,6 @@ namespace Shared\Domain\Model;
 
 use Shared\Domain\ValueObject\Uuid;
 
-class FestivalId extends Uuid
+abstract class BaseFestivalId extends Uuid
 {
 }

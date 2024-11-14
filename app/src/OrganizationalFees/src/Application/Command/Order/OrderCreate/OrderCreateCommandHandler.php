@@ -8,6 +8,7 @@ use Auth\Domain\User\Model\UserId;
 use OrganizationalFees\Application\Model\PromoCode\PromoCodeRepositoryInterface;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFeeRepositoryPersistence;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
+use OrganizationalFees\Domain\Festival\Model\FestivalId;
 use OrganizationalFees\Domain\Order\Model\Order;
 use OrganizationalFees\Domain\Order\Model\OrderRepositoryPersistence;
 use OrganizationalFees\Domain\PromoCode\Model\PromoCode;
@@ -15,7 +16,6 @@ use OrganizationalFees\Domain\PromoCode\Model\PromoCodeId;
 use OrganizationalFees\Domain\PromoCode\Model\PromoCodeRepositoryPersistence;
 use OrganizationalFees\Domain\PromoCode\Model\Title;
 use Shared\Domain\Bus\Command\CommandHandler;
-use Shared\Domain\Model\FestivalId;
 
 class OrderCreateCommandHandler implements CommandHandler
 {

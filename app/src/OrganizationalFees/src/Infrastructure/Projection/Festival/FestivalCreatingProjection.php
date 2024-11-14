@@ -32,7 +32,7 @@ class FestivalCreatingProjection implements Projection
             return;
         }
 
-        $this->connection->insert('festival',
+        $result = $this->connection->insert('festival',
             [
                 'id' => $event->getAggregateId(),
                 'name' => $event->name,
@@ -42,5 +42,9 @@ class FestivalCreatingProjection implements Projection
                 'mail_template' => $event->mailTemplate,
             ],
         );
+
+        $r=5;
+
+
     }
 }

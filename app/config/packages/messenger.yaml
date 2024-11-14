@@ -17,10 +17,14 @@ framework:
             # Route your messages to the transports
             'Shared\Infrastructure\Symfony\Message\WorkerProjectionMessage': projection_event
 
-# when@test:
+#when@test:
 #    framework:
-#        messenger:
+#       messenger:
 #            transports:
 #                # replace with your transport name here (e.g., my_transport: 'in-memory://')
 #                # For more Messenger testing tools, see https://github.com/zenstruck/messenger-test
-#                async: 'in-memory://'
+#               projection_event: test://
+
+#        routing:
+#            # Route your messages to the transports
+#            'Shared\Infrastructure\Symfony\Message\WorkerProjectionMessage': projection_event

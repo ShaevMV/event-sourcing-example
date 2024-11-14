@@ -65,3 +65,19 @@ services:
       - "${INFRA_AMQP_PORT:-15672}:15672"
     networks:
       - default
+
+  redis:
+    build:
+      context: ./docker/redis
+      dockerfile: Dockerfile
+    image: redis:7.2-alpine
+    restart: always
+    ports:
+      - "${INFRA_REDIS_PORT:-6379}:6379"
+    # Run the init script
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - ./data/redis:/bitnami/redis/data
+    networks:
+      - default

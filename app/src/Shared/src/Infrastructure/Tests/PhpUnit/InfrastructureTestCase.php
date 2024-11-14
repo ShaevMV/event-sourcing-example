@@ -6,27 +6,40 @@ namespace Shared\Infrastructure\Tests\PhpUnit;
 
 use Shared\Infrastructure\Tests\Doctrine\DatabaseArrangerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Zenstruck\Messenger\Test\InteractsWithMessenger;
 
 abstract class InfrastructureTestCase extends KernelTestCase
 {
+    /**
+     * @throws \Exception
+     */
     public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
         self::databaseArranger()->beforeClass();
     }
 
+    /**
+     * @throws \Exception
+     */
     protected function setUp(): void
     {
         parent::setUp();
         self::databaseArranger()->beforeTest();
     }
 
+    /**
+     * @throws \Exception
+     */
     protected function tearDown(): void
     {
         parent::tearDown();
         self::databaseArranger()->afterTest();
     }
 
+    /**
+     * @throws \Exception
+     */
     public static function tearDownAfterClass(): void
     {
         parent::tearDownAfterClass();

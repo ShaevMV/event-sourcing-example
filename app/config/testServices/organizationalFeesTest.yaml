@@ -4,20 +4,10 @@ services:
     autowire: true      # Automatically injects dependencies in your services.
     autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
-
-  OrganizationalFees\Application\Command\OrderCreate\OrderCreateCommandHandler:
-    public: true
-
-  OrganizationalFees\Application\Query\GetOrderList\GetOrderListQueryHandler:
-    public: true
-
   OrganizationalFees\Infrastructure\Repository\Domain\ArrangementFee\EventStory\EsArrangementFeeRepositoryPersistence:
     public: true
 
   OrganizationalFees\Infrastructure\Repository\Domain\Order\EventStore\EsOrderRepositoryPersistence:
-    public: true
-
-  OrganizationalFees\Application\Command\FestivalCreate\FestivalCreateCommandHandler:
     public: true
 
   OrganizationalFees\Infrastructure\Repository\Domain\Festival\EventStory\EsFestivalRepositoryPersistence:
@@ -25,35 +15,42 @@ services:
 
   OrganizationalFees\Infrastructure\Repository\Domain\PromoCode\EventStory\EsPromoCodeRepositoryPersistence:
     public: true
-  OrganizationalFees\Application\Command\AddPromoCode\AddPromoCodeCommandHandler:
-    public: true
-
-  OrganizationalFees\Application\Command\AddArrangementFee\AddArrangementFeeCommandHandler:
-    public: true
 
   OrganizationalFees\Infrastructure\Service\Template\TemplateService:
     public: true
 
-  OrganizationalFees\Application\Command\UpdatePrice\UpdatePriceCommandHandler:
+  OrganizationalFees\Application\Command\Order\OrderApproved\OrderApprovedCommandHandler:
     public: true
 
-  Tests\OrganizationalFees\Application\Command\AddArrangementFee\AddArrangementFeeCommandHandlerTest:
+  OrganizationalFees\Application\Command\Order\OrderCreate\OrderCreateCommandHandler:
     public: true
 
-  OrganizationalFees\Application\Command\OrderApproved\OrderApprovedCommandHandler:
+  OrganizationalFees\Application\Query\Order\GetOrderList\GetOrderListQueryHandler:
     public: true
 
-  OrganizationalFees\Application\Query\FindPromoCode\FindPromoCodeQueryHandler:
+  OrganizationalFees\Application\Query\PromoCode\FindPromoCode\FindPromoCodeQueryHandler:
     public: true
 
-  OrganizationalFees\Application\Query\GetArrangementFeeList\GetArrangementFeeListQueryHandler:
+  OrganizationalFees\Application\Command\PromoCode\AddPromoCode\AddPromoCodeCommandHandler:
     public: true
 
-  OrganizationalFees\Application\Query\GetArrangementFeeAllPriceList\GetArrangementFeeAllPriceListQueryHandler:
+  OrganizationalFees\Application\Query\ArrangementFee\GetArrangementFeeList\GetArrangementFeeListQueryHandler:
     public: true
 
-  OrganizationalFees\Application\Query\GetFestivalList\GetFestivalListQueryHandler:
+  OrganizationalFees\Application\Query\ArrangementFee\GetArrangementFeeAllPriceList\GetArrangementFeeAllPriceListQueryHandler:
     public: true
 
-  OrganizationalFees\Application\Query\FindActiveFestival\FindActiveFestivalQueryHandler:
+  OrganizationalFees\Application\Command\ArrangementFee\AddArrangementFee\AddArrangementFeeCommandHandler:
+    public: true
+
+  OrganizationalFees\Application\Command\ArrangementFee\UpdatePrice\UpdatePriceCommandHandler:
+    public: true
+
+  OrganizationalFees\Application\Query\Festival\GetFestivalList\GetFestivalListQueryHandler:
+    public: true
+
+  OrganizationalFees\Application\Query\Festival\FindActiveFestival\FindActiveFestivalQueryHandler:
+    public: true
+
+  OrganizationalFees\Application\Command\Festival\FestivalCreate\FestivalCreateCommandHandler:
     public: true

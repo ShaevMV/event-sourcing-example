@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace OrganizationalFees\Application\Model\ArrangementFee;
 
-use Shared\Domain\Model\FestivalId;
+use OrganizationalFees\Domain\Festival\Model\FestivalId;
 
 interface ArrangementFeeRepositoryInterface
 {
