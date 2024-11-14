@@ -11,12 +11,20 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:{{PORT}}/auth/login/
+GET http://localhost:{{PORT}}/festival/5702befb-b1d0-4658-9c48-4ef10f46afb0
+Content-Type: application/json
+
+###
+
+PUT http://localhost:{{PORT}}/festival/edit/5702befb-b1d0-4658-9c48-4ef10f46afb0
 Content-Type: application/json
 
 {
-    "username": "somebody",
-    "password": "qwerty123"
+  "name": "test2",
+  "dateStart": "2024-01-20",
+  "dateEnd": "2024-12-31",
+  "mailTemplate": "textMail1",
+  "pdfTemplate": "textPdf2"
 }
 
 ###

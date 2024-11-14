@@ -6,8 +6,10 @@ namespace OrganizationalFees\Infrastructure\Http\Controller;
 
 use OrganizationalFees\Application\Command\Festival\FestivalCreate\FestivalCreateCommand;
 use OrganizationalFees\Application\Command\Festival\FestivalCreate\FestivalCreateCommandHandler;
-use OrganizationalFees\Application\Query\Festival\FindFestival\FindFestivalQuery;
-use OrganizationalFees\Application\Query\Festival\FindFestival\FindFestivalQueryHandler;
+use OrganizationalFees\Application\Command\Festival\FestivalEdit\FestivalEditCommand;
+use OrganizationalFees\Application\Command\Festival\FestivalEdit\FestivalEditCommandHandler;
+use OrganizationalFees\Application\Query\Festival\GetFestival\GetFestivalQuery;
+use OrganizationalFees\Application\Query\Festival\GetFestival\GetFestivalQueryHandler;
 use OrganizationalFees\Application\Query\Festival\GetFestivalList\GetFestivalListQuery;
 use OrganizationalFees\Application\Query\Festival\GetFestivalList\GetFestivalListQueryHandler;
 use Shared\Infrastructure\Symfony\Validator\ValidatorService;
@@ -67,10 +69,10 @@ class FestivalController extends AbstractController
         );
     }
 
-    #[Route('/find', name: 'festival_find', methods: 'GET')]
-    public function find(Request $request, FindFestivalQueryHandler $handler): JsonResponse
+    #[Route('/{id}', name: 'festival_get', methods: 'GET')]
+    public function find(string $id, GetFestivalQueryHandler $handler): JsonResponse
     {
-        $query = new FindFestivalQuery($request->query->get('id'));
+        $query = new GetFestivalQuery($id);
 
         if ($errors = $this->validator->validate($query)) {
             return new JsonResponse([
@@ -78,9 +80,50 @@ class FestivalController extends AbstractController
                 'errors' => $errors,
             ]);
         }
+        $response = $handler($query);
 
-        return new JsonResponse(
-            $handler($query)
-        );
+        if (null === $response) {
+            return new JsonResponse([
+                'success' => false,
+                'errors' => ['Festival not found.'],
+            ]);
+        }
+
+        return new JsonResponse($response);
+    }
+
+    /**
+     * @throws \DateMalformedStringException
+     */
+    #[Route('/edit/{id}', name: 'festival_edit', methods: 'PUT')]
+    public function edit(string $id, Request $request, FestivalEditCommandHandler $commandHandler): JsonResponse
+    {
+        try {
+            $data = json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
+            $command = new FestivalEditCommand(
+                $id,
+                $data['name'],
+                $data['dateStart'],
+                $data['dateEnd'],
+                $data['mailTemplate'],
+                $data['pdfTemplate'],
+            );
+        } catch (\Throwable $exception) {
+            return new JsonResponse([
+                'success' => false,
+                'errors' => [$exception->getMessage()],
+            ]);
+        }
+
+        if ($errors = $this->validator->validate($command)) {
+            return new JsonResponse([
+                'success' => false,
+                'errors' => $errors,
+            ]);
+        }
+
+        $response = $commandHandler($command);
+
+        return new JsonResponse($response);
     }
 }

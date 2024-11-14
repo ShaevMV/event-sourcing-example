@@ -40,14 +40,5 @@ class ArrangementFeeUpdatePriceProjection implements Projection
                 'id' => $event->getAggregateId(),
             ]
         );
-
-        $this->connection->insert('arrangement_fee',
-            [
-                'price' => $event->price,
-            ],
-            [
-                'id' => $event->getAggregateId(),
-            ]
-        );
     }
 }
