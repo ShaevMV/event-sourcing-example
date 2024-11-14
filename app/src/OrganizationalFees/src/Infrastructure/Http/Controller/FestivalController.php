@@ -6,6 +6,8 @@ namespace OrganizationalFees\Infrastructure\Http\Controller;
 
 use OrganizationalFees\Application\Command\Festival\FestivalCreate\FestivalCreateCommand;
 use OrganizationalFees\Application\Command\Festival\FestivalCreate\FestivalCreateCommandHandler;
+use OrganizationalFees\Application\Command\Festival\FestivalDelete\FestivalDeleteCommand;
+use OrganizationalFees\Application\Command\Festival\FestivalDelete\FestivalDeleteCommandHandler;
 use OrganizationalFees\Application\Command\Festival\FestivalEdit\FestivalEditCommand;
 use OrganizationalFees\Application\Command\Festival\FestivalEdit\FestivalEditCommandHandler;
 use OrganizationalFees\Application\Query\Festival\GetFestival\GetFestivalQuery;
@@ -114,6 +116,26 @@ class FestivalController extends AbstractController
                 'errors' => [$exception->getMessage()],
             ]);
         }
+
+        if ($errors = $this->validator->validate($command)) {
+            return new JsonResponse([
+                'success' => false,
+                'errors' => $errors,
+            ]);
+        }
+
+        $response = $commandHandler($command);
+
+        return new JsonResponse($response);
+    }
+
+    /**
+     * @throws \DateMalformedStringException
+     */
+    #[Route('/{id}', name: 'festival_delete', methods: 'DELETE')]
+    public function delete(string $id, FestivalDeleteCommandHandler $commandHandler): JsonResponse
+    {
+        $command = new FestivalDeleteCommand($id);
 
         if ($errors = $this->validator->validate($command)) {
             return new JsonResponse([

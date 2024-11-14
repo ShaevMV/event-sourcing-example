@@ -29,12 +29,7 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:{{PORT}}/auth/change_password/
+DELETE http://localhost:{{PORT}}/festival/5702befb-b1d0-4658-9c48-4ef10f46afb0
 Content-Type: application/json
-Authorization: Bearer {{TOKEN}}
-
-{
-    "new_password": "qwerty123"
-}
 
 

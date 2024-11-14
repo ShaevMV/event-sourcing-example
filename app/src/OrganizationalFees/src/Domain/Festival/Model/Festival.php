@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OrganizationalFees\Domain\Festival\Model;
 
 use OrganizationalFees\Domain\Festival\Event\FestivalWasCreating;
+use OrganizationalFees\Domain\Festival\Event\FestivalWasDelete;
 use OrganizationalFees\Domain\Festival\Event\FestivalWasEdit;
 use Shared\Domain\Aggregate\Aggregate;
 use Shared\Domain\Aggregate\AggregateEventable;
@@ -80,5 +81,10 @@ class Festival extends AggregateRoot implements Aggregate, AggregateEventable, A
 
         $this->mailTemplate = FestivalMailTemplate::fromString($festivalWasEdit->mailTemplate);
         $this->pdfTemplate = FestivalPdfTemplate::fromString($festivalWasEdit->pdfTemplate);
+    }
+
+    public function delete(): void
+    {
+        $this->recordAndApply(new FestivalWasDelete($this->id->value()));
     }
 }
