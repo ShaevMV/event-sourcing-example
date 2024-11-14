@@ -36,7 +36,7 @@ SQL;
 
     public function down(Schema $schema): void
     {
-
+        $this->connection->executeStatement('DROP TABLE IF EXISTS public.arrangement_fee_price');
 
     }
 }

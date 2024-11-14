@@ -14,7 +14,7 @@ final class Version20240320084257 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Создание таблицы arrangement_fee';
     }
 
     public function up(Schema $schema): void

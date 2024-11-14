@@ -25,6 +25,6 @@ SQL;
 
     public function down(Schema $schema): void
     {
-        $this->connection->executeStatement('alter table public.arrangement_fee type jsonb using festival_id::jsonb;');
+        $this->connection->executeStatement('alter table public.arrangement_fee type jsonb using price::jsonb;');
     }
 }

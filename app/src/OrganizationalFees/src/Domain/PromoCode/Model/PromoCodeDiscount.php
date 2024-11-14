@@ -6,6 +6,6 @@ namespace OrganizationalFees\Domain\PromoCode\Model;
 
 use Shared\Domain\ValueObject\PositiveNumber;
 
-class Discount extends PositiveNumber
+class PromoCodeDiscount extends PositiveNumber
 {
 }

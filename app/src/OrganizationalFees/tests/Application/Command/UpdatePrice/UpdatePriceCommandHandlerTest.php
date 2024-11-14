@@ -37,7 +37,7 @@ class UpdatePriceCommandHandlerTest extends InfrastructureTestCase
         ));
         $resultPersistence = $persistence->ofId(ArrangementId::fromString($arrangementFee->id()->value()));
 
-        self::assertEquals(1100, $resultPersistence->getPrice());
+        self::assertEquals(1100, $resultPersistence->getPrice()->getCorrectPrice()->value());
 
         $this->consumer();
 

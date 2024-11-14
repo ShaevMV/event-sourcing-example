@@ -14,7 +14,7 @@ final class Version20230106152633 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Создание таблицы event_store_snapshot';
     }
 
     public function up(Schema $schema): void

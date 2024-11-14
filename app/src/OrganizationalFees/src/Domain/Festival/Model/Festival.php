@@ -21,21 +21,21 @@ class Festival extends AggregateRoot implements Aggregate, AggregateEventable, A
     private FestivalPdfTemplate $pdfTemplate;
 
     public static function create(
-        string $name,
-        \DateTimeImmutable $dateStart,
-        \DateTimeImmutable $dateEnd,
-        string $pdfTemplate,
-        string $mailTemplate,
+        FestivalName $name,
+        FestivalDateStartImmutable $dateStart,
+        FestivalDateEndImmutable $dateEnd,
+        FestivalPdfTemplate $pdfTemplate,
+        FestivalMailTemplate $mailTemplate,
     ): self {
         $arrangementFee = new self(FestivalId::random());
 
         $arrangementFee->recordAndApply(new FestivalWasCreating(
             $arrangementFee->id()->value(),
-            $name,
-            $dateStart,
-            $dateEnd,
-            $pdfTemplate,
-            $mailTemplate
+            $name->value(),
+            $dateStart->value(),
+            $dateEnd->value(),
+            $pdfTemplate->value(),
+            $mailTemplate->value(),
         ));
 
         return $arrangementFee;
@@ -54,19 +54,19 @@ class Festival extends AggregateRoot implements Aggregate, AggregateEventable, A
     }
 
     public function edit(
-        string $name,
-        \DateTimeImmutable $dateStart,
-        \DateTimeImmutable $dateEnd,
-        string $pdfTemplate,
-        string $mailTemplate,
+        FestivalName $name,
+        FestivalDateStartImmutable $dateStart,
+        FestivalDateEndImmutable $dateEnd,
+        FestivalPdfTemplate $pdfTemplate,
+        FestivalMailTemplate $mailTemplate,
     ): self {
         $this->recordAndApply(new FestivalWasEdit(
             $this->id->value(),
-            $name,
-            $dateStart,
-            $dateEnd,
-            $pdfTemplate,
-            $mailTemplate
+            $name->value(),
+            $dateStart->value(),
+            $dateEnd->value(),
+            $pdfTemplate->value(),
+            $mailTemplate->value(),
         ));
 
         return $this;

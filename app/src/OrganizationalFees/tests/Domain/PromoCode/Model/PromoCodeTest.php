@@ -8,9 +8,9 @@ use OrganizationalFees\Domain\Festival\Model\FestivalId;
 use OrganizationalFees\Domain\PromoCode\Event\PromoCodeWasCreating;
 use OrganizationalFees\Domain\PromoCode\Exception\PromoCodeExceedingTheLimitException;
 use OrganizationalFees\Domain\PromoCode\Exception\PromoCodeSingDontCorrectException;
-use OrganizationalFees\Domain\PromoCode\Model\Discount;
 use OrganizationalFees\Domain\PromoCode\Model\Limit;
 use OrganizationalFees\Domain\PromoCode\Model\PromoCode;
+use OrganizationalFees\Domain\PromoCode\Model\PromoCodeDiscount;
 use OrganizationalFees\Domain\PromoCode\Model\Sing;
 use OrganizationalFees\Domain\PromoCode\Model\Title;
 use PHPUnit\Framework\TestCase;
@@ -28,7 +28,7 @@ class PromoCodeTest extends TestCase
     {
         $promoCode = PromoCode::create(
             Title::fromString('test'),
-            new Discount(100),
+            new PromoCodeDiscount(100),
             new FestivalId(TestConstant::FESTIVAL_ID),
             Sing::fromString(Sing::FIX),
             null,
@@ -50,7 +50,7 @@ class PromoCodeTest extends TestCase
     {
         $promoCode = PromoCode::create(
             Title::fromString('test'),
-            new Discount(100),
+            new PromoCodeDiscount(100),
             new FestivalId(TestConstant::FESTIVAL_ID),
             Sing::fromString(Sing::FIX),
             new Limit(2),

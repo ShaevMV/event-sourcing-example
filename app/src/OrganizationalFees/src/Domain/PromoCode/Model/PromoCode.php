@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OrganizationalFees\Domain\PromoCode\Model;
 
 use OrganizationalFees\Domain\Festival\Model\FestivalId;
+use OrganizationalFees\Domain\Order\Model\OrderTotalPrice;
 use OrganizationalFees\Domain\PromoCode\Event\PromoCodeWasApply;
 use OrganizationalFees\Domain\PromoCode\Event\PromoCodeWasCreating;
 use OrganizationalFees\Domain\PromoCode\Exception\PromoCodeExceedingTheLimitException;
@@ -23,7 +24,7 @@ class PromoCode extends AggregateRoot implements Aggregate, AggregateEventable, 
 
     protected Counter $count;
 
-    protected Discount $discount;
+    protected PromoCodeDiscount $discount;
 
     protected Sing $promoCodeSing;
 
@@ -31,7 +32,7 @@ class PromoCode extends AggregateRoot implements Aggregate, AggregateEventable, 
 
     public static function create(
         Title $title,
-        Discount $discord,
+        PromoCodeDiscount $discord,
         FestivalId $festivalId,
         Sing $promoCodeSing,
         ?Limit $limit = null,
@@ -56,7 +57,7 @@ class PromoCode extends AggregateRoot implements Aggregate, AggregateEventable, 
     public function onPromoCodeWasCreating(PromoCodeWasCreating $promoCodeWasCreating): void
     {
         $this->festivalId = FestivalId::fromString($promoCodeWasCreating->festivalId);
-        $this->discount = new Discount($promoCodeWasCreating->discount);
+        $this->discount = new PromoCodeDiscount($promoCodeWasCreating->discount);
         $this->title = new Title($promoCodeWasCreating->title);
         $this->limit = null === $promoCodeWasCreating->limit ? null : new Limit($promoCodeWasCreating->limit);
         $this->promoCodeSing = Sing::fromString($promoCodeWasCreating->sing);
@@ -85,7 +86,7 @@ class PromoCode extends AggregateRoot implements Aggregate, AggregateEventable, 
         }
     }
 
-    public function getDiscount(): Discount
+    public function getDiscount(): PromoCodeDiscount
     {
         return $this->discount;
     }
@@ -95,13 +96,16 @@ class PromoCode extends AggregateRoot implements Aggregate, AggregateEventable, 
         return $this->title;
     }
 
-    public function calculateDiscount(int $totalPrice): int
+    /**
+     * @throws ValidateException
+     */
+    public function calculateDiscount(OrderTotalPrice $totalPrice): PromoCodeDiscount
     {
         $discount = $this->discount->value();
         if (Sing::PERCENT === $this->promoCodeSing->value()) {
-            return (int) ($this->discount->value() / 100) * $totalPrice;
+            return new PromoCodeDiscount((int) ($this->discount->value() / 100) * $totalPrice->value());
         }
 
-        return $discount;
+        return new PromoCodeDiscount($discount);
     }
 }

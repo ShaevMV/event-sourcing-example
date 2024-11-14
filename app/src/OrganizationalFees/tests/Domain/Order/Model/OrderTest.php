@@ -7,6 +7,7 @@ namespace Tests\OrganizationalFees\Domain\Order\Model;
 use Auth\Domain\User\Model\UserId;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFee;
 use OrganizationalFees\Domain\Order\Event\OrderWasCreating;
+use OrganizationalFees\Domain\Order\Model\GuestList;
 use OrganizationalFees\Domain\Order\Model\Order;
 use OrganizationalFees\Domain\PromoCode\Exception\PromoCodeSingDontCorrectException;
 use OrganizationalFees\Domain\PromoCode\Model\PromoCode;
@@ -39,10 +40,13 @@ class OrderTest extends BaseKernelTestCase
         $this->promoCode = $promoCode->testCreateFixNotLimit();
     }
 
+    /**
+     * @throws ValidateException
+     */
     public function testCreate(): Order
     {
         $order = Order::create(
-            ['test1', 'test2'],
+            GuestList::fromArray(['test1', 'test2']),
             $this->arrangementFee,
             UserId::random(),
             null,
@@ -62,17 +66,21 @@ class OrderTest extends BaseKernelTestCase
         return $order;
     }
 
+    /**
+     * @throws ValidateException
+     */
     public function testCreateOnPromoCode(): Order
     {
         $order = Order::create(
-            ['test1', 'test2'],
+            GuestList::fromArray(['test1', 'test2']),
             $this->arrangementFee,
             UserId::random(),
             $this->promoCode,
         );
-        $this->assertEquals(100, $order->price);
-        $this->assertEquals(100, $order->discount);
-        $this->assertEquals(100, $order->total);
+        $this->assertEquals(100, $order->price->value());
+        $this->assertEquals(100, $order->discount->value());
+        $this->assertEquals(100, $order->total->value());
+        $this->assertEquals(0, $order->total->applyDiscount($order->discount)->value());
 
         return $order;
     }

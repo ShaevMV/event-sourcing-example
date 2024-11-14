@@ -19,7 +19,7 @@ abstract class PositiveNumber extends Number
     /**
      * @throws ValidateException
      */
-    private function ensureIsValidUuid(int $value): void
+    protected function ensureIsValidUuid(int $value): void
     {
         if ($value < 0) {
             throw new ValidateException(sprintf('Значение должно быть положительным, but got %s', $value));

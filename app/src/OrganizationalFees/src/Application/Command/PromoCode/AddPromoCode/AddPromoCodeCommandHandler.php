@@ -6,9 +6,9 @@ namespace OrganizationalFees\Application\Command\PromoCode\AddPromoCode;
 
 use OrganizationalFees\Domain\Festival\Model\FestivalId;
 use OrganizationalFees\Domain\PromoCode\Exception\PromoCodeSingDontCorrectException;
-use OrganizationalFees\Domain\PromoCode\Model\Discount;
 use OrganizationalFees\Domain\PromoCode\Model\Limit;
 use OrganizationalFees\Domain\PromoCode\Model\PromoCode;
+use OrganizationalFees\Domain\PromoCode\Model\PromoCodeDiscount;
 use OrganizationalFees\Domain\PromoCode\Model\PromoCodeRepositoryPersistence;
 use OrganizationalFees\Domain\PromoCode\Model\Sing;
 use OrganizationalFees\Domain\PromoCode\Model\Title;
@@ -30,7 +30,7 @@ class AddPromoCodeCommandHandler implements CommandHandler
     {
         $promoCode = PromoCode::create(
             Title::fromString($command->title),
-            new Discount($command->discount),
+            new PromoCodeDiscount($command->discount),
             FestivalId::fromString($command->festivalId),
             Sing::fromString($command->sing),
             null === $command->limit ? null : new Limit($command->limit),

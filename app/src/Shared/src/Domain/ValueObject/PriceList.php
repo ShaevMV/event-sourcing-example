@@ -7,15 +7,15 @@ namespace Shared\Domain\ValueObject;
 class PriceList extends Json
 {
     /**
-     * @var array<int,int>
+     * @var array<int,PositiveNumber>
      */
-    private array $priceList = [];
+    protected array $priceList = [];
 
     public function __construct(
-        int $price,
-        int $timestamp,
+        PositiveNumber $price,
+        Timestamp $timestamp,
     ) {
-        $this->priceList[$timestamp] = $price;
+        $this->priceList[$timestamp->value()] = $price;
     }
 
     public function getPriceList(): array
@@ -23,9 +23,9 @@ class PriceList extends Json
         return $this->priceList;
     }
 
-    public function addPrice(int $price, int $timestamp): void
+    public function addPrice(PositiveNumber $price, Timestamp $timestamp): void
     {
-        $this->priceList[$timestamp] = $price;
+        $this->priceList[$timestamp->value()] = $price;
     }
 
     public function jsonSerialize(): array

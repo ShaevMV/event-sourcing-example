@@ -9,6 +9,7 @@ use OrganizationalFees\Application\Model\PromoCode\PromoCodeRepositoryInterface;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFeeRepositoryPersistence;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
 use OrganizationalFees\Domain\Festival\Model\FestivalId;
+use OrganizationalFees\Domain\Order\Model\GuestList;
 use OrganizationalFees\Domain\Order\Model\Order;
 use OrganizationalFees\Domain\Order\Model\OrderRepositoryPersistence;
 use OrganizationalFees\Domain\PromoCode\Model\PromoCode;
@@ -16,6 +17,7 @@ use OrganizationalFees\Domain\PromoCode\Model\PromoCodeId;
 use OrganizationalFees\Domain\PromoCode\Model\PromoCodeRepositoryPersistence;
 use OrganizationalFees\Domain\PromoCode\Model\Title;
 use Shared\Domain\Bus\Command\CommandHandler;
+use Shared\Domain\ValueObject\ValidateException;
 
 class OrderCreateCommandHandler implements CommandHandler
 {
@@ -27,6 +29,9 @@ class OrderCreateCommandHandler implements CommandHandler
     ) {
     }
 
+    /**
+     * @throws ValidateException
+     */
     public function __invoke(OrderCreateCommand $orderCreateCommand): OrderCreateCommandResponse
     {
         $arrangementFee = $this->feeRepositoryDecoration->ofId(
@@ -34,7 +39,7 @@ class OrderCreateCommandHandler implements CommandHandler
         );
         $promoCode = $this->getAndPersistPromoCode($orderCreateCommand->promoCode, $orderCreateCommand->festivalId);
         $order = Order::create(
-            $orderCreateCommand->guestNames,
+            GuestList::fromArray($orderCreateCommand->guestNames),
             $arrangementFee,
             UserId::fromString($orderCreateCommand->userId),
             $promoCode ?? null,

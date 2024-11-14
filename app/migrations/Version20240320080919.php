@@ -14,7 +14,7 @@ final class Version20240320080919 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Добавление в таблицу order полей discount, price, total, promo_code, festival_id';
     }
 
     public function up(Schema $schema): void

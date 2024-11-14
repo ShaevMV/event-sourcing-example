@@ -6,7 +6,10 @@ namespace OrganizationalFees\Application\Command\ArrangementFee\UpdatePrice;
 
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFeeRepositoryPersistence;
 use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementId;
+use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementPrice;
+use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementPriceTimestamp;
 use Shared\Domain\Bus\Command\CommandHandler;
+use Shared\Domain\ValueObject\ValidateException;
 
 class UpdatePriceCommandHandler implements CommandHandler
 {
@@ -15,6 +18,9 @@ class UpdatePriceCommandHandler implements CommandHandler
     ) {
     }
 
+    /**
+     * @throws ValidateException
+     */
     public function __invoke(UpdatePriceCommand $updatePriceCommand): void
     {
         $arrangement = $this->feeRepositoryDecoration->ofId(
@@ -22,7 +28,10 @@ class UpdatePriceCommandHandler implements CommandHandler
         );
 
         $this->feeRepositoryDecoration->persist(
-            $arrangement->updatePrice($updatePriceCommand->price, $updatePriceCommand->timestamp)
+            $arrangement->updatePrice(
+                new ArrangementPrice($updatePriceCommand->price),
+                new ArrangementPriceTimestamp($updatePriceCommand->timestamp)
+            )
         );
     }
 }

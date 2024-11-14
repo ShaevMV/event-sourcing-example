@@ -11,6 +11,7 @@ use Shared\Domain\Aggregate\Aggregate;
 use Shared\Domain\Aggregate\AggregateEventable;
 use Shared\Domain\Aggregate\AggregateReconstructable;
 use Shared\Domain\Aggregate\AggregateRoot;
+use Shared\Domain\ValueObject\ValidateException;
 
 class ArrangementFee extends AggregateRoot implements Aggregate, AggregateEventable, AggregateReconstructable
 {
@@ -20,63 +21,62 @@ class ArrangementFee extends AggregateRoot implements Aggregate, AggregateEventa
     public readonly FestivalId $festivalId;
 
     public static function create(
-        string $name,
-        int $price,
+        ArrangementName $name,
+        ArrangementPrice $price,
         FestivalId $festivalId,
     ): self {
         $arrangementFee = new self(ArrangementId::random());
 
         $arrangementFee->recordAndApply(new ArrangementFeeWasCreating(
             $arrangementFee->id()->value(),
-            $name,
-            $price,
+            $name->value(),
+            $price->value(),
             $festivalId->value()
         ));
 
         return $arrangementFee;
     }
 
+    /**
+     * @throws ValidateException
+     */
     public function onArrangementFeeWasCreating(ArrangementFeeWasCreating $arrangementFeeWasCreating): void
     {
         $this->id = ArrangementId::fromString($arrangementFeeWasCreating->getAggregateId());
         $this->name = ArrangementName::fromString($arrangementFeeWasCreating->name);
         $this->price = new ArrangementPriceList(
-            $arrangementFeeWasCreating->price,
-            $arrangementFeeWasCreating->getOccurredOn()->getTimestamp()
+            new ArrangementPrice($arrangementFeeWasCreating->price),
+            new ArrangementPriceTimestamp($arrangementFeeWasCreating->getOccurredOn()->getTimestamp())
         );
         $this->festivalId = FestivalId::fromString($arrangementFeeWasCreating->festivalId);
     }
 
-    public function updatePrice(int $price, int $timestamp): self
-    {
+    public function updatePrice(
+        ArrangementPrice $price,
+        ArrangementPriceTimestamp $timestamp,
+    ): self {
         $this->recordAndApply(new ArrangementFeeWasUpdatePrice(
             $this->id->value(),
-            $price,
-            $timestamp
+            $price->value(),
+            $timestamp->value()
         ));
 
         return $this;
     }
 
+    /**
+     * @throws ValidateException
+     */
     public function onArrangementFeeWasUpdatePrice(ArrangementFeeWasUpdatePrice $arrangementFeeWasUpdatePrice): void
     {
         $this->price->addPrice(
-            $arrangementFeeWasUpdatePrice->price,
-            $arrangementFeeWasUpdatePrice->timestamp
+            new ArrangementPrice($arrangementFeeWasUpdatePrice->price),
+            new ArrangementPriceTimestamp($arrangementFeeWasUpdatePrice->timestamp)
         );
     }
 
-    public function getPrice(?int $timestampNow = null): ?int
+    public function getPrice(): ArrangementPriceList
     {
-        $timestampNow = null === $timestampNow ? time() : $timestampNow;
-        $priceList = $this->price->getPriceList() ?? [];
-        krsort($priceList);
-        foreach ($priceList as $timestamp => $price) {
-            if ($timestamp <= $timestampNow) {
-                return $price;
-            }
-        }
-
-        return null;
+        return $this->price;
     }
 }
