@@ -9,7 +9,6 @@ use OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFeeRepositoryPersi
 use OrganizationalFees\Domain\Festival\Model\FestivalId;
 use Shared\Domain\Bus\Command\CommandHandler;
 
-
 class AddArrangementFeeCommandHandler implements CommandHandler
 {
     public function __construct(

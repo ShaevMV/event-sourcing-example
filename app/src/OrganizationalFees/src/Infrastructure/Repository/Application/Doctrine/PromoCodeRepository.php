@@ -11,7 +11,6 @@ use OrganizationalFees\Application\Model\PromoCode\PromoCode;
 use OrganizationalFees\Application\Model\PromoCode\PromoCodeRepositoryInterface;
 use OrganizationalFees\Domain\Festival\Model\FestivalId;
 use OrganizationalFees\Domain\PromoCode\Model\Title;
-use Shared\Domain\Model\BaseFestivalId;
 
 class PromoCodeRepository implements PromoCodeRepositoryInterface
 {

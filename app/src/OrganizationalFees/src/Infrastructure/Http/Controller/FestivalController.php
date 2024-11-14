@@ -15,7 +15,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 #[Route('/festival', name: 'festival')]
 class FestivalController extends AbstractController
@@ -73,7 +72,7 @@ class FestivalController extends AbstractController
     {
         $query = new FindFestivalQuery($request->query->get('id'));
 
-        if($errors = $this->validator->validate($query)) {
+        if ($errors = $this->validator->validate($query)) {
             return new JsonResponse([
                 'success' => false,
                 'errors' => $errors,

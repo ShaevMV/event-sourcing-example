@@ -6,7 +6,6 @@ namespace Shared\Infrastructure\Tests\PhpUnit;
 
 use Shared\Infrastructure\Tests\Doctrine\DatabaseArrangerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Zenstruck\Messenger\Test\InteractsWithMessenger;
 
 abstract class InfrastructureTestCase extends KernelTestCase
 {

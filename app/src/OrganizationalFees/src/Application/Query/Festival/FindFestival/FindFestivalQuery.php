@@ -13,7 +13,6 @@ class FindFestivalQuery implements Query
         #[Assert\NotBlank]
         #[Assert\Uuid]
         public readonly ?string $id,
-    )
-    {
+    ) {
     }
 }

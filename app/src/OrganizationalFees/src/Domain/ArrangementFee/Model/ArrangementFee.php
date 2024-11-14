@@ -20,8 +20,8 @@ class ArrangementFee extends AggregateRoot implements Aggregate, AggregateEventa
     public readonly FestivalId $festivalId;
 
     public static function create(
-        string         $name,
-        int            $price,
+        string $name,
+        int $price,
         FestivalId $festivalId,
     ): self {
         $arrangementFee = new self(ArrangementId::random());

@@ -11,9 +11,8 @@ use Shared\Domain\Bus\Query\QueryHandler;
 class FindFestivalQueryHandler implements QueryHandler
 {
     public function __construct(
-        private readonly FestivalRepositoryInterface $repository
-    )
-    {
+        private readonly FestivalRepositoryInterface $repository,
+    ) {
     }
 
     public function __invoke(FindFestivalQuery $query): ?FindFestivalQueryResponse

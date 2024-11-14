@@ -43,8 +43,6 @@ class FestivalCreatingProjection implements Projection
             ],
         );
 
-        $r=5;
-
-
+        $r = 5;
     }
 }

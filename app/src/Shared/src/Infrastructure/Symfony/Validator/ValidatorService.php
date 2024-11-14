@@ -13,7 +13,7 @@ class ValidatorService
     ) {
     }
 
-    public function validate(mixed $value): array|null
+    public function validate(mixed $value): ?array
     {
         $errors = $this->validator->validate($value);
         $errorArray = [];
