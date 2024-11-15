@@ -9,7 +9,7 @@ use Shared\Domain\Bus\Command\Command;
 class AddArrangementFeeCommand implements Command
 {
     public function __construct(
-        public readonly string $name,
+        public readonly string $title,
         public readonly string $festivalId,
         public readonly int $price,
     ) {

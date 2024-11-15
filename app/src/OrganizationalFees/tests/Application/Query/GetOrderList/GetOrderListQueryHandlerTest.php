@@ -9,7 +9,7 @@ use OrganizationalFees\Application\Query\Order\GetOrderList\GetOrderListQuery;
 use OrganizationalFees\Application\Query\Order\GetOrderList\GetOrderListQueryHandler;
 use Shared\Domain\ValueObject\Status;
 use Shared\Infrastructure\Tests\PhpUnit\InfrastructureTestCase;
-use Tests\OrganizationalFees\Application\Command\OrderCreate\OrderCreateCommandTest;
+use Tests\OrganizationalFees\Application\Command\Order\OrderCreate\OrderCreateCommandTest;
 use Tests\OrganizationalFees\Application\Command\PromoCode\AddPromoCodeCommandHandlerTest;
 use Tests\OrganizationalFees\Constant\TestConstant;
 

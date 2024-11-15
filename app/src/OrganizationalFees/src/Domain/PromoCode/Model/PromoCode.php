@@ -56,6 +56,7 @@ class PromoCode extends AggregateRoot implements Aggregate, AggregateEventable, 
      */
     public function onPromoCodeWasCreating(PromoCodeWasCreating $promoCodeWasCreating): void
     {
+        $this->id = PromoCodeId::fromString($promoCodeWasCreating->getAggregateId());
         $this->festivalId = FestivalId::fromString($promoCodeWasCreating->festivalId);
         $this->discount = new PromoCodeDiscount($promoCodeWasCreating->discount);
         $this->title = new Title($promoCodeWasCreating->title);

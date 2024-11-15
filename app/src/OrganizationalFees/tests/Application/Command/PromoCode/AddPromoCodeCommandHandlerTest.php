@@ -47,7 +47,6 @@ class AddPromoCodeCommandHandlerTest extends InfrastructureTestCase
 
         $id = PromoCodeId::fromString($handlerResponse->id);
         self::assertTrue($id->equals(PromoCodeId::fromString($resultPersistence->id()->value())));
-        $this->consumer();
 
         self::assertNotEmpty($this->getReadModel('promo_code', $id->value()));
 

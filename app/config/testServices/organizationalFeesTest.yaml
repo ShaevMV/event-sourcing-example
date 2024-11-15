@@ -19,6 +19,8 @@ services:
   OrganizationalFees\Infrastructure\Service\Template\TemplateService:
     public: true
 
+  ############################## Order ######################################
+
   OrganizationalFees\Application\Command\Order\OrderApproved\OrderApprovedCommandHandler:
     public: true
 
@@ -28,11 +30,16 @@ services:
   OrganizationalFees\Application\Query\Order\GetOrderList\GetOrderListQueryHandler:
     public: true
 
+  ############################### PromoCode ####################################
+
   OrganizationalFees\Application\Query\PromoCode\FindPromoCode\FindPromoCodeQueryHandler:
     public: true
 
   OrganizationalFees\Application\Command\PromoCode\AddPromoCode\AddPromoCodeCommandHandler:
     public: true
+
+
+  ################################### ArrangementFee ############################
 
   OrganizationalFees\Application\Query\ArrangementFee\GetArrangementFeeList\GetArrangementFeeListQueryHandler:
     public: true
@@ -46,6 +53,8 @@ services:
   OrganizationalFees\Application\Command\ArrangementFee\UpdatePrice\UpdatePriceCommandHandler:
     public: true
 
+  ############################################### Festival ##############################
+
   OrganizationalFees\Application\Query\Festival\GetFestivalList\GetFestivalListQueryHandler:
     public: true
 
@@ -53,4 +62,10 @@ services:
     public: true
 
   OrganizationalFees\Application\Command\Festival\FestivalCreate\FestivalCreateCommandHandler:
+    public: true
+
+
+  ############################################## PaymentMethod #######################
+
+  OrganizationalFees\Application\Command\PaymentMethod\PaymentMethodCreate\PaymentMethodCreateCommandHandler:
     public: true

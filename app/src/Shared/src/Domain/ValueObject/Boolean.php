@@ -20,6 +20,11 @@ abstract class Boolean implements \Stringable, ValueObject
         return $this->value() === $other->value();
     }
 
+    public static function formatBool(bool $value): self
+    {
+        return new static($value);
+    }
+
     public function __toString(): string
     {
         return (string) $this->value();

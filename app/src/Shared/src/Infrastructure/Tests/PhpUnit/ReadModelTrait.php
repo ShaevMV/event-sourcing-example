@@ -6,7 +6,6 @@ namespace Shared\Infrastructure\Tests\PhpUnit;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
-use Shared\Infrastructure\Bus\Projection\Projector\Redis\ProjectorConsumer;
 
 trait ReadModelTrait
 {
@@ -21,15 +20,5 @@ trait ReadModelTrait
         $result = $connect->executeQuery("SELECT * FROM $table WHERE id = '$id'")->fetchAssociative();
 
         return false === $result ? [] : $result;
-    }
-
-    /**
-     * @throws \Exception
-     */
-    protected function consumer(): void
-    {
-        /** @var ProjectorConsumer $consumer */
-        $consumer = $this->get(ProjectorConsumer::class);
-        $consumer->consume();
     }
 }

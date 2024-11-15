@@ -25,7 +25,7 @@ class AddArrangementFeeCommandHandler implements CommandHandler
     public function __invoke(AddArrangementFeeCommand $addArrangementFeeCommand): AddArrangementFeeCommandResponse
     {
         $arrangementFee = ArrangementFee::create(
-            ArrangementName::fromString($addArrangementFeeCommand->name),
+            ArrangementName::fromString($addArrangementFeeCommand->title),
             new ArrangementPrice($addArrangementFeeCommand->price),
             FestivalId::fromString($addArrangementFeeCommand->festivalId),
         );

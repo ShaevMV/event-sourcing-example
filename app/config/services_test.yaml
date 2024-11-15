@@ -21,7 +21,7 @@ services:
 
   Shared\Infrastructure\Tests\Doctrine\DatabaseArrangerInterface: '@DatabaseArranger'
 
-  Shared\Domain\Bus\Projection\Projector: '@Shared\Infrastructure\Bus\Projection\Projector\Redis\ProjectorProducer'
+  Shared\Domain\Bus\Projection\Projector: '@Shared\Infrastructure\Bus\Projection\Projector\InMemory\ProjectorInMemory'
 
 
 

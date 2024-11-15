@@ -20,13 +20,13 @@ final class Version20241114134609 extends AbstractMigration
     public function up(Schema $schema): void
     {
         $sql = <<<SQL
-        CREATE TABLE IF NOT EXISTS public.types_of_payment
+        CREATE TABLE IF NOT EXISTS public.payment_method
         (
             id uuid NOT NULL,
             festival_id uuid NOT NULL,
-            name varchar(255) NOT NULL,
+            account_details varchar(255) NOT NULL,
             active boolean default true NOT NULL,
-            sort int NOT NULL,
+            "order" int NOT NULL,
             created_at timestamp without time zone default NOW(),
             updated_at timestamp without time zone default NOW(),
             CONSTRAINT types_of_payment_pkey PRIMARY KEY (id)

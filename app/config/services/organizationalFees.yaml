@@ -26,15 +26,12 @@ services:
     class: OrganizationalFees\Infrastructure\Repository\Domain\PromoCode\EventStory\EsPromoCodeRepositoryPersistence
     public: true
 
+  EsPaymentMethodRepositoryPersistence:
+    class: OrganizationalFees\Infrastructure\Repository\Domain\PaymentMethod\EventStory\EsPaymentMethodRepositoryPersistence
+    public: true
+
+  OrganizationalFees\Domain\PaymentMethod\Model\PaymentMethodPersistence: '@EsPaymentMethodRepositoryPersistence'
   OrganizationalFees\Domain\PromoCode\Model\PromoCodeRepositoryPersistence: '@EsPromoCodeRepositoryPersistence'
   OrganizationalFees\Domain\ArrangementFee\Model\ArrangementFeeRepositoryPersistence: '@EsArrangementFeeRepositoryPersistence'
   OrganizationalFees\Domain\Festival\Model\PromoCodeRepositoryPersistenceFestivalRepositoryPersistence: '@EsFestivalRepositoryPersistence'
-
-  ### Projection #####
-  OrganizationalFees\Infrastructure\Projection\PromoCode\PromoCodeWasCreatingProjection:
-    tags: [ 'shared.domain.bus.projector.projection' ]
-  OrganizationalFees\Infrastructure\Projection\Order\OrderWasCreatingProjection:
-    tags: [ 'shared.domain.bus.projector.projection' ]
-  OrganizationalFees\Infrastructure\Projection\ArrangementFee\ArrangementFeeUpdatePriceProjection:
-    tags: [ 'shared.domain.bus.projector.projection' ]
 

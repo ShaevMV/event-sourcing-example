@@ -8,7 +8,7 @@ use Doctrine\DBAL\Exception;
 use OrganizationalFees\Application\Query\ArrangementFee\GetArrangementFeeList\GetArrangementFeeListQuery;
 use OrganizationalFees\Application\Query\ArrangementFee\GetArrangementFeeList\GetArrangementFeeListQueryHandler;
 use Shared\Infrastructure\Tests\PhpUnit\InfrastructureTestCase;
-use Tests\OrganizationalFees\Application\Command\AddArrangementFee\AddArrangementFeeCommandHandlerTest;
+use Tests\OrganizationalFees\Application\Command\ArrangementFee\AddArrangementFee\AddArrangementFeeCommandHandlerTest;
 use Tests\OrganizationalFees\Constant\TestConstant;
 
 class GetArrangementFeeListQueryHandlerTest extends InfrastructureTestCase

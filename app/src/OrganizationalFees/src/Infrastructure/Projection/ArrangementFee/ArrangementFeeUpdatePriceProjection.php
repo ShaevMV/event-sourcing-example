@@ -4,18 +4,13 @@ declare(strict_types=1);
 
 namespace OrganizationalFees\Infrastructure\Projection\ArrangementFee;
 
-use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use OrganizationalFees\Domain\ArrangementFee\Event\ArrangementFeeWasUpdatePrice;
 use Shared\Domain\Bus\Projection\Projection;
+use Shared\Infrastructure\Projection\BaseProjection;
 
-class ArrangementFeeUpdatePriceProjection implements Projection
+class ArrangementFeeUpdatePriceProjection extends BaseProjection implements Projection
 {
-    public function __construct(
-        private readonly Connection $connection,
-    ) {
-    }
-
     public function listenTo(): array
     {
         return [

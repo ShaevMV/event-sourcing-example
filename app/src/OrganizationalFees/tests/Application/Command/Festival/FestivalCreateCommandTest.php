@@ -38,8 +38,6 @@ class FestivalCreateCommandTest extends BaseTemplateTestCase
         $id = FestivalId::fromString($handlerResponse->id);
         self::assertTrue($id->equals(FestivalId::fromString($resultPersistence->id()->value())));
 
-        $this->consumer();
-
         $rearModelResult = $this->getReadModel('festival', $id->value());
         self::assertNotEmpty($rearModelResult);
 

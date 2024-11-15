@@ -35,12 +35,8 @@ services:
   App\DataFixtures\:
     resource: '../app/DataFixtures/'
 
-  #    Shared\Infrastructure\Bus\Projection\Projector\InMemory\ProjectorInMemory:
-  #      arguments: [ !tagged shared.domain.bus.projector.projection ]
-  
-  Shared\Infrastructure\Bus\Projection\Projector\Redis\ProjectorConsumer:
-       arguments: [ !tagged shared.domain.bus.projector.projection ]
-       public: true
+  Shared\Infrastructure\Bus\Projection\Projector\InMemory\ProjectorInMemory:
+        arguments: [ !tagged shared.domain.bus.projector.projection ]
 
   Shared\Infrastructure\Symfony\Message\WorkerProjectionHandler:
     arguments: [ !tagged shared.domain.bus.projector.projection ]
